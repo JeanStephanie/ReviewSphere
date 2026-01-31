@@ -63,7 +63,6 @@ Tools
 
 * XAMPP
 * Visual Studio Code
-* Git & GitHub
 
 Database Design
 
