@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mattress</title>
+    <style>
+        /* General Styles */
+        * {
+            margin: 0;
+            padding: 5px;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f3f3f3;
+            color: #002d72;
+            text-align: center;
+        }
+
+        header {
+            background-color: #002d72;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: center;
+            /* Center content horizontally */
+            align-items: center;
+            flex-direction: column;
+            /* Stack items vertically */
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin: 0;
+            text-align: center;
+            /* Center the text */
+        }
+
+        .nav a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+        }
+
+        .nav a:hover {
+            color: #80cbc4;
+        }
+
+        /* Carousel Styles */
+        #about-carousel {
+            position: relative;
+            max-width: 100%;
+            overflow: hidden;
+            text-align: center;
+            background-color: #eee;
+        }
+
+        .carousel-slides {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .carousel-slide {
+            min-width: 100%;
+            box-sizing: border-box;
+            padding: 50px 20px;
+        }
+
+        .carousel-slide h2 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: #002d72;
+        }
+
+        .carousel-slide p {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.2em;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .carousel-controls {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+        }
+
+        .carousel-control {
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 1.5em;
+        }
+
+        .carousel-control:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        /* Types Section */
+        #types {
+            padding: 40px 20px;
+            background-color: #e9f5fb;
+            text-align: center;
+        }
+
+        #types h2 {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        .types-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            /* Creates 4 equal columns */
+            gap: 20px;
+            justify-items: center;
+            padding: 20px;
+        }
+
+        .type-card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+            max-width: 250px;
+            transition: transform 0.3s;
+        }
+
+        .type-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .type-card img {
+            width: 150px;
+            height: 150px;
+            margin-bottom: 15px;
+        }
+
+        .type-card h3 {
+            margin-bottom: 10px;
+            color: #00457c;
+        }
+
+        /* Comparison Table Styles */
+        #comparison {
+            padding: 40px 20px;
+            background-color: #e9f5fb;
+            text-align: center;
+        }
+
+        #comparison h2 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            color: #00457c;
+        }
+
+        table {
+            width: 80%;
+            margin: 0 auto;
+            border-collapse: collapse;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        th,
+        td {
+            padding: 15px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #00457c;
+            color: white;
+        }
+
+        td {
+            background-color: #fff;
+        }
+
+        /* Hover effect */
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        /* Footer Styles */
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            margin-top: 40px;
+        }
+
+        /* Brand styling*/
+        .brand-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .brand {
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            margin: 10px;
+            padding: 20px;
+            width: 300px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+            text-align: center;
+        }
+
+        .brand img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .brand:hover {
+            transform: scale(1.05);
+        }
+
+        h2 {
+            color: #003366;
+        }
+
+        p {
+            line-height: 1.6;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-top: 10px;
+            border-radius: 5px;
+            background-color: #003366;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #ff6600;
+        }
+
+        /* Suggested mattress Section Styling */
+        .suggested-mat {
+            background-color: #f8f9fa;
+            padding: 50px 0;
+            text-align: center;
+        }
+
+        .suggested-mat .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .suggested-mat h2 {
+            font-size: 2em;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .suggested-mat p {
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .mat-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .mat-item {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            max-width: 350px;
+            text-align: left;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .mat-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .mat-item img {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .mat-item h3 {
+            font-size: 1.5em;
+            color: #222;
+            margin: 15px 0 10px;
+        }
+
+        .mat-item p {
+            color: #555;
+            font-size: 1em;
+            line-height: 1.5;
+        }
+
+        .review {
+            margin-top: 15px;
+        }
+
+        .review p {
+            font-style: italic;
+            color: #444;
+        }
+
+        .star-rating span {
+            font-size: 1.2em;
+        }
+
+        .buy-now-btn {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #00457c;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+        }
+
+        .buy-now-btn:hover {
+            background-color: #00457c;
+        }
+
+
+        /* Styling for the last grid*/
+        .additional-grids {
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        .additional-grids h2 {
+            font-size: 2.5em;
+            margin-bottom: 30px;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            /* 3 columns */
+            gap: 20px;
+            justify-items: center;
+        }
+
+        .grid-item {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 320px;
+            /* Keeps items from getting too wide */
+            transition: transform 0.3s ease;
+        }
+
+        .grid-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .grid-item img {
+            width: 100%;
+            height: 200px;
+            border-radius: 8px;
+        }
+
+        .grid-item p {
+            margin-top: 15px;
+            font-size: 1.1em;
+        }
+
+        .grid-item a {
+            text-decoration: none;
+            color: #003366;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .grid-item a:hover {
+            color: #00bcd4;
+        }
+
+        /* FAQ styles*/
+        #faq {
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+
+        #faq h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .faq-item {
+            margin-bottom: 20px;
+        }
+
+        .faq-item h3 {
+            cursor: pointer;
+            padding: 10px;
+            background-color: white;
+            color: #002d72;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .faq-item p {
+            display: none;
+            padding: 10px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-top: none;
+            border-radius: 0 0 5px 5px;
+        }
+
+        .faq-item p.visible {
+            display: block;
+        }
+
+        .faq-answer {
+            display: none;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+        }
+
+        .toggle-btn {
+            margin-left: 10px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>MATTRESS</h1>
+        <nav class="nav">
+            <a href="buyinguidemat.html">Buying Guide</a>
+            <a href="../reviews.php">Reviews</a>
+        </nav>
+    </header>
+
+    <!-- About Us Section with Carousel -->
+    <section id="about-carousel">
+        <div class="carousel-slides">
+            <div class="carousel-slide">
+                <h2>SLEEP REDEFINED</h2>
+                <img src="../images/mattress.jpg" alt="Sleep Redefined"
+                    style="max-width: 400px; height: 400px; margin: 10px 0;">
+                <p>We offer reliable and expert advice on selecting the best mattress for your comfort and health. Our
+                    mission is to guide you toward a perfect night's sleep.</p>
+            </div>
+            <div class="carousel-slide">
+                <h2>COMFORT AND QUALITY</h2>
+                <img src="../images/mattress2.jpg" alt="Comfort and Quality"
+                    style="max-width: 400px; height: 400px; margin: 10px 0;">
+                <p>Discover top mattress brands, detailed comparisons, and insightful tips to make your mattress
+                    shopping experience easy and hassle-free.</p>
+            </div>
+            <div class="carousel-slide">
+                <h2>AFFORDABLE OPTIONS</h2>
+                <img src="../images/linenspa.jpg" alt="Affordable Options"
+                    style="max-width: 400px; height: 400px; margin: 10px 0;">
+                <p>Whether you're on a budget or seeking luxury, we provide information tailored to your preferences and
+                    lifestyle.</p>
+            </div>
+        </div>
+        <div class="carousel-controls">
+            <button class="carousel-control" id="prev-btn">&#8249;</button>
+            <button class="carousel-control" id="next-btn">&#8250;</button>
+        </div>
+    </section>
+
+    <!-- Types Section -->
+    <section id="types">
+        <h2>TYPES OF MATTRESS</h2>
+        <div class="types-container">
+            <div class="type-card">
+                <img src="../images/linenspa.jpg" alt="Innerspring Mattresses">
+                <h3>Innerspring Mattresses</h3>
+                <p>Innerspring mattresses are traditional mattresses that use a network of steel coils to provide
+                    support. They come in various coil configurations, such as Bonnell, continuous, offset, and pocket
+                    coils. Known for their firmness and durability, they offer good bounce and breathability, making
+                    them a popular choice for many sleepers.</p>
+            </div>
+            <div class="type-card">
+                <img src="../images/mat1.jpg" alt="Memory Foam Mattresses">
+                <h3>Memory Foam Mattresses</h3>
+                <p>Memory foam mattresses are crafted from viscoelastic foam that conforms to the body's shape, offering
+                    excellent support and pressure relief. They are particularly known for reducing motion transfer,
+                    making them ideal for couples. These mattresses also provide a cozy, cradling sensation, enhancing
+                    overall comfort and support.</p>
+            </div>
+            <div class="type-card">
+                <img src="../images/mat2.jpg" alt="Hybrid Mattresses">
+                <h3>Hybrid Mattresses</h3>
+                <p>Hybrid mattresses combine the support of innerspring coils with the comfort of memory foam, latex, or
+                    gel layers. This combination provides a balanced feel with excellent support, pressure relief, and
+                    enhanced breathability. They're great for those who want the bounce and support of an innerspring
+                    mattress, along with the contouring comfort of foam.</p>
+            </div>
+            <div class="type-card">
+                <img src="../images/mat7.jpg" alt="Adjustable Beds">
+                <h3>Adjustable Beds</h3>
+                <p>Adjustable mattresses can be paired with adjustable beds, allowing users to customize their sleep
+                    positions for optimal comfort. These beds are especially useful for those with specific health
+                    needs, such as back pain or sleep apnea, as they can elevate the head or feet as needed. Many
+                    adjustable mattresses come with features like memory foam or latex to enhance support and comfort.
+                </p>
+            </div>
+            <!-- Additional mattress types (row 2) -->
+            <div class="type-card">
+                <img src="../images/mat3.jpg" alt="Latex Mattresses">
+                <h3>Latex Mattresses</h3>
+                <p>Latex mattresses are made from natural or synthetic latex, known for being durable, breathable, and
+                    hypoallergenic. These mattresses offer excellent pressure relief and a responsive feel, ideal for
+                    those who want a firm mattress with natural materials. Latex is also resistant to dust mites and
+                    mold, making it a great choice for allergy sufferers.</p>
+            </div>
+            <div class="type-card">
+                <img src="../images/mat4.jpg" alt="Pocket Coil Mattresses">
+                <h3>Pocket Coil Mattresses</h3>
+                <p>Pocket coil mattresses feature individually wrapped coils, allowing each coil to move independently
+                    and provide targeted support. This design reduces motion transfer, making it a great choice for
+                    couples. Pocket coils are typically found in hybrid mattresses and offer enhanced breathability,
+                    making them cool and comfortable throughout the night.</p>
+            </div>
+            <div class="type-card">
+                <img src="../images/mat5.jpg" alt="Gel Foam Mattresses">
+                <h3>Gel Foam Mattresses</h3>
+                <p>Gel foam mattresses incorporate gel-infused memory foam that helps regulate body temperature and
+                    provides a cooler sleeping experience. The gel particles enhance the foam's cooling properties,
+                    making it an excellent option for those who tend to sleep hot while still enjoying the support and
+                    comfort of traditional memory foam.</p>
+            </div>
+            <div class="type-card">
+                <img src="../images/mat6.jpg" alt="Airbed Mattresses">
+                <h3>Airbed Mattresses</h3>
+                <p>Airbed mattresses use adjustable air chambers to change the firmness of the mattress. These
+                    mattresses are often used for personalized comfort and can be adjusted on both sides to cater to
+                    individual sleep preferences. They're an excellent choice for couples with different firmness
+                    preferences and are available in both traditional and hybrid versions.</p>
+            </div>
+        </div>
+    </section>
+    <!-- Mattress Comparison Table -->
+    <section id="comparison">
+        <h2>MATTRESS COMPARISONS</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Mattress Type</th>
+                    <th>Firmness</th>
+                    <th>Durability</th>
+                    <th>Ideal Sleep Position</th>
+                    <th>Cooling Properties</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Innerspring Mattresses</td>
+
+                    <td>Firm</td>
+                    <td>High</td>
+                    <td>Back, Stomach</td>
+                    <td>Good</td>
+                </tr>
+                <tr>
+                    <td>Memory Foam Mattresses</td>
+
+                    <td>Medium to Firm</td>
+                    <td>Very High</td>
+                    <td>Side, Back</td>
+                    <td>Moderate</td>
+                </tr>
+                <tr>
+                    <td>Hybrid Mattresses</td>
+                    <td>Medium</td>
+                    <td>High</td>
+                    <td>Back, Side</td>
+                    <td>Good</td>
+                </tr>
+                <tr>
+                    <td>Adjustable Beds</td>
+                    <td>Varies</td>
+                    <td>High</td>
+                    <td>All Positions</td>
+                    <td>Good</td>
+                </tr>
+                <tr>
+                    <td>Latex Mattresses</td>
+                    <td>Firm</td>
+                    <td>Very High</td>
+                    <td>Back, Stomach</td>
+                    <td>Good</td>
+                </tr>
+                <tr>
+                    <td>Pocket Coil Mattresses</td>
+                    <td>Medium to Firm</td>
+                    <td>High</td>
+                    <td>Side, Back</td>
+                    <td>Excellent</td>
+                </tr>
+                <tr>
+                    <td>Gel Foam Mattresses</td>
+                    <td>Medium</td>
+                    <td>High</td>
+                    <td>Side, Back</td>
+                    <td>Excellent</td>
+                </tr>
+                <tr>
+                    <td>Airbed Mattresses</td>
+                    <td>Adjustable</td>
+                    <td>Medium</td>
+                    <td>Back, Stomach</td>
+                    <td>Good</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+    <h1>TOP MATTRESS BRANDS</h1>
+    <section id="brands" class="brand-list">
+        <article class="brand">
+            <h2> Tempur-Pedic</h2>
+            <p> <strong>Best Known For: Memory foam mattresses</strong> <br>
+                Why It's Popular: Tempur-Pedic is known for its high-quality memory foam that offers excellent pressure
+                relief and motion isolation. Their mattresses are often recommended for those with back pain or joint
+                issues. They also offer a wide range of models with cooling technology to combat heat retention in foam.
+            </p> <a href="https://www.tempurpedic.com/" class="btn">Learn More</a>
+        </article>
+        <article class="brand">
+            <h2>Saatva</h2>
+            <p> <strong>Best Known For: Luxury hybrid mattresses</strong> <br>
+                Why It's Popular: Saatva combines the best of innerspring support with luxurious memory foam layers.
+                They offer eco-friendly materials and are known for their high-end feel at more affordable prices than
+                traditional luxury brands. Saatva mattresses are known for providing great back support and durability.
+            </p> <a href="https://www.saatva.com/mattresses" class="btn">Learn More</a>
+        </article>
+        <article class="brand">
+            <h2>Sealy</h2>
+            <p><strong>Best Known For: Innerspring and hybrid mattresses</strong> <br>
+                Why It's Popular: Sealy has been a trusted mattress brand for decades. It offers a wide range of
+                innerspring and hybrid models, combining traditional coil systems with advanced memory foam for enhanced
+                comfort and support. Sealy mattresses are praised for their durability and long lifespan.</p> <a
+                href="https://sealy.in/?srsltid=AfmBOop3Q_OT1gB2Z4a7PBc_rmKoiwlWqohlvc-EwAw9K2xAfkaHeIcn"
+                class="btn">Learn More</a>
+        </article>
+    </section>
+    <!-- Suggested Mattresses Section -->
+    <section id="suggested-mat" class="suggested-mat">
+        <div class="container">
+            <h2>TOP SELLING MATTRESS</h2>
+            <p>Explore the most in-demand mattresses with expert reviews and ratings.</p>
+            <div class="mat-grid">
+                <!-- Mattress 1 -->
+                <div class="mat-item">
+                    <img src="../images/mat8.jpg" alt="Tempur-Pedic" style="max-width: 500px; height:200px;">
+                    <h3>Tempur-Pedic</h3>
+                    <p>
+                        A premium memory foam mattress designed for ultimate pressure relief and comfort.
+                        Adapts to your body for a restful sleep experience.
+                    </p>
+                    <div class="review">
+                        <p><strong>Review:</strong> "The best sleep I've ever had! Provides excellent support and
+                            comfort."</p>
+                        <div class="star-rating">
+                            <span style="color: gold; font-size: 1.2em;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                        </div>
+                        <a href="https://www.tempurpedic.com/shop-mattresses/tempur-cloud-mattress/"
+                            class="buy-now-btn">Buy Now</a>
+                    </div>
+                </div>
+                <!-- Mattress 2 -->
+                <div class="mat-item">
+                    <img src="../images/saatva.jpg" alt="Saatva Classic" style="max-width: 500px; height: 200px;">
+                    <h3>Saatva Classic</h3>
+                    <p>
+                        A luxury innerspring mattress with eco-friendly materials, offering balanced comfort and
+                        support.
+                        Ideal for all sleep positions.
+                    </p>
+                    <div class="review">
+                        <p><strong>Review:</strong> "Perfect combination of support and plushness. No more back pain!"
+                        </p>
+                        <div class="star-rating">
+                            <span style="color: gold; font-size: 1.2em;">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
+                        </div>
+                        <a href="https://www.saatva.com/mattresses/saatva-classic" class="buy-now-btn">Buy Now</a>
+                    </div>
+                </div>
+                <!-- Mattress 3 -->
+                <div class="mat-item">
+                    <img src="../images/nectarmat.jpg" alt="Nectar Memory Foam Mattress"
+                        style="max-width: 500px; height: 200px;">
+                    <h3>Nectar Memory Foam Mattress</h3>
+                    <p>
+                        A high-quality memory foam mattress with superior cooling and pressure relief.
+                        Designed to give you a cool and restful night's sleep.
+                    </p>
+                    <div class="review">
+                        <p><strong>Review:</strong> "Great value for the price! Super comfortable and keeps me cool."
+                        </p>
+                        <div class="star-rating">
+                            <span style="color: gold; font-size: 1.2em;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                        </div>
+                        <a href="https://www.nectarsleep.com/mattress" class="buy-now-btn">Buy Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <header>RELATED ARTICLES</header>
+    </header>
+    <section class="additional-grids">
+        <div class="grid-container">
+            <div class="grid-item">
+                <img src="../images/dreamcloud.jpg"
+                    alt="Stop body pain and aches, improve your sleep quality with the right mattress">
+                <p><a
+                        href="https://www.moneycontrol.com/health-and-fitness/stop-body-pain-and-aches-improve-your-sleep-quality-with-the-right-mattress-article-12910130.html">Stop
+                        body pain and aches, improve your sleep quality with the right mattress.</a></p>
+            </div>
+            <div class="grid-item">
+                <img src="../images/mat9.jpg" alt="Best Mattress for Adjustable Beds">
+                <p><a href="https://www.cnet.com/health/sleep/best-adjustable-mattress/">Best
+                        Mattress for Adjustable Beds.</a></p>
+            </div>
+            <div class="grid-item">
+                <img src="../images/mattress3.jpg" alt="Top 10 Best Mattress Brands in India">
+                <p><a
+                        href="https://www.herzindagi.com/your-picks/household-furnishings/best-mattress-brands-in-india-ergonomic-comfortable-and-durable-669">Top
+                        10 Best Mattress Brands in India</a></p>
+            </div>
+        </div>
+    </section>
+    <section id="faq">
+        <h2>FREQUENTLY ASKED QUESTIONS</h2>
+
+        <div class="faq-item">
+            <h3>How often should I replace my mattress?
+                <button class="toggle-btn">+</button>
+            </h3>
+            <p class="faq-answer">Most mattresses should be replaced every 7-10 years, depending on the quality and
+                level of wear. Signs of sagging, discomfort, or poor sleep quality indicate it’s time for a new one.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>What type of mattress is best for back pain?
+                <button class="toggle-btn">+</button>
+            </h3>
+            <p class="faq-answer">A medium-firm memory foam or hybrid mattress is generally best for back pain, as it
+                provides a balance of support and pressure relief, helping maintain spinal alignment.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>How do I clean and maintain my mattress?
+                <button class="toggle-btn">+</button>
+            </h3>
+            <p class="faq-answer">Vacuum your mattress regularly, spot-clean stains with mild detergent, and use a
+                mattress protector to prevent spills and dust mites. Rotate it every few months to maintain even wear.
+            </p>
+        </div>
+        <div class="faq-item">
+            <h3>Which mattress is better: memory foam or spring?
+                <button class="toggle-btn">+</button>
+            </h3>
+            <p class="faq-answer">Memory foam provides contouring support and pressure relief, making it great for side
+                sleepers. Spring mattresses offer more bounce and airflow, making them ideal for hot sleepers.</p>
+        </div>
+        <div class="faq-item">
+            <h3>Can I flip my mattress?
+                <button class="toggle-btn">+</button>
+            </h3>
+            <p class="faq-answer">Most modern mattresses are designed as one-sided and should not be flipped. However,
+                rotating it 180 degrees every 3-6 months can help maintain its shape and longevity.</p>
+        </div>
+    </section>
+    <script>
+        const slides = document.querySelector('.carousel-slides');
+        const totalSlides = slides.children.length;
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        let currentIndex = 0;
+
+        prevBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex === 0) ? totalSlides - 1 : currentIndex - 1;
+            updateCarousel();
+        });
+
+        nextBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex === totalSlides - 1) ? 0 : currentIndex + 1;
+            updateCarousel();
+        });
+
+        function updateCarousel() {
+            const offset = -currentIndex * 100;
+            slides.style.transform = `translateX(${offset}%)`;
+        }
+        // js for toggle function of FAQ'S
+        document.querySelectorAll('.toggle-btn').forEach(button => {
+            button.addEventListener('click', function () {
+                const answer = this.parentElement.nextElementSibling;
+                const isVisible = answer.style.display === 'block';
+                answer.style.display = isVisible ? 'none' : 'block';
+                this.textContent = isVisible ? '+' : '-';
+            });
+        });
+
+    </script>
+</body>
+
+</html>

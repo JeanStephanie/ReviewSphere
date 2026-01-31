@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Refrigerator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<style>
+    * {
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f9f9f9;
+        color: #333;
+    }
+
+    /* Header with top navigation */
+    header {
+        background-color: #00457c;
+        color: white;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        /* Stack items vertically */
+        justify-content: center;
+        /* Center items vertically */
+        align-items: center;
+        /* Center items horizontally */
+        text-align: center;
+        /* Ensure text aligns to the center */
+    }
+
+    header h1 {
+        font-size: 2.5em;
+        margin-bottom: 10px;
+    }
+
+    header nav ul {
+        list-style: none;
+        display: flex;
+        justify-content: center;
+        /* Center the navigation */
+        gap: 20px;
+        /* Add space between navigation links */
+    }
+
+    header nav ul li a {
+        color: white;
+        text-decoration: none;
+        font-size: 1.2em;
+    }
+
+    header nav ul li a:hover {
+        color: #00bcd4;
+    }
+
+    /* style for image collage*/
+    .collage-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        background-color: #f9f9f9;
+    }
+
+    .collage-item {
+        position: relative;
+        overflow: hidden;
+        margin: 10px;
+        border-radius: 12px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .collage-item img {
+        display: block;
+        width: 100%;
+        height: 400px;
+        transition: transform 0.3s ease, filter 0.3s ease;
+    }
+
+    .collage-item:hover img {
+        transform: scale(1.1);
+        filter: brightness(90%);
+    }
+
+    /* Responsive Design */
+    .collage-item {
+        width: calc(33.33% - 20px);
+    }
+
+    @media (max-width: 768px) {
+        .collage-item {
+            width: calc(50% - 20px);
+        }
+    }
+
+    @media (max-width: 480px) {
+        .collage-item {
+            width: 100%;
+        }
+    }
+
+    .nav {
+        margin-top: 0.5rem;
+    }
+
+    .nav a {
+        margin: 0 1rem;
+        text-decoration: none;
+        color: #007bff;
+        font-weight: bold;
+    }
+
+    .nav a:hover {
+        text-decoration: underline;
+    }
+
+    /* comparison styles*/
+
+    .card-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+        padding: 20px;
+    }
+
+    .card {
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .card h2 {
+        color: #00457c;
+        margin-bottom: 10px;
+        font-size: 1.5em;
+    }
+
+    .card p {
+        margin: 8px 0;
+        line-height: 1.5;
+    }
+
+    .card .label {
+        font-weight: bold;
+        color: #0078d4;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .card-container {
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
+    }
+
+    /* top 6 brand comparison*/
+    .comparison-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+        background: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    thead th {
+        background-color: #00457c;
+        color: #ffffff;
+        padding: 12px;
+        text-align: left;
+        font-size: 1rem;
+    }
+
+    tbody td {
+        padding: 10px;
+        border-bottom: 1px solid #dddddd;
+        font-size: 0.9rem;
+    }
+
+    tbody tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    tbody tr:hover {
+        background-color: #f1f8ff;
+    }
+
+    td:first-child,
+    th:first-child {
+        font-weight: bold;
+        color: #00457c;
+    }
+
+    td,
+    th {
+        text-align: left;
+        vertical-align: top;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+
+        table,
+        thead,
+        tbody,
+        th,
+        td,
+        tr {
+            display: block;
+        }
+
+        thead {
+            display: none;
+        }
+
+        tbody tr {
+            margin-bottom: 20px;
+            border-bottom: 2px solid #dddddd;
+            padding-bottom: 10px;
+        }
+
+        tbody td {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+        }
+
+        tbody td::before {
+            content: attr(data-label);
+            font-weight: bold;
+            color: #00457c;
+            width: 50%;
+            text-align: left;
+        }
+    }
+
+    /* Main content styling */
+    main {
+        margin-left: 10px;
+        /* Adjust content for sidebar width */
+        padding: 20px;
+    }
+
+    .section {
+        margin-bottom: 40px;
+        text-align: -webkit-match-parent;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        .sidebar {
+            width: 200px;
+        }
+
+        main {
+            margin-left: 220px;
+        }
+
+        .brands-grid {
+            grid-template-columns: 1fr 1fr;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .sidebar {
+            width: 100%;
+            position: relative;
+            top: 0;
+            margin-bottom: 20px;
+        }
+
+        main {
+            margin-left: 0;
+        }
+
+        .brands-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    h1 {
+        text-align: center;
+
+    }
+
+    .grid-container {
+        display: flex;
+        /* Use flexbox for better alignment */
+        flex-wrap: wrap;
+        /* Allow wrapping of items */
+        justify-content: space-between;
+        /* Add space between items */
+        gap: 20px;
+        /* Space between grid items */
+        padding: 20px;
+        /* Add padding around the grid */
+    }
+
+    .grid-item {
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        width: 200px;
+        /* Ensure same width as the brand cards */
+        text-align: center;
+        padding: 20px;
+    }
+
+    #brands.section {
+        padding: 50px 0;
+        background-color: #f4f4f4;
+    }
+
+    #brands .container {
+        width: 90%;
+        margin: 0 auto;
+        max-width: 1200px;
+    }
+
+    h2 {
+        text-align: center;
+        font-size: 32px;
+        color: #333;
+        margin-bottom: 40px;
+        font-weight: bold;
+    }
+
+    /* Grid layout for brands */
+    .brands-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 20px;
+        justify-items: center;
+    }
+
+    .brand {
+        background-color: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        transition: transform 0.3s ease;
+    }
+
+    .brand img {
+        width: 300px;
+        height: 300px;
+        border-radius: 8px;
+        object-fit: fill;
+        margin-bottom: 20px;
+    }
+
+    .brand h3 {
+        font-size: 20px;
+        color: #333;
+        margin-bottom: 10px;
+        font-weight: bold;
+    }
+
+    .brand p {
+        font-size: 16px;
+        color: #666;
+        margin-bottom: 20px;
+    }
+
+    /* Styling for the Buy Now button */
+    .cta-button {
+        display: inline-block;
+        background-color: #007BFF;
+        color: white;
+        padding: 10px 20px;
+        text-decoration: none;
+        border-radius: 5px;
+        font-size: 16px;
+        margin-top: 10px;
+        transition: background-color 0.3s;
+    }
+
+    .cta-button:hover {
+        background-color: #0056b3;
+    }
+
+    /* Hover effect for brand card */
+    .brand:hover {
+        transform: translateY(-5px);
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        h2 {
+            font-size: 28px;
+        }
+
+        .brand img {
+            max-width: 100%;
+        }
+
+        .brands-grid {
+            grid-template-columns: 1fr 1fr;
+        }
+    }
+
+    @media (max-width: 480px) {
+        h2 {
+            font-size: 24px;
+        }
+
+        .brands-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    .cta-button {
+        display: inline-block;
+        background-color: #007BFF;
+        /* Blue background */
+        color: white;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        border-radius: 5px;
+        font-size: 16px;
+        margin-top: 10px;
+    }
+
+    .cta-button:hover {
+        background-color: #0056b3;
+        /* Darker blue on hover */
+    }
+
+    /* Suggested refrigerator Section Styling */
+    .suggested-ref {
+        background-color: #f8f9fa;
+        padding: 50px 0;
+        text-align: center;
+    }
+
+    .suggested-ref .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+
+    .suggested-ref h2 {
+        font-size: 2em;
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    .suggested-ref p {
+        color: #666;
+        margin-bottom: 30px;
+    }
+
+    .ref-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: center;
+    }
+
+    .ref-item {
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        max-width: 350px;
+        text-align: left;
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .ref-item:hover {
+        transform: translateY(-5px);
+    }
+
+    .ref-item img {
+        width: 100%;
+        height: 250px;
+        border-radius: 10px;
+    }
+
+    .ref-item h3 {
+        font-size: 1.5em;
+        color: #222;
+        margin: 15px 0 10px;
+    }
+
+    .ref-item p {
+        color: #555;
+        font-size: 1em;
+        line-height: 1.5;
+    }
+
+    .review {
+        margin-top: 15px;
+    }
+
+    .review p {
+        font-style: italic;
+        color: #444;
+    }
+
+    .star-rating span {
+        font-size: 1.2em;
+    }
+
+    .buy-now-btn {
+        display: inline-block;
+        margin-top: 10px;
+        padding: 10px 20px;
+        background-color: #00457c;
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+        border-radius: 5px;
+        transition: background 0.3s ease;
+    }
+
+    .buy-now-btn:hover {
+        background-color: #00457c;
+    }
+
+    /* styles for last grid*/
+    .additional-grids {
+        padding: 50px 20px;
+        text-align: center;
+    }
+
+    .additional-grids h2 {
+        font-size: 2.5em;
+        margin-bottom: 30px;
+    }
+
+    .grid-container {
+        display: grid;
+        grid-template-columns: repeat(3, 400px);
+        /* Set each grid item to be 400px wide */
+        gap: 30px;
+        /* Add spacing between items */
+    }
+
+    .grid-item {
+        width: 400px;
+        /* Set specific width */
+        min-height: 450px;
+        /* Control the height of grid items */
+        padding: 30px;
+        background-color: #fff;
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        border-radius: 12px;
+        transition: transform 0.3s ease;
+    }
+
+    .grid-item:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .grid-item img {
+        width: 100%;
+        height: 300px;
+        border-radius: 8px;
+    }
+
+    .grid-item p {
+        margin-top: 15px;
+        font-size: 1.1em;
+    }
+
+    .grid-item a {
+        text-decoration: none;
+        color: #003366;
+        font-weight: bold;
+        transition: color 0.3s ease;
+    }
+
+    .grid-item a:hover {
+        color: #00bcd4;
+    }
+
+    /* FAQ styles*/
+    #faq {
+        padding: 20px;
+        background-color: #f9f9f9;
+        text-align: center;
+    }
+
+    #faq h2 {
+        text-align: center;
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    .faq-item {
+        margin-bottom: 20px;
+    }
+
+    .faq-item h3 {
+        cursor: pointer;
+        padding: 10px;
+        background-color: white;
+        color: #002d72;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+    }
+
+    .faq-item p {
+        display: none;
+        padding: 10px;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-top: none;
+        border-radius: 0 0 5px 5px;
+    }
+
+    .faq-item p.visible {
+        display: block;
+    }
+
+    .faq-answer {
+        display: none;
+        padding: 10px;
+        background-color: #f9f9f9;
+        border: 1px solid #ddd;
+    }
+
+    .toggle-btn {
+        margin-left: 10px;
+        cursor: pointer;
+        background: none;
+        border: none;
+        font-size: 18px;
+        font-weight: bold;
+    }
+</style>
+
+<body>
+    <header>
+        <div class="container">
+            <h1>REFRIGERATOR</h1>
+            <nav>
+                <ul>
+                    <li><a href="buyinguideFridge.html">Buying Guide</a></li>
+                    <li><a href="../reviews.php">Reviews</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+
+
+    </div>
+        <section class="collage-container">
+            <div class="collage-item">
+                <img src="../images/fridge1.jpg" alt="Image 1">
+            </div>
+            <div class="collage-item">
+                <img src="../images/fridge2.jpg" alt="Image 2">
+            </div>
+            <div class="collage-item">
+                <img src="../images/fridge3.jpg" alt="Image 3">
+            </div>
+        </section>
+    </div>
+    <main>
+        <h1>TYPES OF REFRIGERATORS</h1>
+        <div class="card-container">
+            <div class="card">
+                <h2>Top Freezer Refrigerator</h2>
+                <p><span class="label">Specifications:</span> Classic design, average capacity 18-22 cu. ft.,
+                    energy-efficient.</p>
+                <p><span class="label">Features:</span> Simple layout, wide shelves.</p>
+                <p><span class="label">Pros:</span> Budget-friendly, compact, reliable.</p>
+                <p><span class="label">Cons:</span> Limited freezer space, older style.</p>
+                <p><span class="label">Best For:</span> Small families, tight budgets.</p>
+            </div>
+            <div class="card">
+                <h2>Bottom Freezer Refrigerator</h2>
+                <p><span class="label">Specifications:</span> Freezer at the bottom, capacity 18-25 cu. ft.</p>
+                <p><span class="label">Features:</span> Pull-out drawer, ergonomic design.</p>
+                <p><span class="label">Pros:</span> Convenient access to fresh food, modern design.</p>
+                <p><span class="label">Cons:</span> Higher cost, bending for freezer access.</p>
+                <p><span class="label">Best For:</span> Modern kitchens, medium-sized families.</p>
+            </div>
+            <div class="card">
+                <h2>Side-By-Side Refrigerator</h2>
+                <p><span class="label">Specifications:</span> Two vertical doors, capacity 20-28 cu. ft.</p>
+                <p><span class="label">Features:</span> Adjustable shelves, water/ice dispenser.</p>
+                <p><span class="label">Pros:</span> Narrow door swing, organized storage.</p>
+                <p><span class="label">Cons:</span> Less wide interior, higher energy use.</p>
+                <p><span class="label">Best For:</span> Homes with narrow kitchens.</p>
+            </div>
+            <div class="card">
+                <h2>French Door Refrigerator</h2>
+                <p><span class="label">Specifications:</span> Wide fridge on top, freezer drawer below, capacity 20-30
+                    cu. ft.</p>
+                <p><span class="label">Features:</span> Spacious design, advanced features.</p>
+                <p><span class="label">Pros:</span> Stylish, flexible storage, large capacity.</p>
+                <p><span class="label">Cons:</span> Expensive, needs more space.</p>
+                <p><span class="label">Best For:</span> Large families, modern kitchens.</p>
+            </div>
+            <div class="card">
+                <h2>Compact Refrigerator</h2>
+                <p><span class="label">Specifications:</span> Capacity 1.7-4.5 cu. ft., portable.</p>
+                <p><span class="label">Features:</span> Small and lightweight.</p>
+                <p><span class="label">Pros:</span> Fits anywhere, energy-efficient.</p>
+                <p><span class="label">Cons:</span> Limited storage, no freezer space.</p>
+                <p><span class="label">Best For:</span> Dorms, offices, small spaces.</p>
+            </div>
+            <div class="card">
+                <h2>Counter Depth Refrigerator</h2>
+                <p><span class="label">Specifications:</span> Flush with counters, capacity 20-24 cu. ft.</p>
+                <p><span class="label">Features:</span> Sleek design, custom look.</p>
+                <p><span class="label">Pros:</span> Space-saving, high-end aesthetic.</p>
+                <p><span class="label">Cons:</span> Less capacity, more expensive.</p>
+                <p><span class="label">Best For:</span> Stylish kitchens, urban homes.</p>
+            </div>
+            <div class="card">
+                <h2>Smart Refrigerator</h2>
+                <p><span class="label">Specifications:</span> Wi-Fi-enabled, touchscreens, advanced tech.</p>
+                <p><span class="label">Features:</span> Remote control, inventory management.</p>
+                <p><span class="label">Pros:</span> High-tech features, convenience.</p>
+                <p><span class="label">Cons:</span> Very expensive, requires tech knowledge.</p>
+                <p><span class="label">Best For:</span> Tech-savvy households.</p>
+            </div>
+            <div class="card">
+                <h2>Wine Refrigerator</h2>
+                <p><span class="label">Specifications:</span> Specialized for wine storage, capacity varies.</p>
+                <p><span class="label">Features:</span> Temperature and humidity control.</p>
+                <p><span class="label">Pros:</span> Perfect for wine preservation.</p>
+                <p><span class="label">Cons:</span> Single-purpose, limited use.</p>
+                <p><span class="label">Best For:</span> Wine enthusiasts, collectors.</p>
+            </div>
+        </div>
+        <div class="comparison-container">
+            <h1>TOP 6 REFRIGERATOR BRAND COMPARISONS</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Brand</th>
+                        <th>Specifications</th>
+                        <th>Features</th>
+                        <th>Price</th>
+                        <th>Pros</th>
+                        <th>Cons</th>
+                        <th>Warranty</th>
+                        <th>Best For</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Samsung</td>
+                        <td>Capacity: 20-30 cu. ft., energy-efficient, smart features.</td>
+                        <td>Wi-Fi connectivity, touchscreens, flexible storage options.</td>
+                        <td>High</td>
+                        <td>Stylish design, advanced technology, reliable performance.</td>
+                        <td>Expensive, complex for non-tech users.</td>
+                        <td>1-year comprehensive, 10 years on compressor.</td>
+                        <td>Tech-savvy households.</td>
+                    </tr>
+                    <tr>
+                        <td>LG</td>
+                        <td>Capacity: 18-29 cu. ft., energy-efficient, durable.</td>
+                        <td>SmartThinQ, linear cooling, large capacity.</td>
+                        <td>High</td>
+                        <td>Great for large families, energy-efficient, reliable warranty.</td>
+                        <td>Premium pricing, occasional software glitches.</td>
+                        <td>1-year comprehensive, 10 years on compressor.</td>
+                        <td>Large families, modern kitchens.</td>
+                    </tr>
+                    <tr>
+                        <td>Whirlpool</td>
+                        <td>Capacity: 18-25 cu. ft., budget-friendly, durable build.</td>
+                        <td>Adaptive defrost, fresh flow air filters.</td>
+                        <td>Moderate</td>
+                        <td>Affordable, reliable performance, easy maintenance.</td>
+                        <td>Limited smart features, basic design.</td>
+                        <td>1-year comprehensive, 5 years on compressor.</td>
+                        <td>Budget-conscious buyers.</td>
+                    </tr>
+                    <tr>
+                        <td>GE Appliances</td>
+                        <td>Capacity: 20-27 cu. ft., advanced cooling technologies.</td>
+                        <td>Turbo cool, customizable storage options.</td>
+                        <td>Moderate to High</td>
+                        <td>Good reliability, modern features, spacious design.</td>
+                        <td>Somewhat expensive, design may feel basic.</td>
+                        <td>1-year comprehensive, 5 years on compressor.</td>
+                        <td>Homes needing larger storage.</td>
+                    </tr>
+                    <tr>
+                        <td>Frigidaire</td>
+                        <td>Capacity: 16-28 cu. ft., energy-efficient options.</td>
+                        <td>Custom-Flex Temp, EvenTemp cooling.</td>
+                        <td>Moderate</td>
+                        <td>Affordable, consistent performance, versatile storage.</td>
+                        <td>Limited high-end features, simpler design.</td>
+                        <td>1-year comprehensive, 5 years on compressor.</td>
+                        <td>Small to medium families.</td>
+                    </tr>
+                    <tr>
+                        <td>Bosch</td>
+                        <td>Capacity: 20-30 cu. ft., premium build quality.</td>
+                        <td>VitaFresh technology, sleek design, Wi-Fi-enabled.</td>
+                        <td>High</td>
+                        <td>Top-tier design, efficient cooling, quiet operation.</td>
+                        <td>Expensive, limited availability.</td>
+                        <td>1-year comprehensive, 10 years on compressor.</td>
+                        <td>Luxury kitchens, premium buyers.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        </section>
+        <section id="brands" class="section">
+            <div class="container">
+                <h2>TOP RATED REFRIGERATORS</h2>
+                <div class="brands-grid">
+                    <div class="brand">
+                        <img src="../images/fridge4.jpg" alt="Samsung">
+                        <h3>Samsung 236L 3 Star Convertible Digital Inverter Refrigerator</h3>
+                        <p>Samsung is a global leader in home appliances, offering advanced refrigerator models
+                            with features like smart technology, energy efficiency, and stylish designs. <br>
+                            This refrigerator offers a 236-liter capacity with a 3-star energy rating. It features
+                            convertible modes, digital inverter technology for energy efficiency, and a sleek black
+                            matte finish. Ideal for small to medium-sized families seeking modern features and
+                            reliable performance.</p>
+                        <a href="https://www.amazon.in/Samsung-Convertible-Refrigerator-RT28C3733S8-HL/dp/B0C2TPHG6Q"
+                            class="cta-button">Buy Now</a>
+                    </div>
+                    <div class="brand">
+                        <img src="../images/fridge5.jpg" alt="LG">
+                        <h3>LG 242L 3 Star Smart Inverter Frost-Free Double Door Refrigerator</h3>
+                        <p>LG is renowned for its cutting-edge technology, especially in smart refrigerators.
+                            Their models are known for smart features like ThinQ technology. <br>
+                            With a 242-liter capacity and 3-star energy rating, this LG refrigerator includes Smart
+                            Inverter technology, frost-free operation, and a double door design. It's suitable for
+                            families looking for advanced cooling features and energy efficiency.
+                        </p>
+                        <a href="https://www.amazon.in/Samsung-Convertible-Refrigerator-RT28C3733S8-HL/dp/B0C2TPHG6Q"
+                            class="cta-button">Buy Now</a>
+                    </div>
+                    <div class="brand">
+                        <img src="../images/fridge6.jpg" alt="Whirlpool">
+                        <h3>Whirlpool 207L 5 Star Icemagic Pro Inverter Direct-Cool Single Door Refrigerator</h3>
+                        <p>Whirlpool has a strong reputation for durability and performance. Known for offering
+                            a variety of refrigerator styles such as side-by-side, top-freezer, French door etc.
+                            <br>
+                            This model provides a 207-liter capacity with a 5-star energy rating, ensuring high
+                            energy efficiency. It features Icemagic Pro technology and an inverter compressor,
+                            making it a budget-friendly option for small families or individuals.
+                        </p>
+                        <a href="https://www.amazon.in/Samsung-Convertible-Refrigerator-RT28C3733S8-HL/dp/B0C2TPHG6Q"
+                            class="cta-button">Buy Now</a>
+                    </div>
+        </section>
+        <!-- Suggested Refrigerator Section -->
+        <section id="suggested-ref" class="suggested-ref">
+            <div class="container">
+                <h2>TOP SELLING REFRIGERATORS</h2>
+                <p>Explore the most in-demand refrigerators with expert reviews and ratings.</p>
+                <div class="ref-grid">
+                    <!-- Ref 1 -->
+                    <div class="ref-item">
+                        <img src="../images/fridge7.jpg" alt="LG Smart Inverter Refrigerator">
+                        <h3>LG Smart Inverter Refrigerator</h3>
+                        <p>
+                            A top-rated refrigerator with smart inverter technology, energy efficiency,
+                            and ample storage space for all your food essentials.
+                        </p>
+                        <div class="review">
+                            <p><strong>Review:</strong> "Super spacious and keeps food fresh for longer. Highly
+                                efficient!"</p>
+                            <div class="star-rating">
+                                <span style="color: gold; font-size: 1.2em;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                            </div>
+                            <a href="https://www.lg.com/in/refrigerators/double-door-refrigerators/?srsltid=AfmBOoqzp1StwBETVBAmco-XPNgSBo75664ZINHrzU7ILgTKj5Bp57d_"
+                                class="buy-now-btn">Buy Now</a>
+
+                        </div>
+                    </div>
+                    <!-- Ref 2 -->
+                    <div class="ref-item">
+                        <img src="../images/fridge8.jpg" alt="Samsung Double Door Refrigerator">
+                        <h3>Samsung Double Door Refrigerator</h3>
+                        <p>
+                            A premium double-door fridge with a frost-free cooling system,
+                            sleek design, and digital inverter compressor for long-lasting performance.
+                        </p>
+                        <div class="review">
+                            <p><strong>Review:</strong> "Excellent cooling and modern design. Perfect for families!"
+                            </p>
+                            <div class="star-rating">
+                                <span style="color: gold; font-size: 1.2em;">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
+                            </div>
+                            <a href="https://www.samsung.com/in/refrigerators/double-door/?srsltid=AfmBOorfksOJHr9Swd7br_7Y6ucTlS0jHwQhvrO7OprcY5DB4J_c72-A"
+                                class="buy-now-btn">Buy Now</a>
+
+                        </div>
+                    </div>
+                    <!-- Ref 3 -->
+                    <div class="ref-item">
+                        <img src="../images/fridge9.jpg" alt="Whirlpool Multi-Door Refrigerator">
+                        <h3>Whirlpool Multi-Door Refrigerator</h3>
+                        <p>
+                            A high-capacity multi-door refrigerator with advanced cooling technology,
+                            fresh zone compartments, and superior energy efficiency.
+                        </p>
+                        <div class="review">
+                            <p><strong>Review:</strong> "Great design and functionality. Keeps fruits and veggies
+                                fresh!"</p>
+                            <div class="star-rating">
+                                <span style="color: gold; font-size: 1.2em;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                            </div>
+                            <a href="https://www.whirlpoolindia.com/refrigerators/three-door-refrigerators"
+                                class="buy-now-btn">Buy Now</a>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <header>RELATED ARTICLES</header>
+        <section class="additional-grids">
+            <div class="grid-container">
+                <div class="grid-item">
+                    <img src="../images/fridge10.jpg" alt="Best single door refrigerators">
+                    <p><a
+                            href="https://www.msn.com/en-in/technology/consumer-electronics/best-single-door-refrigerators-in-2025-top-options-that-are-perfect-for-a-small-family-set-up/ar-AA1xE3Hg?ocid=BingNewsVerp">Best
+                            single door refrigerators: Top options that are perfect for a small family set
+                            up.</a></p>
+                </div>
+                <div class="grid-item">
+                    <img src="../images/fridge11.jpg"
+                        alt="Best Refrigerator Under 30000: Select From LG, Samsung, Whirlpool And MoreBengaluru's BMTC begins trial runs of AC electric buses">
+                    <p><a
+                            href="https://www.herzindagi.com/your-picks/home-solutions-electronics/best-refrigerator-under-30000-january-2025-select-from-lg-samsung-whirlpool-and-more-836">Best
+                            Refrigerator Under 30000: Select From L G, Samsung, Whirlpool
+                            And More</a></p>
+                </div>
+                <div class="grid-item">
+                    <img src="../images/fridge12.jpg"
+                        alt="Samsung's latest fridge uses AI to keep your food fresh for longer — here's how">
+                    <p><a
+                            href="https://www.gadgets360.com/ai/news/samsung-bespoke-smart-refrigerator-groceries-recommendation-ordering-instacart-partnership-7389927">Samsung's
+                            latest fridge uses AI to keep your food fresh for longer — here's
+                            how</a></p>
+                </div>
+            </div>
+        </section>
+        <section id="faq">
+            <h2>FREQUENTLY ASKED QUESTIONS</h2>
+            <div class="faq-item">
+                <h3>How do I properly clean my refrigerator?
+                    <button class="toggle-btn">+</button>
+                </h3>
+                <p class="faq-answer">Turn off the refrigerator, remove all items, and wipe down the shelves and
+                    walls
+                    with a mixture of warm water and mild detergent. Dry thoroughly before restocking.</p>
+            </div>
+            <div class="faq-item">
+                <h3>Why is my refrigerator not cooling properly?
+                    <button class="toggle-btn">+</button>
+                </h3>
+                <p class="faq-answer">This could be due to a dirty condenser coil, blocked vents, or a faulty
+                    thermostat. Check for these issues and clean or repair as needed.</p>
+            </div>
+            <div class="faq-item">
+                <h3>What should I do if my refrigerator is leaking water?
+                    <button class="toggle-btn">+</button>
+                </h3>
+                <p class="faq-answer">Inspect the drain tube for clogs and clear any blockages. Ensure the
+                    refrigerator
+                    is level to prevent water accumulation.</p>
+            </div>
+            <div class="faq-item">
+                <h3>How often should I defrost my refrigerator?
+                    <button class="toggle-btn">+</button>
+                </h3>
+                <p class="faq-answer">If you have a manual defrost refrigerator, it's recommended to defrost it
+                    whenever
+                    the frost buildup reaches about 1/4 inch. Frost-free models do not require manual defrosting.
+                </p>
+            </div>
+            <div class="faq-item">
+                <h3>Can I store hot food directly in the refrigerator?
+                    <button class="toggle-btn">+</button>
+                </h3>
+                <p class="faq-answer">It’s best to let hot food cool to room temperature before placing it in the
+                    refrigerator. Storing hot food can raise the internal temperature and affect other items.</p>
+            </div>
+
+    </main>
+</body>
+<script>
+    // js for toggle function of FAQ'S
+    document.querySelectorAll('.toggle-btn').forEach(button => {
+        button.addEventListener('click', function () {
+            const answer = this.parentElement.nextElementSibling;
+            const isVisible = answer.style.display === 'block';
+            answer.style.display = isVisible ? 'none' : 'block';
+            this.textContent = isVisible ? '+' : '-';
+        });
+    });
+</script>
+
+</html>

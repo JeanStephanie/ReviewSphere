@@ -1,0 +1,1143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Haircare</title>
+    <style>
+        /* Reset Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background: linear-gradient(90deg, #002d72, #002d72);
+            color: white;
+            padding: 5px;
+            text-align: center;
+            position: relative;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            text-transform: uppercase;
+        }
+
+        header p {
+            margin: 5px 0 0;
+            font-size: 1.2em;
+            font-weight: 300;
+        }
+
+        nav {
+            background-color: #002d72;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            outline: none;
+            box-shadow: none;
+        }
+
+        nav a:hover {
+            color: #00bcd4;
+        }
+
+        /* Slider Styles */
+        .slider-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            margin: 40px auto;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+
+        .slider {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .slider img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+        }
+
+        .slider-nav {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+            pointer-events: none;
+        }
+
+        .slider-nav button {
+            pointer-events: all;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 15px;
+            cursor: pointer;
+            border-radius: 50%;
+            outline: none;
+        }
+
+        .slider-nav button:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        /* Types of Hair Maintenance Products*/
+
+        .hair-section {
+            padding: 40px 20px;
+            background-color: #e9f5fb;
+            text-align: center;
+        }
+
+        .hair-section h2 {
+            font-size: 2.2em;
+            margin-bottom: 20px;
+            color: #002d72;
+        }
+
+        .hair-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            /* Exactly 4 cards per row */
+            gap: 20px;
+            /* Space between cards */
+            justify-items: center;
+            /* Center-align cards within the grid */
+        }
+
+        .hair-card {
+            background-color: white;
+            border-radius: 10px;
+            margin: 15px;
+            width: 260px;
+            height: 340px;
+            perspective: 1000px;
+            /* Enables 3D effect */
+        }
+
+        .hair-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transform-style: preserve-3d;
+            transition: transform 0.6s;
+            /* Smooth flip effect */
+        }
+
+        .hair-card:hover .hair-card-inner {
+            transform: rotateY(180deg);
+            /* Flip card on hover */
+        }
+
+        .hair-card-front,
+        .hair-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            /* Hides the back when front is visible */
+            border-radius: 10px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+        }
+
+        .hair-card-front {
+            background-color: #fff;
+        }
+
+        .hair-card-back {
+            background-color: #00457c;
+            color: white;
+            transform: rotateY(180deg);
+            /* Back starts flipped */
+        }
+
+        .hair-card img {
+            width: 70%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px 10px 0 0;
+        }
+
+        .hair-card h3 {
+            margin: 10px 0;
+            color: #00457c;
+        }
+
+        .hair-card-back h3 {
+            color: white;
+        }
+
+        .hair-card p {
+            font-size: 0.9em;
+            line-height: 1.4;
+            text-align: center;
+        }
+
+        .hidden-cards {
+            display: none;
+            /* Initially hide the additional cards */
+        }
+
+        .view-more-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .view-more-container button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            background-color: #002d72;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .view-more-container button:hover {
+            background-color: #00bcd4;
+        }
+
+        .cta-button {
+            background-color: purple;
+            /* Green background color */
+            color: white;
+            /* White text color */
+            border: none;
+            /* Remove default border */
+            padding: 10px 20px;
+            /* Adjust padding to make the button larger */
+            text-align: center;
+            /* Center the text */
+            text-decoration: none;
+            /* Remove underline */
+            display: inline-block;
+            /* Make it an inline-block element */
+            font-size: 16px;
+            /* Set font size */
+            border-radius: 5px;
+            /* Rounded corners */
+            transition: background-color 0.3s ease;
+            /* Add transition for hover effect */
+        }
+
+        /* Hover effect */
+        .cta-button:hover {
+            background-color: #45a049;
+            /* Darker green on hover */
+        }
+
+        /* comparison table styles*/
+
+        /* Comparison Table */
+        .comparison-table {
+            margin: 40px auto;
+            padding: 20px;
+            max-width: 1200px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .comparison-table h2 {
+            text-align: center;
+            font-size: 2.5em;
+            color: #002d72;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        th,
+        td {
+            padding: 15px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+        th {
+            background-color: #002d72;
+            color: white;
+            font-size: 1.1em;
+        }
+
+        td {
+            font-size: 1em;
+            color: #333;
+        }
+
+        td strong {
+            color: #002d72;
+        }
+
+        footer {
+            background-color: #003366;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 0.9rem;
+        }
+
+        /* comparison between 2 brand products*/
+
+        h1 {
+            margin: 0;
+            font-size: 2.5em;
+            text-transform: uppercase;
+        }
+
+        .comparison-container {
+            padding: 40px;
+            margin: 0 auto;
+            width: 90%;
+        }
+
+        .product-comparison {
+            margin-bottom: 40px;
+        }
+
+        .product-comparison h2 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            color: #002d72;
+            text-align: center;
+        }
+
+        .product {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            width: 45%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+            vertical-align: top;
+            margin: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .product:hover {
+            transform: translateY(-10px);
+        }
+
+        .product h3 {
+            font-size: 1.5em;
+            color: #002d72;
+            margin-bottom: 10px;
+        }
+
+        .product img {
+            width: 250px;
+            height: 250px;
+            object-fit: contain;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .product p {
+            font-size: 1em;
+            line-height: 1.5;
+            margin: 10px 0;
+        }
+
+        /* Suggested hair products Section Styling */
+        .suggested-hair {
+            background-color: #f8f9fa;
+            padding: 50px 0;
+            text-align: center;
+        }
+
+        .suggested-hair .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .suggested-hair h2 {
+            font-size: 2em;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .suggested-hair p {
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .hair-grid {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .hair-item {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            max-width: 350px;
+            text-align: left;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .hair-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .hair-item img {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .hair-item h3 {
+            font-size: 1.5em;
+            color: #222;
+            margin: 15px 0 10px;
+        }
+
+        .hair-item p {
+            color: #555;
+            font-size: 1em;
+            line-height: 1.5;
+        }
+
+        .review {
+            margin-top: 15px;
+        }
+
+        .review p {
+            font-style: italic;
+            color: #444;
+        }
+
+        .star-rating span {
+            font-size: 1.2em;
+        }
+
+        .buy-now-btn {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #00457c;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+        }
+
+        .buy-now-btn:hover {
+            background-color: #00457c;
+        }
+
+        /* Styles for the new grid section */
+        .additional-grids {
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        .additional-grids h2 {
+            font-size: 2.5em;
+            margin-bottom: 30px;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            /* 3 columns */
+            gap: 20px;
+            justify-items: center;
+        }
+
+        .grid-item {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 320px;
+            /* Keeps items from getting too wide */
+            transition: transform 0.3s ease;
+        }
+
+        .grid-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .grid-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .grid-item p {
+            margin-top: 15px;
+            font-size: 1.1em;
+        }
+
+        .grid-item a {
+            text-decoration: none;
+            color: #003366;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .grid-item a:hover {
+            color: #00bcd4;
+        }
+
+        /* FAQ styles*/
+        #faq {
+            padding: 20px;
+            background-color: #f9f9f9;
+            text-align: center;
+        }
+
+        #faq h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .faq-item {
+            margin-bottom: 20px;
+        }
+
+        .faq-item h3 {
+            cursor: pointer;
+            padding: 10px;
+            background-color: white;
+            color: #002d72;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .faq-item p {
+            display: none;
+            padding: 10px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-top: none;
+            border-radius: 0 0 5px 5px;
+        }
+
+        .faq-item p.visible {
+            display: block;
+        }
+
+        .faq-answer {
+            display: none;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+        }
+
+        .toggle-btn {
+            margin-left: 10px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Haircare</h1>
+        <nav>
+            <a href="buyinguidehair.html">Buying Guide</a>
+            <a href="../reviews.php">Reviews</a>
+        </nav>
+    </header>
+
+    <!-- Slider Section -->
+    <div class="slider-container">
+        <div class="slider" id="slider">
+            <img src="../images/haircare1.jpg" alt="Image 1">
+            <img src="../images/haircare2.jpg" alt="Image 2">
+            <img src="../images/haircare3.jpg" alt="Image 3">
+        </div>
+        <div class="slider-nav">
+            <button id="prevBtn">&lt;</button>
+            <button id="nextBtn">&gt;</button>
+        </div>
+    </div>
+
+    <!-- Product Section -->
+    <section id="hair" class="hair-section">
+        <h2>Types of Hair Maintenance Products</h2>
+        <div class="hair-container">
+            <!-- Card 1 -->
+            <div class="hair-card">
+                <div class="hair-card-inner">
+                    <div class="hair-card-front">
+                        <img src="../images/shampoo.jpg" alt="Shampoos">
+                        <h3>Shampoos</h3>
+                    </div>
+                    <div class="hair-card-back">
+                        <p>Shampoos cleanse the scalp and hair, removing dirt and product buildup. They hydrate and
+                            nourish the hair, improving texture and preventing dryness or breakage. Specialized shampoos
+                            address concerns like dandruff, hair loss, or color protection.</p>
+                        <a href="https://discoverpilgrim.com/collections/shampoos?srsltid=AfmBOooXNLaO8CyrltK4cL-Iczki2bCswQlAX1gpEZU9-YRleKZ9WHI_"
+                            class="cta-button">Shop Now</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="hair-card">
+                <div class="hair-card-inner">
+                    <div class="hair-card-front">
+                        <img src="../images/oil.jpg" alt="Hair Oils">
+                        <h3>Hair Oils</h3>
+                    </div>
+                    <div class="hair-card-back">
+                        <p>Hair oils nourish and moisturize the scalp, promoting softness and shine. They reduce
+                            dryness, split ends, and frizz while improving scalp health. Oils also stimulate hair growth
+                            by enhancing circulation to hair follicles.</p>
+                        <a href="https://www.kerastase.in/oils-and-serums?srsltid=AfmBOooKeRPf5il7YPI_4soaEAM9Q0AvkPmp8c6c5wxBnkHxi6E4-mFk"
+                            class="cta-button">Shop Now</a>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="hair-card">
+                <div class="hair-card-inner">
+                    <div class="hair-card-front">
+                        <img src="../images/conditioner.jpg" alt="Conditioners">
+                        <h3>Conditioners</h3>
+                    </div>
+                    <div class="hair-card-back">
+                        <p>Conditioners restore moisture and detangle hair after shampooing, making it softer and more
+                            manageable. They reduce frizz, improve texture, and protect against damage, leaving the hair
+                            smooth and shiny.</p>
+                        <a href="https://bblunt.com/?srsltid=AfmBOorUGSJUTJDPeoLxkzpY1JmULPwxxsVvtoaCOHXOFrLUF-xxkMDM"
+                            class="cta-button">Shop Now</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="hair-card">
+                <div class="hair-card-inner">
+                    <div class="hair-card-front">
+                        <img src="../images/hairserum.jpg" alt="Hair Serums">
+                        <h3>Hair Serums</h3>
+                    </div>
+                    <div class="hair-card-back">
+                        <p>Hair serums are designed to smooth and add shine to your hair while providing heat
+                            protection. They help to seal split ends, reduce frizz, and enhance the overall look and
+                            feel of your hair, making it sleek and manageable.</p>
+                        <a href="https://www.kerastase.in/oils-and-serums?srsltid=AfmBOooKeRPf5il7YPI_4soaEAM9Q0AvkPmp8c6c5wxBnkHxi6E4-mFk"
+                            class="cta-button">Shop Now</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 5 -->
+            <div class="hair-card">
+                <div class="hair-card-inner">
+                    <div class="hair-card-front">
+                        <img src="../images/hairmask.jpg" alt="Hair Masks">
+                        <h3>Hair Masks</h3>
+                    </div>
+                    <div class="hair-card-back">
+                        <p>Hair masks provide intense hydration and repair damaged hair. They are ideal for restoring
+                            elasticity, reducing breakage, and enhancing the texture of dry or chemically treated hair.
+                        </p>
+                        <a href="https://www.lorealprofessionnel.in/all-products/hair-care/mask" class="cta-button">Shop
+                            Now</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 6 -->
+            <div class="hair-card">
+                <div class="hair-card-inner">
+                    <div class="hair-card-front">
+                        <img src="../images/dryshampoo.jpg" alt="Dry Shampoos">
+                        <h3>Dry Shampoos</h3>
+                    </div>
+                    <div class="hair-card-back">
+                        <p>Dry shampoos absorb excess oil and refresh your hair without the need for water. They add
+                            volume and extend the life of hairstyles, making them a convenient option for busy days or
+                            travel.</p>
+                        <a href="https://www.dove.com/us/en/hair-care/dry-shampoo.html" class="cta-button">Shop Now</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 7 -->
+            <div class="hair-card">
+                <div class="hair-card-inner">
+                    <div class="hair-card-front">
+                        <img src="../images/hairspray.jpg" alt="Hair Sprays">
+                        <h3>Hair Sprays</h3>
+                    </div>
+                    <div class="hair-card-back">
+                        <p>Hair sprays provide long-lasting hold and control for your hairstyle. They resist humidity,
+                            prevent frizz, and can be tailored to various styles, from soft and flexible to strong and
+                            structured.</p>
+                        <a href="https://bblunt.com/?srsltid=AfmBOopozyPQ8izLGPqLuMZcyzU4IO0zGeKNaS-u8TYnhEs7GgtbyzGH"
+                            class="cta-button">Shop Now</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 8 -->
+            <div class="hair-card">
+                <div class="hair-card-inner">
+                    <div class="hair-card-front">
+                        <img src="../images/hairtreatment.jpg" alt="Hair Treatments">
+                        <h3>Hair Treatments</h3>
+                    </div>
+                    <div class="hair-card-back">
+                        <p>Hair treatments address specific hair and scalp issues, such as thinning, dandruff, or
+                            breakage. These targeted solutions rejuvenate the scalp, strengthen strands, and promote
+                            overall hair health.</p>
+                        <a href="https://traya.health/?srsltid=AfmBOorweTCy_HErQdGUX2aKYg-B6WULc3pvJFC_4Y3MsZcQlNsAMd6C"
+                            class="cta-button">Shop Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comparison Table -->
+    <section class="comparison-table">
+        <h2>Hair Product Insights</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Specifications</th>
+                    <th>Features</th>
+                    <th>Pros</th>
+                    <th>Cons</th>
+                    <th>How to Use</th>
+                    <th>Why It's the Best</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Shampoos -->
+                <tr>
+                    <td><strong>Shampoos</strong></td>
+                    <td>Volume: 250ml, Type: Hydrating, Anti-Dandruff</td>
+                    <td>Cleanses scalp, Adds volume, Removes buildup</td>
+                    <td>Great for scalp health, Prevents dandruff, Adds shine</td>
+                    <td>May strip natural oils with frequent use, Not suitable for dry hair</td>
+                    <td>Apply a generous amount to wet hair, Massage, Rinse thoroughly</td>
+                    <td>Best for daily scalp cleaning and preventing dandruff while promoting healthy hair growth</td>
+                </tr>
+                <!-- Hair Oils -->
+                <tr>
+                    <td><strong>Hair Oils</strong></td>
+                    <td>Volume: 100ml, Type: Nourishing, Lightweight</td>
+                    <td>Moisturizes scalp, Reduces frizz, Adds shine</td>
+                    <td>Promotes hair growth, Softens hair, Controls split ends</td>
+                    <td>Can be heavy for fine hair, May take longer to absorb</td>
+                    <td>Apply a few drops to damp or dry hair, Focus on ends, Do not rinse</td>
+                    <td>Best for restoring moisture and promoting shine, particularly for dry or damaged hair</td>
+                </tr>
+                <!-- Conditioners -->
+                <tr>
+                    <td><strong>Conditioners</strong></td>
+                    <td>Volume: 300ml, Type: Repairing, Sulfate-Free</td>
+                    <td>Detangles hair, Moisturizes, Prevents damage</td>
+                    <td>Smoothens hair, Makes hair manageable, Adds moisture</td>
+                    <td>Not ideal for fine or oily hair, Can leave residue if over-applied</td>
+                    <td>Apply after shampoo, Leave for 2-3 minutes, Rinse thoroughly</td>
+                    <td>Best for keeping hair hydrated and detangled, especially for coarse or textured hair</td>
+                </tr>
+                <!-- Hair Serums -->
+                <tr>
+                    <td><strong>Hair Serums</strong></td>
+                    <td>Volume: 50ml, Type: Smoothing, Heat Protectant</td>
+                    <td>Protects from heat, Adds gloss, Reduces frizz</td>
+                    <td>Protects from styling tools, Smoothens unruly hair, Adds shine</td>
+                    <td>Can make hair greasy if over-applied, Not suitable for thin hair</td>
+                    <td>Apply to damp hair, Distribute evenly, Style as usual</td>
+                    <td>Best for managing frizz and adding a glossy finish while protecting from heat styling tools</td>
+                </tr>
+                <!-- Hair Masks -->
+                <tr>
+                    <td><strong>Hair Masks</strong></td>
+                    <td>Volume: 200ml, Type: Repairing, Deep Moisturizing</td>
+                    <td>Restores elasticity, Repairs damage, Deep hydration</td>
+                    <td>Great for restoring damaged hair, Provides intense moisture, Strengthens hair</td>
+                    <td>Requires time to work, May not suit fine hair, Can be heavy</td>
+                    <td>Apply generously to clean hair, Leave for 15-20 minutes, Rinse thoroughly</td>
+                    <td>Best for repairing dry, damaged, or chemically treated hair, providing deep nourishment</td>
+                </tr>
+                <!-- Dry Shampoos -->
+                <tr>
+                    <td><strong>Dry Shampoos</strong></td>
+                    <td>Volume: 150ml, Type: Absorbs Oil, Adds Volume</td>
+                    <td>Absorbs excess oil, Adds texture, Refreshes hair</td>
+                    <td>Convenient, Ideal for on-the-go, Adds volume</td>
+                    <td>May leave residue, Not ideal for deep cleaning</td>
+                    <td>Spray onto roots, Massage in, Style as desired</td>
+                    <td>Best for refreshing hair between washes and adding volume without the need for water</td>
+                </tr>
+                <!-- Hair Sprays -->
+                <tr>
+                    <td><strong>Hair Sprays</strong></td>
+                    <td>Volume: 200ml, Type: Firm Hold, Flexible Hold</td>
+                    <td>Holds hairstyles, Adds texture, Resists humidity</td>
+                    <td>Provides long-lasting hold, Prevents frizz, Great for setting styles</td>
+                    <td>Can make hair stiff, May cause buildup over time</td>
+                    <td>Spray evenly onto styled hair, Hold for 10-12 inches away</td>
+                    <td>Best for setting hairstyles with long-lasting hold and preventing frizz</td>
+                </tr>
+                <!-- Hair Treatments -->
+                <tr>
+                    <td><strong>Hair Treatments</strong></td>
+                    <td>Volume: 120ml, Type: Rejuvenating, Anti-Hair Loss</td>
+                    <td>Treats scalp issues, Stimulates hair follicles, Strengthens hair</td>
+                    <td>Addresses specific issues like hair thinning, Promotes healthy scalp</td>
+                    <td>May take time to show results, Requires consistent use</td>
+                    <td>Apply to scalp, Massage gently, Leave for a few hours before washing</td>
+                    <td>Best for targeted hair problems such as thinning, breakage, or scalp issues</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+    <header>Battle of the Brands: A Comparative Analysis of Leading Haircare Products</header>
+    <section class="comparison-container">
+        <!-- Shampoo Comparison -->
+        <div class="product-comparison">
+            <h2>Shampoo Comparison</h2>
+            <div class="product">
+                <h3>Kérastase Bain Satin 2 Shampoo</h3>
+                <img src="../images/shampoo1.jpg" alt="Kérastase Shampoo">
+                <p><strong>Description:</strong> A nourishing shampoo designed to hydrate dry hair and restore balance.
+                </p>
+                <p><strong>Best For:</strong> Dry, damaged, or color-treated hair.</p>
+            </div>
+            <div class="product">
+                <h3>Pantene Pro-V Daily Moisture Renewal Shampoo</h3>
+                <img src="../images/shampoo2.jpg" alt="Pantene Shampoo">
+                <p><strong>Description:</strong> A daily-use shampoo that deeply moisturizes and helps strengthen hair.
+                </p>
+                <p><strong>Best For:</strong> All hair types, particularly for normal to dry hair needing moisture.</p>
+            </div>
+        </div>
+
+        <!-- Hair Serum Comparison -->
+        <div class="product-comparison">
+            <h2>Hair Serum Comparison</h2>
+            <div class="product">
+                <h3>L'Oreal Paris Extraordinary Oil Hair Serum</h3>
+                <img src="../images/hairserum1.jpg" height="200px" width="400px" alt="L'Oreal Paris Extraordinary Oil Hair Serum">
+                <p><strong>Description:</strong> Enriched with 6 rare flower oils (lotus, chamomile, tiara, rose, flax,
+                    and sunflower), this serum deeply nourishes hair while adding a radiant shine.</p>
+                <p><strong>Best For:</strong> People with dull, dry, or damaged hair who want intense nourishment and
+                    shine.</p>
+            </div>
+            <div class="product">
+                <h3>Streax Hair Serum</h3>
+                <img src="../images/hairserum2.jpg" alt="Streax Hair Serum">
+                <p><strong>Description:</strong> A repairing serum that strengthens damaged hair, adding softness and
+                    shine.Suitable for all hair types, including dry, frizzy, and damaged hair.</p>
+                <p><strong>Best For:</strong> Damaged or brittle hair needing repair and protection.Those looking for a
+                    serum to protect hair from heat styling tools.</p>
+            </div>
+        </div>
+
+        <!-- Hair Oil Comparison -->
+        <div class="product-comparison">
+            <h2>Hair Oil Comparison</h2>
+            <div class="product">
+                <h3>Dabur Amla Hair Oil</h3>
+                <img src="../images/oil.jpg" alt="Dabur Amla Hair Oil">
+                <p><strong>Description:</strong>Amla (Indian Gooseberry) extract.Promotes visibly blacker and lustrous
+                    hair.Provides natural sun protection against harmful UV rays.Helps prevent premature graying.
+                    Strengthens hair from root to tip.
+                </p>
+                <p><strong>Best For:</strong> Individuals seeking to enhance hair darkness and shine.
+                    Those looking to prevent premature graying.</p>
+            </div>
+            <div class="product">
+                <h3>Parachute Coconut Hair Oil</h3>
+                <img src="../images/oil1.jpg" alt="Parachute Coconut Hair Oil">
+                <p><strong>Description:</strong>100% pure coconut oil.Deeply nourishes and conditions the hair.
+                    Strengthens hair, reducing breakage.Adds natural shine and softness.Suitable for regular use and all
+                    hair types.</p>
+                <p><strong>Best For:</strong>Individuals looking for deep nourishment and conditioning.
+                    Those aiming to strengthen hair and reduce breakage.</p>
+            </div>
+        </div>
+
+        <!-- Hair Mask Comparison -->
+        <div class="product-comparison">
+            <h2>Hair Mask Comparison</h2>
+            <div class="product">
+                <h3>Olaplex Hair Perfector No.3</h3>
+                <img src="../images/hairmask1.jpg" alt="Olaplex Hair Perfector No.3">
+                <p><strong>Description:</strong>A treatment designed to repair and strengthen damaged and compromised
+                    hair by restoring its healthy appearance and texture. Bis-Aminopropyl Diglycol Dimaleate, which
+                    works on a molecular level to repair broken disulfide bonds in the hair.
+                </p>
+                <p><strong>Best For:</strong>Individuals with color-treated, chemically processed, or heat-damaged hair
+                    seeking to repair and strengthen their strands.
+                    Those looking for a treatment to improve hair texture and restore a healthy appearance.</p>
+            </div>
+            <div class="product">
+                <h3>K18 Leave-In Molecular Repair Hair Mask</h3>
+                <img src="../images/hairmask2.jpg" alt="K18 Leave-In Molecular Repair Hair Mask">
+                <p><strong>Description:</strong> A leave-in treatment that repairs and strengthens hair by reconnecting
+                    keratin chains, resulting in improved elasticity and strength.K18Peptide™, a patented peptide that
+                    travels into the inner layers of hair to reconnect broken keratin chains.After shampooing, skip
+                    conditioner, apply to towel-dried hair, and leave in for 4 minutes. Do not rinse out.</p>
+                <p><strong>Best For:</strong>Individuals with severely damaged hair from bleaching, coloring,or
+                    excessive heat styling.</p>
+            </div>
+        </div>
+    </section>
+    <!-- Suggested Haircare Section -->
+    <section id="suggested-hair" class="suggested-hair">
+        <div class="container">
+            <h2>TOP-SELLING HAIRCARE PRODUCTS</h2>
+            <p>Explore the most in-demand haircare products with expert reviews and ratings.</p>
+            <div class="hair-grid">
+                <!-- Haircare Product 1 -->
+                <div class="hair-item">
+                    <img src="../images/shampoo3.jpg" alt="Argan Oil Shampoo" style="max-width: 500px; height:200px;">
+                    <h3>Argan Oil Shampoo</h3>
+                    <p>
+                        Infused with natural argan oil, this shampoo nourishes hair, reduces frizz, and promotes healthy
+                        hair growth.
+                        Ideal for dry and damaged hair.
+                    </p>
+                    <div class="review">
+                        <p><strong>Review:</strong> "Leaves my hair silky smooth and hydrated. Best shampoo for frizzy
+                            hair!"</p>
+                        <div class="star-rating">
+                            <span style="color: gold; font-size: 1.2em;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                        </div>
+                        <a href="#" class="buy-now-btn">Buy Now</a>
+                    </div>
+                </div>
+                <!-- Haircare Product 2 -->
+                <div class="hair-item">
+                    <img src="../images/hairmask3.jpg" alt="Keratin Hair Mask" style="max-width: 500px; height:200px;">
+                    <h3>Keratin Hair Mask</h3>
+                    <p>
+                        A deep-conditioning keratin treatment that restores hair strength, repairs damage, and provides
+                        intense hydration.
+                        Perfect for chemically treated and brittle hair.
+                    </p>
+                    <div class="review">
+                        <p><strong>Review:</strong> "Transformed my damaged hair into soft and manageable locks!"</p>
+                        <div class="star-rating">
+                            <span style="color: gold; font-size: 1.2em;">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
+                        </div>
+                        <a href="#" class="buy-now-btn">Buy Now</a>
+                    </div>
+                </div>
+                <!-- Haircare Product 3 -->
+                <div class="hair-item">
+                    <img src="../images/hairserum3.jpg" alt="Biotin Hair Serum" style="max-width: 500px; height:200px;">
+                    <h3>Biotin Hair Serum</h3>
+                    <p>
+                        Enriched with biotin and essential vitamins, this serum strengthens hair roots, promotes hair
+                        growth, and reduces hair fall.
+                        Suitable for all hair types.
+                    </p>
+                    <div class="review">
+                        <p><strong>Review:</strong> "My hair feels thicker and healthier after just a few weeks of use!"
+                        </p>
+                        <div class="star-rating">
+                            <span style="color: gold; font-size: 1.2em;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                        </div>
+                        <a href="#" class="buy-now-btn">Buy Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <header>RELATED ARTICLES</header>
+    <section class="additional-grids">
+        <div class="grid-container">
+            <div class="grid-item">
+                <img src="../images/haircare4.jpg" alt="Best
+                    Hair Care Solutions for Radiant Looks: Nutrition Guide">
+                <p><a
+                        href="https://www.msn.com/en-in/health/other/best-hair-care-solutions-for-radiant-looks-nutrition-guide/ar-AA1xpjIN?ocid=BingNewsVerp">Best
+                        Hair Care Solutions for Radiant Looks: Nutrition Guide</a></p>
+            </div>
+            <div class="grid-item">
+                <img src="../images/haircare5.jpg" alt="The
+                    12 Very Best Shampoos For dry hair, thinning hair, frizzy hair, and curls">
+                <p><a href="https://nymag.com/strategist/article/best-shampoos-dandruff-volumizing-thinning-dry.html">The
+                        12 Very Best Shampoos For dry hair, thinning hair, frizzy hair, and curls</a></p>
+            </div>
+            <div class="grid-item">
+                <img src="../images/haircare6.jpg" alt="7
+                    hair oils that will deeply nourish your hair this winter">
+                <p><a href="https://emirateswoman.com/7-hair-oils-that-will-deeply-nourish-your-hair-this-winter/">7
+                        hair oils that will deeply nourish your hair this winter</a></p>
+            </div>
+        </div>
+    </section>
+    <section id="faq">
+        <h2>Frequently Asked Questions</h2>
+
+        <div class="faq-item">
+            <h3>How often should I wash my hair?
+                <button class="toggle-btn">+</button>
+            </h3>
+            <p class="faq-answer">It depends on your hair type. Oily hair may need washing every other day, while dry or
+                curly hair can be washed 2-3 times a week to maintain moisture.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>What is the best way to prevent hair damage?
+                <button class="toggle-btn">+</button>
+            </h3>
+            <p class="faq-answer">Avoid excessive heat styling, use a heat protectant, trim split ends regularly, and
+                opt for sulfate-free shampoos to maintain hair health.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>How can I make my hair grow faster?
+                <button class="toggle-btn">+</button>
+            </h3>
+            <p class="faq-answer">Maintain a balanced diet, massage your scalp to stimulate blood flow, use nourishing
+                oils, and minimize heat and chemical treatments.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>Should I use conditioner every time I wash my hair?
+                <button class="toggle-btn">+</button>
+            </h3>
+            <p class="faq-answer">Yes, conditioner helps keep your hair hydrated and smooth. If you have fine hair, use
+                a lightweight conditioner to avoid buildup.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>Can I use oil on my hair every day?
+                <button class="toggle-btn">+</button>
+            </h3>
+            <p class="faq-answer">Using oil daily can weigh down your hair, especially if it's fine or oily. Instead,
+                apply oil 1-2 times a week before shampooing for nourishment.</p>
+        </div>
+
+    </section>
+    <script>
+        // Get references to the slider container and navigation buttons
+        const slider = document.getElementById('slider');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+
+        // Set the initial index of the slide
+        let currentSlide = 0;
+        const totalSlides = slider.children.length;
+
+        // Function to update the slider position
+        function updateSliderPosition() {
+            // Calculate the new position of the slider
+            slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+        }
+
+        // Event listener for the previous button
+        prevBtn.addEventListener('click', function () {
+            if (currentSlide > 0) {
+                currentSlide--;
+            } else {
+                currentSlide = totalSlides - 1; // Loop back to the last slide
+            }
+            updateSliderPosition();
+        });
+
+        // Event listener for the next button
+        nextBtn.addEventListener('click', function () {
+            if (currentSlide < totalSlides - 1) {
+                currentSlide++;
+            } else {
+                currentSlide = 0; // Loop back to the first slide
+            }
+            updateSliderPosition();
+        });
+
+        // Optional: Auto slide every 3 seconds
+        setInterval(function () {
+            nextBtn.click(); // Trigger the next button click every 3 seconds
+        }, 3000);
+
+
+        const viewMoreBtn = document.getElementById('viewMoreBtn');
+        const hiddenCards = document.querySelector('.hidden-cards');
+
+        viewMoreBtn.addEventListener('click', function () {
+            // Toggle visibility of hidden cards
+            if (hiddenCards.style.display === 'none' || hiddenCards.style.display === '') {
+                hiddenCards.style.display = 'block';
+                viewMoreBtn.textContent = 'View Less';
+            } else {
+                hiddenCards.style.display = 'none';
+                viewMoreBtn.textContent = 'View More';
+            }
+        });
+
+        // js for toggle function of FAQ'S
+        document.querySelectorAll('.toggle-btn').forEach(button => {
+            button.addEventListener('click', function () {
+                const answer = this.parentElement.nextElementSibling;
+                const isVisible = answer.style.display === 'block';
+                answer.style.display = isVisible ? 'none' : 'block';
+                this.textContent = isVisible ? '+' : '-';
+            });
+        });
+    </script>
+</body>
+
+</html>

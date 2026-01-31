@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pickup Trucks</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        header {
+            background: linear-gradient(90deg, #002d72, #002d72);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.8em;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        nav {
+            background-color: #002d72;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 15px 0;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 30px;
+            border-radius: 20px;
+            transition: background-color 0.3s ease;
+            font-size: 1.1em;
+        }
+
+        nav a:hover {
+            color: #80cbc4;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 20px 20px;
+            background: url('https://via.placeholder.com/1200x500') no-repeat center center/cover;
+            color: black;
+        }
+
+        .hero h2 {
+            font-size: 3.5em;
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            font-size: 1.7em;
+        }
+
+        .slider-section {
+            text-align: center;
+            padding: 50px 20px;
+            background-color: #f4f4f4;
+        }
+
+        .slider-container {
+            position: relative;
+            max-width: 100%;
+            overflow: hidden;
+            margin: 0 auto;
+        }
+
+        .slider {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .slide {
+            min-width: 100%;
+            text-align: center;
+            box-sizing: border-box;
+        }
+
+        .slide img {
+            width: 80%;
+            max-width: 300px;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .slide p {
+            font-size: 1.2em;
+            margin: 10px 0;
+        }
+
+        .slide a {
+            text-decoration: none;
+            color: #004d40;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .slide a:hover {
+            color: #00796b;
+        }
+
+        .slider-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+            font-size: 1.5em;
+            border-radius: 50%;
+            z-index: 10;
+        }
+
+        .slider-button.prev {
+            left: 10px;
+        }
+
+        .slider-button.next {
+            right: 10px;
+        }
+
+        .slider-button:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        /* Types of pickup trucks*/
+        .truck-type-selection {
+            text-align: center;
+            margin: 60px 20px;
+        }
+
+        .truck-type-selection h2 {
+            font-size: 2.5em;
+            margin-bottom: 30px;
+        }
+
+        .truck-types {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .truck-card {
+            background-color: white;
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            padding: 50px;
+            text-align: center;
+            width: 280px;
+            transition: transform 0.3s ease;
+        }
+
+        .truck-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .truck-card img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .truck-card h3 {
+            font-size: 1.7em;
+            margin-top: 15px;
+        }
+
+        .truck-card p {
+            font-size: 1.1em;
+            margin-top: 10px;
+        }
+
+        .truck-card a {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #0047ab;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: background-color 0.3s ease;
+        }
+
+        .truck-card a:hover {
+            background-color: #0066cc;
+        }
+
+        .comparison-table-section {
+            padding: 50px 20px;
+            background-color: #fff;
+            text-align: center;
+        }
+
+        .comparison-table-section h2 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: black;
+        }
+
+        .comparison-table {
+            width: 90%;
+            margin: 0 auto;
+            border-collapse: collapse;
+            text-align: center;
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
+            background-color: #f9f9f9;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 15px;
+            border: 1px solid #ddd;
+        }
+
+        .comparison-table th {
+            background-color: #002d72;
+            color: white;
+            text-transform: uppercase;
+        }
+
+        .comparison-table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .comparison-table tr:hover {
+            background-color: #e0f2f1;
+        }
+
+        .comparison-table td {
+            font-size: 1em;
+            color: #333;
+        }
+
+        /* style for top brands*/
+        .top-brands {
+            text-align: center;
+            padding: 50px 20px;
+            background-color: #f4f4f4;
+        }
+
+        .top-brands h2 {
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            color: #002d72;
+        }
+
+        .brand-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .brand-card {
+            background-color: white;
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            width: 250px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .brand-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .brand-card img {
+            width: 100%;
+            height: 200px;
+            margin-bottom: 15px;
+        }
+
+        .brand-card h3 {
+            font-size: 1.5em;
+            margin: 10px 0;
+            color: #0047ab;
+        }
+
+        .brand-card p {
+            font-size: 1em;
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        .brand-card a {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #0047ab;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 0.9em;
+            transition: background-color 0.3s ease;
+        }
+
+        .brand-card a:hover {
+            background-color: #0066cc;
+        }
+
+        /* styling for grid*/
+        .grid-section {
+            padding: 50px 20px;
+            background-color: #fff;
+        }
+
+        .grid-section h2 {
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            text-align: center;
+            color: #002d72;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 0 auto;
+            max-width: 1200px;
+        }
+
+        .grid-item {
+            background-color: white;
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .grid-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .grid-item h3 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            color: #0047ab;
+        }
+
+        .grid-item a {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #0047ab;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 0.9em;
+            transition: background-color 0.3s ease;
+        }
+
+        .grid-item a:hover {
+            background-color: #0066cc;
+        }
+
+        /* Suggested trucks Section Styling */
+        .suggested-truck {
+            background-color: #f8f9fa;
+            padding: 50px 0;
+            text-align: center;
+        }
+
+        .suggested-truck .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .suggested-truck h2 {
+            font-size: 2em;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .suggested-truck p {
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .truck-grid {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .truck-item {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            max-width: 350px;
+            text-align: left;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .truck-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .truck-item img {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .truck-item h3 {
+            font-size: 1.5em;
+            color: #222;
+            margin: 15px 0 10px;
+        }
+
+        .truck-item p {
+            color: #555;
+            font-size: 1em;
+            line-height: 1.5;
+        }
+
+        .review {
+            margin-top: 15px;
+        }
+
+        .review p {
+            font-style: italic;
+            color: #444;
+        }
+
+        .star-rating span {
+            font-size: 1.2em;
+        }
+
+        .buy-now-btn {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #00457c;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+        }
+
+        .buy-now-btn:hover {
+            background-color: #00457c;
+        }
+
+        /* FAQ styles*/
+        #faq {
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+
+        #faq h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .faq-item {
+            margin-bottom: 20px;
+        }
+
+        .faq-item h3 {
+            cursor: pointer;
+            padding: 10px;
+            background-color: white;
+            color: #002d72;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .faq-item p {
+            display: none;
+            padding: 10px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-top: none;
+            border-radius: 0 0 5px 5px;
+        }
+
+        .faq-item p.visible {
+            display: block;
+        }
+
+        .faq-answer {
+            display: none;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+        }
+
+        .toggle-btn {
+            margin-left: 10px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Pickup Trucks</h1>
+    </header>
+
+    <nav>
+        <a href="buyinguidetrucks.html">Buying Guide </a>
+        <a href="../reviews.php">Reviews</a>
+    </nav>
+
+    <section class="hero">
+        <h2>Explore the Power of Pickup Trucks</h2>
+        <p>From rugged off-roaders to luxurious haulers, find the perfect pickup truck for your needs.</p>
+    </section>
+
+    <section id="categories" class="slider-section">
+        <h2>PICKUP TRUCK CATEGORIES</h2>
+        <div class="slider-container">
+            <button class="slider-button prev" onclick="moveSlide(-1)">&#10094;</button>
+            <div class="slider">
+                <div class="slide">
+                    <img src="../images/truck1.jpg" alt="Compact/Mid-Size Pickups">
+                    <p><a href="#">Compact/Mid-Size Pickups</a></p>
+                </div>
+                <div class="slide">
+                    <img src="../images/truck2.jpg" alt="Full-Size Pickups">
+                    <p><a href="#">Full-Size Pickups</a></p>
+                </div>
+                <div class="slide">
+                    <img src="../images/truck3.jpg" alt="Heavy-Duty Pickups">
+                    <p><a href="#">Heavy-Duty Pickups</a></p>
+                </div>
+                <div class="slide">
+                    <img src="../images/truck4.jpg" alt="Luxury Pickups">
+                    <p><a href="#">Luxury Pickups</a></p>
+                </div>
+                <div class="slide">
+                    <img src="../images/truck5.jpg" alt="Off-Road Pickups">
+                    <p><a href="#">Off-Road Pickups</a></p>
+                </div>
+            </div>
+            <button class="slider-button next" onclick="moveSlide(1)">&#10095;</button>
+        </div>
+    </section>
+    <!--- Categories--->
+    <section class="truck-type-selection">
+        <h2>TYPES OF PICKUP TRUCKS</h2>
+        <div class="truck-types">
+            <div class="truck-card" id="Compact-truck">
+                <h3>Compact Trucks</h3>
+                <p>Compact trucks, also known as mid-size pickups, are smaller than full-size trucks and are known for
+                    their maneuverability and fuel efficiency. They are perfect for urban driving and light-duty tasks
+                    like hauling and towing smaller loads. Examples include the Toyota Tacoma and the Ford Ranger, which
+                    offer a blend of utility and comfort, making them popular choices for both personal and professional
+                    use.Compact trucks appeal to those who need the versatility of a pickup truck without the bulk of a
+                    full-size model, making them perfect for both personal use and small business needs.
+                </p>
+            </div>
+            <div class="truck-card" id="Fullsize-truck">
+                <h3>Full-Size Trucks</h3>
+                <p>Full-size trucks are larger than their compact counterparts, offering more power, towing capacity,
+                    and cargo space. They are built for heavy-duty tasks such as hauling large loads and towing heavy
+                    trailers, making them ideal for work-related purposes. Popular models include the Ford F-150,
+                    Chevrolet Silverado, and Ram 1500, known for their robust performance and versatility. These trucks
+                    also often come with advanced features and comfortable interiors, blending functionality with
+                    comfort.Their versatility and capability make them popular choices for both professionals and
+                    families who require reliable and high-performing vehicles. </p>
+            </div>
+            <div class="truck-card" id="heavy-truck">
+                <h3>Heavy-Duty Trucks</h3>
+                <p>Heavy-duty trucks are built for maximum performance, offering exceptional towing and payload
+                    capacities. They are designed for demanding tasks such as construction, hauling heavy equipment, and
+                    long-distance transport. Popular models include the Ford F-250/F-350 Super Duty, Chevrolet Silverado
+                    HD, and Ram 2500/3500, all known for their robust engines and durability. These trucks often come
+                    equipped with advanced technology and enhanced safety features to handle the toughest jobs.Their
+                    reliability and performance make them indispensable tools for professionals in various industries.
+                </p>
+            </div>
+            <div class="truck-card" id="Luxury-truck">
+                <h3>Luxury Trucks</h3>
+                <p>Luxury trucks combine the utility of a pickup with the comfort and features of high-end vehicles.
+                    They offer premium interiors, advanced technology, and powerful performance. Popular models include
+                    the GMC Sierra Denali, Ford F-150 Platinum, and Ram 1500 Limited, all known for their sophisticated
+                    designs and luxurious amenities. These trucks cater to those who want both rugged capability and
+                    upscale comfort in one package.The combination of cutting-edge features, such as state-of-the-art
+                    infotainment systems and superior safety technologies, makes luxury trucks a top choice for those
+                    who want the best of both worlds in terms of capability and comfort.</p>
+            </div>
+            <div class="truck-card" id="Off-Road-truck">
+                <h3>Off Road Trucks</h3>
+                <p>Off-road trucks are specially designed for rugged terrain and adventurous driving, equipped with
+                    features like enhanced suspension, skid plates, and all-terrain tires. Models like the Ford F-150
+                    Raptor, Jeep Gladiator, and Toyota Tacoma TRD Pro are known for their durability and capability to
+                    handle challenging environments. These trucks provide excellent performance and reliability for
+                    outdoor enthusiasts and professionals who need to navigate difficult landscapes. They also often
+                    come with advanced technology and comfort features to make the off-road experience enjoyable. </p>
+            </div>
+            <!----Comaprison table-->
+            <section class="comparison-table-section">
+                <h2>PICKUP TRUCK COMPARISONS</h2>
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th>Compact Trucks</th>
+                            <th>Full-Size Trucks</th>
+                            <th>Heavy-Duty Trucks</th>
+                            <th>Luxury Trucks</th>
+                            <th>Off-Road Trucks</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Towing Capacity</td>
+                            <td>3,500 - 7,500 lbs</td>
+                            <td>8,000 - 12,000 lbs</td>
+                            <td>12,000+ lbs</td>
+                            <td>Varies</td>
+                            <td>6,000 - 8,000 lbs</td>
+                        </tr>
+                        <tr>
+                            <td>Payload Capacity</td>
+                            <td>1,000 - 1,500 lbs</td>
+                            <td>1,500 - 3,000 lbs</td>
+                            <td>3,000+ lbs</td>
+                            <td>Varies</td>
+                            <td>1,500 - 2,000 lbs</td>
+                        </tr>
+                        <tr>
+                            <td>Fuel Efficiency</td>
+                            <td>20 - 25 MPG</td>
+                            <td>15 - 20 MPG</td>
+                            <td>10 - 15 MPG</td>
+                            <td>15 - 22 MPG</td>
+                            <td>15 - 18 MPG</td>
+                        </tr>
+                        <tr>
+                            <td>Best Use</td>
+                            <td>City Driving, Light Towing</td>
+                            <td>Work, Daily Driving</td>
+                            <td>Construction, Heavy Hauling</td>
+                            <td>Luxury & Performance</td>
+                            <td>Off-Road Adventures</td>
+                        </tr>
+                        <tr>
+                            <td>Popular Models</td>
+                            <td>Toyota Tacoma, Ford Ranger</td>
+                            <td>Ford F-150, Ram 1500</td>
+                            <td>Chevy Silverado HD, Ford F-250</td>
+                            <td>GMC Sierra Denali, Ford F-150 Platinum</td>
+                            <td>Jeep Gladiator, Ford Raptor</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+            <!----Top Brands-->
+            <section class="top-brands">
+                <h2>TOP PICKUP TRUCK BRANDS</h2>
+                <div class="brand-container">
+                    <div class="brand-card">
+                        <img src="../images/truck6.jpg" alt="Ford Logo">
+                        <h3>Ford</h3>
+                        <p>Renowned for models like the F-150 and Super Duty, Ford is a leader in innovation and
+                            performance.</p>
+                        <a href="https://www.ford.com" target="_blank">Learn More</a>
+                    </div>
+                    <div class="brand-card">
+                        <img src="../images/truck7.jpg" alt="Toyota Logo">
+                        <h3>Toyota</h3>
+                        <p>Known for the rugged Tacoma and Tundra, Toyota delivers reliability and off-road capability.
+                        </p>
+                        <a href="https://www.toyota.com" target="_blank">Learn More</a>
+                    </div>
+                    <div class="brand-card">
+                        <img src="../images/truck8.jpg" alt="Ram Logo">
+                        <h3>Ram</h3>
+                        <p>Famous for the Ram 1500 and heavy-duty models, Ram stands out for comfort and performance.
+                        </p>
+                        <a href="https://www.ramtrucks.com" target="_blank">Learn More</a>
+                    </div>
+                    <div class="brand-card">
+                        <img src="../images/truck9.jpg" alt="GMC Logo">
+                        <h3>GMC</h3>
+                        <p>Known for Sierra trucks, GMC offers professional-grade capability and luxury.</p>
+                        <a href="https://www.gmc.com" target="_blank">Learn More</a>
+                    </div>
+                </div>
+            </section>
+            <!-- Suggested Pickup Trucks Section -->
+            <section id="suggested-truck" class="suggested-truck">
+                <div class="container">
+                    <h2>TOP SELLING PICKUP TRUCKS</h2>
+                    <p>Explore the most in-demand pickup trucks with expert reviews and ratings.</p>
+                    <div class="truck-grid">
+                        <!-- Pickup 1 -->
+                        <div class="truck-item">
+                            <img src="../images/truck10.jpg" alt="Chevrolet Silverado" style="max-width: 100%; height: auto;">
+                            <h3>Chevrolet Silverado</h3>
+                            <p>
+                                A robust and reliable pickup truck with powerful engine options and excellent towing
+                                capacity.
+                            </p>
+                            <div class="review">
+                                <p><strong>Review:</strong> "Tough and reliable. Perfect for heavy-duty tasks!"</p>
+                                <div class="star-rating">
+                                    <span
+                                        style="color: gold; font-size: 1.2em;">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
+                                </div>
+                                <br>
+                                <a href="https://www.chevrolet.com/trucks/silverado/1500" class="buy-now-btn">Buy
+                                    Now</a>
+                            </div>
+                        </div>
+                        <!-- Pickup 2 -->
+                        <div class="truck-item">
+                            <img src="../images/truck11.jpg" alt="Ford F-150" style="max-width: 500px; height:200px;">
+                            <h3>Ford F-150</h3>
+                            <p>
+                                The best-selling pickup truck, known for its power, durability, and cutting-edge
+                                features.
+                                Ideal for work and adventure alike.
+                            </p>
+                            <div class="review">
+                                <p><strong>Review:</strong> "Unmatched power and versatility. Handles everything I throw
+                                    at it!"</p>
+                                <div class="star-rating">
+                                    <span
+                                        style="color: gold; font-size: 1.2em;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                                </div>
+
+                                <a href="https://www.ford.com/trucks/f150/" class="buy-now-btn">Buy Now</a>
+                            </div>
+                        </div>
+                        <!-- Pickup 3 -->
+                        <div class="truck-item">
+                            <img src="../images/truck12.jpg" alt="Ram 1500" style="max-width: 500px; height: 200px;">
+                            <h3>Ram 1500</h3>
+                            <p>
+                                A full-size pickup with a smooth ride, luxurious interior, and impressive towing
+                                capabilities.
+                            </p>
+                            <div class="review">
+                                <p><strong>Review:</strong> "Incredibly comfortable and powerful. A game-changer in
+                                    pickups!"</p>
+                                <div class="star-rating">
+                                    <span
+                                        style="color: gold; font-size: 1.2em;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                                </div>
+
+                                <a href="https://www.ramtrucks.com/ram-1500.html " class="buy-now-btn">Buy Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- related articles section -->
+            <section class="grid-section">
+                <header style="text-align: center;">RELATED ARTICLES</header>
+                <div class="grid-container">
+                    <div class="grid-item">
+                        <h3>Top Value Trucks</h3>
+                        <p>10 Pickup Trucks That Hold Their Value Best Over Time.</p>
+                        <a href="https://www.topspeed.com/pickup-trucks-that-hold-their-value-best/">Read More</a>
+                    </div>
+                    <div class="grid-item">
+                        <h3>Top Used Vehicles</h3>
+                        <p>Pickup trucks and SUVs were the most-purchased used vehicles in 2024.</p>
+                        <a
+                            href="https://www.consumeraffairs.com/news/pickup-trucks-and-suvs-were-the-most-purchased-used-vehicles-in-2024-010925.html">Read
+                            More</a>
+                    </div>
+                    <div class="grid-item">
+                        <h3>Best Used Trucks</h3>
+                        <p>Most Reliable Used Pickup Trucks.These models were good when they were new and have stood the
+                            test of time.</p>
+                        <a
+                            href="https://www.consumerreports.org/cars/pickup-trucks/most-reliable-used-pickup-trucks-a7737894754/">Read
+                            More</a>
+                    </div>
+                </div>
+            </section>
+            <section id="faq">
+                <h2>FREQUENTLY ASKED QUESTIONS</h2>
+                <div class="faq-item">
+                    <h3>What is the best pickup truck for towing?
+                        <button class="toggle-btn">+</button>
+                    </h3>
+                    <p class="faq-answer">The best pickup truck for towing depends on your needs. Popular models like
+                        the Ford F-150, Chevrolet Silverado, and Ram 1500 offer excellent towing capacities and features
+                        designed for heavy loads.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Are pickup trucks fuel-efficient?
+                        <button class="toggle-btn">+</button>
+                    </h3>
+                    <p class="faq-answer">While pickup trucks are generally less fuel-efficient than smaller vehicles,
+                        modern models with hybrid or diesel engines offer improved mileage. Consider models like the
+                        Ford F-150 Hybrid or Chevrolet Silverado Diesel for better fuel economy.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>What are the advantages of owning a pickup truck?
+                        <button class="toggle-btn">+</button>
+                    </h3>
+                    <p class="faq-answer">Pickup trucks provide versatility, high towing and payload capacities,
+                        off-road capabilities, and spacious interiors. They are ideal for work, adventure, and daily
+                        driving.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Are pickup trucks safe for families?
+                        <button class="toggle-btn">+</button>
+                    </h3>
+                    <p class="faq-answer">Yes, many modern pickup trucks come with advanced safety features like
+                        lane-keeping assist, adaptive cruise control, and automatic emergency braking, making them safe
+                        for families.</p>
+                </div>
+            </section>
+            <script>
+                let currentIndex = 0;
+
+                function moveSlide(direction) {
+                        const slider = document.querySelector('.slider');
+                        const slides = document.querySelectorAll('.slide');
+                        const totalSlides = slides.length;
+
+                        // Update the current index
+                        currentIndex = (currentIndex + direction + totalSlides) % totalSlides;
+
+                        // Move the slider
+                        slider.style.transform = `translateX(-${currentIndex * 100}%)`;
+                }
+
+                // js for toggle function of FAQ'S
+                document.querySelectorAll('.toggle-btn').forEach(button => {
+                        button.addEventListener('click', function () {
+                                const answer = this.parentElement.nextElementSibling;
+                                const isVisible = answer.style.display === 'block';
+                                answer.style.display = isVisible ? 'none' : 'block';
+                                this.textContent = isVisible ? '+' : '-';
+                        });
+                });
+            </script>
+</body>
+
+</html>

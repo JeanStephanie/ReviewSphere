@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car</title>
+</head>
+<style>
+    * {
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f9f9f9;
+        color: #333;
+    }
+
+    /* Header with top navigation */
+    header {
+        background-color: #00457c;
+        color: white;
+        padding: 20px;
+        text-align: center;
+    }
+
+    header nav ul {
+        list-style-type: none;
+        display: flex;
+        justify-content: center;
+    }
+
+    header nav ul li {
+        margin: 0 15px;
+    }
+
+    header nav ul li a {
+        color: white;
+        text-decoration: none;
+        font-size: 1.1em;
+    }
+
+    header nav ul li a:hover {
+        color: #00bcd4;
+    }
+
+    /* Carousel vd*/
+    .carousel {
+        position: relative;
+        width: 100%;
+        overflow: hidden;
+        background: #000;
+        margin-top: 20px;
+    }
+
+    .carousel-container {
+        display: flex;
+        transition: transform 0.5s ease-in-out;
+    }
+
+    .carousel-item {
+        min-width: 100%;
+        text-align: center;
+    }
+
+    .carousel-item img,
+    .carousel-item video {
+        width: 100%;
+        height: auto;
+    }
+
+    .prev,
+    .next {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(255, 255, 255, 0.5);
+        border: none;
+        padding: 10px;
+        cursor: pointer;
+        font-size: 18px;
+    }
+
+    .prev {
+        left: 10px;
+    }
+
+    .next {
+        right: 10px;
+    }
+
+    /* Car Collage */
+    .collage {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 10px;
+        padding: 20px;
+        justify-content: center;
+    }
+
+    .car {
+        position: relative;
+        width: 100%;
+        overflow: hidden;
+        border-radius: 10px;
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .car img {
+        width: 100%;
+        height: 150px;
+        object-fit: cover;
+        transition: filter 0.3s;
+    }
+
+    .car:hover {
+        transform: scale(1.05);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .car:hover img {
+        filter: grayscale(80%);
+    }
+
+    .overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: rgba(0, 0, 0, 0.5);
+        color: white;
+        text-align: center;
+        padding: 10px;
+        opacity: 0;
+        transition: opacity 0.3s;
+    }
+
+    .car:hover .overlay {
+        opacity: 1;
+    }
+
+
+    /* style for explore category*/
+    /* General Page Styling */
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f8f9fa;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+    }
+
+    /* Explore by Category Section */
+    .explore-category {
+        background-color: white;
+        padding: 50px 0;
+    }
+
+    .explore-category h2 {
+        font-size: 2.5rem;
+        color: #00457c;
+        margin-bottom: 30px;
+    }
+
+    /* Grid Container - Always 3 Columns Per Row */
+    .categories-container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        /* Always 3 columns */
+        gap: 20px;
+        padding: 0 40px;
+    }
+
+    /* Individual Category Card */
+    .category-item {
+        background-color: white;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        padding: 25px;
+        text-align: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .category-item:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Card Images */
+    .category-item img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 8px;
+        transition: transform 0.3s ease;
+    }
+
+    .category-item:hover img {
+        transform: scale(1.05);
+    }
+
+    /* Category Titles */
+    .category-item h3 {
+        font-size: 1.8rem;
+        color: #00457c;
+        margin-top: 15px;
+        font-weight: 600;
+    }
+
+    /* Category Description */
+    .category-item p {
+        font-size: 1.1rem;
+        color: #333;
+        margin-top: 10px;
+        line-height: 1.5;
+    }
+
+    /* Responsive Design - Stack on Smaller Screens */
+    @media (max-width: 900px) {
+        .categories-container {
+            grid-template-columns: repeat(2, 1fr);
+            /* 2 per row for tablets */
+        }
+    }
+
+    @media (max-width: 600px) {
+        .categories-container {
+            grid-template-columns: repeat(1, 1fr);
+            /* 1 per row for mobile */
+        }
+    }
+
+    /* General styles */
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f9;
+    }
+
+    /* Header styling */
+    header {
+        background-color: #00457c;
+        color: white;
+        text-align: center;
+        padding: 20px;
+    }
+
+    header h1 {
+        margin: 0;
+    }
+
+    /* Table container */
+    .table-container {
+        width: 90%;
+        margin: 30px auto;
+        overflow-x: auto;
+        border-radius: 8px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        background-color: white;
+        padding: 15px;
+    }
+
+    /* Table styling */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    table th,
+    table td {
+        padding: 15px;
+        text-align: center;
+        border: 1px solid #ddd;
+    }
+
+    table th {
+        background-color: #00457c;
+        color: white;
+        font-size: 1.1rem;
+    }
+
+    table tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    table tr:hover {
+        background-color: #f0f0f0;
+    }
+
+    .feature-list,
+    .pros-cons ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    /* Ensuring proper spacing between list items */
+    .feature-list li,
+    .pros-cons ul li {
+        margin-bottom: 5px;
+    }
+
+    /* Price styling */
+    .price {
+        font-size: 1.2rem;
+        color: #333;
+        font-weight: bold;
+    }
+
+    /* Pros & Cons container */
+    .pros-cons {
+        display: flex;
+        justify-content: space-between;
+        font-size: 1rem;
+        text-align: left;
+    }
+
+    /* Width for each column in pros & cons */
+    .pros-cons div {
+        width: 45%;
+    }
+
+    /* Bold and black highlight for the best reason */
+    .best-reason {
+        font-weight: bold;
+        color: black;
+    }
+
+    /* Responsive styles */
+    @media (max-width: 768px) {
+        table {
+            font-size: 0.9rem;
+        }
+
+        table th,
+        table td {
+            padding: 10px;
+        }
+
+        .pros-cons {
+            flex-direction: column;
+        }
+
+        .pros-cons div {
+            width: 100%;
+        }
+    }
+
+    /* Center the title */
+    h1 {
+        margin: 20px 0;
+        font-size: 28px;
+        color: white;
+    }
+
+    /* Grid container */
+    .grid-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+        padding: 20px;
+        max-width: 1200px;
+        margin: auto;
+    }
+
+    /* Grid item */
+    .grid-item {
+        background: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        text-align: center;
+        padding: 15px;
+        transition: transform 0.3s ease-in-out;
+        width: 300px;
+    }
+
+    .grid-item:hover {
+        transform: translateY(-5px);
+    }
+
+    /* Image styling */
+    .grid-item img {
+        width: 100%;
+        height: auto;
+        border-radius: 10px;
+    }
+
+    /* Link styling */
+    .grid-item p {
+        margin: 15px 0 0;
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+    .grid-item a {
+        text-decoration: none;
+        color: #0047ab;
+        transition: color 0.3s ease-in-out;
+    }
+
+    .grid-item a:hover {
+        color: #0056b3;
+        text-decoration: underline;
+    }
+
+
+    /* Suggested Cars Section Styling */
+    .suggested-cars {
+        background-color: #f8f9fa;
+        padding: 50px 0;
+        text-align: center;
+    }
+
+    .suggested-cars .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+
+    .suggested-cars h2 {
+        font-size: 2em;
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    .suggested-cars p {
+        color: #666;
+        margin-bottom: 30px;
+    }
+
+    .cars-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: center;
+    }
+
+    .car-item {
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        max-width: 350px;
+        text-align: left;
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .car-item:hover {
+        transform: translateY(-5px);
+    }
+
+    .car-item img {
+        width: 100%;
+        border-radius: 10px;
+    }
+
+    .car-item h3 {
+        font-size: 1.5em;
+        color: #222;
+        margin: 15px 0 10px;
+    }
+
+    .car-item p {
+        color: #555;
+        font-size: 1em;
+        line-height: 1.5;
+    }
+
+    .review {
+        margin-top: 15px;
+    }
+
+    .review p {
+        font-style: italic;
+        color: #444;
+    }
+
+    .star-rating span {
+        font-size: 1.2em;
+    }
+
+    .buy-now-btn {
+        display: inline-block;
+        margin-top: 10px;
+        padding: 10px 20px;
+        background-color: #00457c;
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+        border-radius: 5px;
+        transition: background 0.3s ease;
+    }
+
+    .buy-now-btn:hover {
+        background-color: #00457c;
+    }
+
+    /* popular brands*/
+    /* General styling for the section */
+    #brands {
+        background-color: #f8f8f8;
+        padding: 40px 20px;
+        text-align: center;
+        font-family: Arial, sans-serif;
+    }
+
+    /* Section heading */
+    #brands h2 {
+        font-size: 28px;
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+    /* Container for brands */
+    .brands-grid {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 20px;
+        max-width: 1200px;
+        margin: auto;
+    }
+
+    /* Individual brand cards */
+    .brand {
+        background: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        padding: 20px;
+        width: 300px;
+        transition: transform 0.3s ease-in-out;
+    }
+
+    /* Hover effect */
+    .brand:hover {
+        transform: translateY(-5px);
+    }
+
+    /* Brand images */
+    .brand img {
+        max-width: 100%;
+        height: 180px;
+        border-radius: 10px;
+        margin-bottom: 15px;
+    }
+
+    /* Brand headings */
+    .brand h3 {
+        font-size: 20px;
+        margin: 10px 0;
+        color: #0047ab;
+    }
+
+    /* Brand descriptions */
+    .brand p {
+        font-size: 14px;
+        color: #555;
+        line-height: 1.5;
+    }
+
+
+    /* FAQ styles*/
+    #faq {
+        padding: 20px;
+        background-color: #f9f9f9;
+    }
+
+    #faq h2 {
+        text-align: center;
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    .faq-item {
+        margin-bottom: 20px;
+    }
+
+    .faq-item h3 {
+        cursor: pointer;
+        padding: 10px;
+        background-color: white;
+        color: #002d72;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+    }
+
+    .faq-item p {
+        display: none;
+        padding: 10px;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-top: none;
+        border-radius: 0 0 5px 5px;
+    }
+
+    .faq-item p.visible {
+        display: block;
+    }
+
+    .faq-answer {
+        display: none;
+        padding: 10px;
+        background-color: #f9f9f9;
+        border: 1px solid #ddd;
+    }
+
+    .toggle-btn {
+        margin-left: 10px;
+        cursor: pointer;
+        background: none;
+        border: none;
+        font-size: 18px;
+        font-weight: bold;
+    }
+</style>
+
+<body>
+    <header>
+        <div class="container">
+            <h1>CAR</h1>
+            <nav>
+                <ul>
+                    <li><a href="buyinguidecar.html">Buying Guide</a></li>
+                    <li><a href="../reviews.php">Reviews</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <!---Carousel Video-->
+    <section class="carousel">
+        <div class="carousel-container">
+            <div class="carousel-item active">
+                <video src="../video/car.mp4" autoplay muted loop></video>
+            </div>
+        </div>
+    </section>
+    
+    <main>
+        <!-- Explore by Category Section -->
+        <section class="explore-category">
+            <h2 style="color:#00457c;">Types Of Cars</h2>
+            <div class="categories-container">
+                <div class="category-item">
+                    <img src="../images/car1.jpg" alt="Sleep Redefined">
+                    <h3 style="color: #00457c;">Sedans</h3>
+                    <p>Sedans are the epitome of style and comfort, offering a sleek design with spacious interiors and
+                        advanced features. Perfect for both daily commutes and long drives, they combine fuel efficiency
+                        with smooth handling. With a focus on safety and modern technology, sedans deliver a balanced
+                        and
+                        enjoyable driving experience.</p>
+                </div>
+
+                <div class="category-item">
+                    <img src="../images/car2.jpg" alt="Comfort and Quality">
+                    <h3 style="color: #00457c;">SUVs</h3>
+                    <p>SUVs (Sports Utility Vehicles) are designed for versatility, combining spacious interiors with
+                        rugged
+                        performance. Ideal for families and adventurous drives, they offer elevated seating, ample cargo
+                        space, and superior off-road capabilities. Modern SUVs balance power with comfort, making them
+                        perfect for both city commutes and outdoor escapades.</p>
+                </div>
+
+                <div class="category-item">
+                    <img src="../images/car3.jpg" alt="Affordable Options"> 
+                    <h3 style="color: #00457c;">Sports Cars</h3>
+                    <p>Sports cars are high-performance vehicles designed for speed, agility, and an exhilarating
+                        driving
+                        experience. With sleek designs, powerful engines, and advanced aerodynamics, they deliver
+                        exceptional handling and acceleration. Perfect for enthusiasts, sports cars combine luxury with
+                        unmatched road performance.</p>
+                </div>
+
+                <div class="category-item">
+                    <img src="../images/car4.jpg" alt="Affordable Options">
+                    <h3 style="color: #00457c;">Electric Cars</h3>
+                    <p>Electric cars are eco-friendly vehicles powered by electricity instead of traditional fuel,
+                        offering
+                        zero emissions and reduced environmental impact. With advanced battery technology, they provide
+                        smooth, quiet rides and are becoming increasingly popular for their efficiency and cost savings.
+                        Electric cars represent the future of sustainable transportation, combining innovation and
+                        environmental consciousness
+                    </p>
+                </div>
+
+                <div class="category-item">
+                    <img src="../images/car5.jpg" alt="Affordable Options"
+                        style="max-width: 900px; height: auto; margin: 10px 0;">
+                    <h3 style="color: #00457c;">Convertible Cars</h3>
+                    <p>Electric cars are eco-friendly vehicles powered by electricity instead of traditional fuel,
+                        offering
+                        zero emissions and reduced environmental impact. With advanced battery technology, they provide
+                        smooth, quiet rides and are becoming increasingly popular for their efficiency and cost savings.
+                        Electric cars represent the future of sustainable transportation, combining innovation and
+                        environmental consciousness.</p>
+                </div>
+
+                <div class="category-item">
+                    <img src="../images/car6.jpg" alt="Affordable Options"
+                        style="max-width: 900px; height: auto; margin: 10px 0;">
+                    <h3 style="color: #00457c;">Classic Cars</h3>
+                    <p>Classic cars are vintage vehicles typically over 20 to 25 years old, often admired for their
+                        historical significance, craftsmanship, and timeless design. These cars represent a bygone era
+                        of automotive engineering, with many models becoming collector's items. Enthusiasts value them
+                        for their unique style, mechanical simplicity, and the nostalgia they evoke.</p>
+                </div>
+            </div>
+        </section>
+        </head>
+
+        <body>
+            <h2 style="color: #00457c; text-align: center;">COMPARISON BETWEEN CAR BRANDS</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Brand</th>
+                            <th>Specifications</th>
+                            <th>Features</th>
+                            <th>Price</th>
+                            <th>Pros & Cons</th>
+                            <th>Why It's the Best</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Toyota</strong></td>
+                            <td>Engine: 2.0L, 180HP | Transmission: 6-speed manual</td>
+                            <td>
+                                <ul class="feature-list">
+                                    <li>Bluetooth connectivity</li>
+                                    <li>Leather seats</li>
+                                    <li>LED headlights</li>
+                                </ul>
+                            </td>
+                            <td><span class="price">$25,000</span></td>
+                            <td>
+                                <div class="pros-cons">
+                                    <div><strong>Pros:</strong>
+                                        <ul>
+                                            <li>Excellent fuel economy</li>
+                                            <li>Stylish design</li>
+                                        </ul>
+                                    </div>
+                                    <div><strong>Cons:</strong>
+                                        <ul>
+                                            <li>Limited cargo space</li>
+                                            <li>No all-wheel drive option</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </td>
+                            <td><span class="best-reason">Great balance of performance and economy!</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Hyundai</strong></td>
+                            <td>Engine: 3.0L, 250HP | Transmission: 8-speed automatic</td>
+                            <td>
+                                <ul class="feature-list">
+                                    <li>Advanced navigation system</li>
+                                    <li>Panoramic sunroof</li>
+                                    <li>Adaptive cruise control</li>
+                                </ul>
+                            </td>
+                            <td><span class="price">$35,000</span></td>
+                            <td>
+                                <div class="pros-cons">
+                                    <div><strong>Pros:</strong>
+                                        <ul>
+                                            <li>Spacious interior</li>
+                                            <li>Advanced safety features</li>
+                                        </ul>
+                                    </div>
+                                    <div><strong>Cons:</strong>
+                                        <ul>
+                                            <li>Higher maintenance cost</li>
+                                            <li>Less sporty feel</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </td>
+                            <td><span class="best-reason">Perfect for families seeking luxury and comfort.</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Ford</strong></td>
+                            <td>Engine: 1.5L, 150HP | Transmission: CVT</td>
+                            <td>
+                                <ul class="feature-list">
+                                    <li>Apple CarPlay</li>
+                                    <li>Heated seats</li>
+                                    <li>Keyless entry</li>
+                                </ul>
+                            </td>
+                            <td><span class="price">$20,000</span></td>
+                            <td>
+                                <div class="pros-cons">
+                                    <div><strong>Pros:</strong>
+                                        <ul>
+                                            <li>Affordable price</li>
+                                            <li>Great city mileage</li>
+                                        </ul>
+                                    </div>
+                                    <div><strong>Cons:</strong>
+                                        <ul>
+                                            <li>Lack of horsepower</li>
+                                            <li>Basic interior</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </td>
+                            <td><span class="best-reason">An affordable option for budget-conscious buyers!</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>BMW</strong></td>
+                            <td>Engine: 3.5L, 300HP | Transmission: 7-speed dual-clutch</td>
+                            <td>
+                                <ul class="feature-list">
+                                    <li>Premium sound system</li>
+                                    <li>Adaptive suspension</li>
+                                    <li>Wireless charging</li>
+                                </ul>
+                            </td>
+                            <td><span class="price">$40,000</span></td>
+                            <td>
+                                <div class="pros-cons">
+                                    <div><strong>Pros:</strong>
+                                        <ul>
+                                            <li>Powerful engine</li>
+                                            <li>Top-tier safety features</li>
+                                        </ul>
+                                    </div>
+                                    <div><strong>Cons:</strong>
+                                        <ul>
+                                            <li>Expensive price tag</li>
+                                            <li>Less fuel-efficient</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </td>
+                            <td><span class="best-reason">A high-performance car for enthusiasts!</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Audi</strong></td>
+                            <td>Engine: 2.5L, 200HP | Transmission: 5-speed manual</td>
+                            <td>
+                                <ul class="feature-list">
+                                    <li>Sunroof</li>
+                                    <li>Heated front seats</li>
+                                    <li>Apple CarPlay</li>
+                                </ul>
+                            </td>
+                            <td><span class="price">$28,000</span></td>
+                            <td>
+                                <div class="pros-cons">
+                                    <div><strong>Pros:</strong>
+                                        <ul>
+                                            <li>Reliable build</li>
+                                            <li>Great value for money</li>
+                                        </ul>
+                                    </div>
+                                    <div><strong>Cons:</strong>
+                                        <ul>
+                                            <li>Basic tech features</li>
+                                            <li>Not very sporty</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </td>
+                            <td><span class="best-reason">Ideal for daily commuters seeking reliability.</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!--Popular brands section-->
+            <section id="brands" class="section">
+                <div class="container">
+                    <h2>TOP 3 BEST RATED CARS</h2>
+                    <div class="brands-grid">
+                        <div class="brand">
+                            <img src="../images/car7.jpg" alt="Tesla">
+                            <h3>Tesla</h3>
+                            <p>Innovators in electric vehicles, Tesla combines cutting-edge technology with unmatched
+                                efficiency and style.</p> <br>
+                            <a href="https://www.tesla.com/" target="_blank" class="buy-now-btn">Buy Now</a>
+                        </div>
+                        <div class="brand">
+                            <img src="../images/car8.jpg" alt="BMW">
+                            <h3>BMW</h3>
+                            <p>Known for luxury and performance, BMW delivers exceptional driving experiences with every
+                                model.</p>
+                            <a href="https://www.bmw.com/" target="_blank" class="buy-now-btn">Buy Now</a>
+                        </div>
+                        <div class="brand">
+                            <img src="../images/car9.jpg" alt="Audi">
+                            <h3>Audi</h3>
+                            <p>Offering a perfect blend of technology, performance, and elegance, Audi cars redefine
+                                modern luxury.</p>
+                            <a href="https://www.audi.com/" target="_blank" class="buy-now-btn">Buy Now</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Suggested Cars Section -->
+            <section id="suggested-cars" class="suggested-cars">
+                <div class="container">
+                    <h2>TOP-SELLING CARS</h2>
+                    <p>Explore the most in-demand cars with expert reviews and ratings.</p>
+                    <div class="cars-grid">
+                        <!-- Car 1 -->
+                        <div class="car-item">
+                            <img src="../images/car10.jpg" alt="Tesla Model Y" style="max-width: 500px; height:200px;">
+                            <h3>Tesla Model Y</h3>
+                            <p>
+                                A top-selling electric SUV that offers impressive range, cutting-edge technology,
+                                and a sleek design for a futuristic driving experience.
+                            </p>
+                            <div class="review">
+                                <p><strong>Review:</strong> "Amazing efficiency and smooth performance. Best EV in its
+                                    class!"</p>
+                                <div class="star-rating">
+                                    <span
+                                        style="color: gold; font-size: 1.2em;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                                </div>
+
+                                <a href="https://www.tesla.com/modely" class="buy-now-btn">Buy Now</a>
+                            </div>
+                        </div>
+                        <!-- Car 2 -->
+                        <div class="car-item">
+                            <img src="../images/car11.jpg" alt="Toyota RAV4" style="max-width: 100%; height: auto;">
+                            <h3>Toyota RAV4</h3>
+                            <p>
+                                A best-selling compact SUV known for its reliability, fuel efficiency, and spacious
+                                interior.
+                                Perfect for family trips and city drives alike.
+                            </p>
+                            <div class="review">
+                                <p><strong>Review:</strong> "Reliable and fuel-efficient. The best value for an SUV!"
+                                </p>
+                                <div class="star-rating">
+                                    <span
+                                        style="color: gold; font-size: 1.2em;">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
+                                </div>
+                                <a href="https://www.toyota.com/rav4/" class="buy-now-btn">Buy Now</a>
+                            </div>
+                        </div>
+                        <div class="car-item">
+                            <img src="../images/car12.jpg" alt="Honda Civic" style="max-width: 500px; height: 200px;">
+                            <h3>Honda Civic</h3>
+                            <p>
+                                A stylish and sporty sedan offering a balanced mix of performance, comfort, and advanced
+                                safety features.
+                                Perfect for urban and highway drives.
+                            </p>
+                            <div class="review">
+                                <p><strong>Review:</strong> "A smooth ride with great fuel efficiency. Love the modern
+                                    tech inside!"</p>
+                                <div class="star-rating">
+                                    <span
+                                        style="color: gold; font-size: 1.2em;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                                </div>
+                                <a href="https://automobiles.honda.com/civic-sedan" class="buy-now-btn">Buy Now</a>
+                            </div>
+                        </div>
+            </section>
+
+            <!--Related Articles-->
+            <header style="text-align: center;">RELATED ARTICLES</header>
+            <div class="grid-container">
+                <div class="grid-item">
+                    <img src="../images/car13.jpg" alt="Five best selling Cars in 2024 in India">
+                    <p><a
+                            href="https://auto.hindustantimes.com/auto/photos/in-pics-tata-punch-to-hyundai-creta-five-top-selling-cars-in-india-in-2024-41736056538453.html">Five
+                            best selling Cars in 2024 in India</a></p>
+                </div>
+                <div class="grid-item">
+                    <img src="../images/car14.jpg" alt="Best Electric Cars">
+                    <p><a
+                            href="https://news24online.com/auto/how-electric-vehicles-contribute-to-indias-sustainable-future-the-green-road-head/260717/">How
+                            electric vehicles contribute to India's
+                            sustainable future the green road head.</a></p>
+                </div>
+                <div class="grid-item">
+                    <img src="../images/car15.jpg" alt="Tata Cars">
+                    <p><a
+                            href="https://www.autocarindia.com/car-news/tata-motors-overtakes-maruti-as-maker-of-indias-no1-car-434049">Tata
+                            Motors overtakes Maruti as maker of India’s No.1 car</a></p>
+                </div>
+            </div>
+            <section id="faq">
+                <h2>Frequently Asked Questions</h2>
+                <div class="faq-item">
+                    <h3>How often should I change my car's oil?
+                        <button class="toggle-btn">+</button>
+                    </h3>
+                    <p class="faq-answer">It's generally recommended to change your car's oil every 3,000 to 5,000
+                        miles, depending on the type of oil and the manufacturer's guidelines. Always refer to your
+                        car's manual for specific recommendations.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>What should I do if my car is overheating?
+                        <button class="toggle-btn">+</button>
+                    </h3>
+                    <p class="faq-answer">If your car is overheating, pull over safely and turn off the engine. Let it
+                        cool before checking the coolant level. If it's low, top it off. If the issue persists, it may
+                        require professional inspection for coolant leaks or a malfunctioning thermostat.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>How do I maintain my car's brakes?
+                        <button class="toggle-btn">+</button>
+                    </h3>
+                    <p class="faq-answer">Regularly inspect the brake pads and rotors for wear and tear. If you hear
+                        squealing noises or experience reduced braking power, it may be time to replace the brake pads.
+                        Make sure the brake fluid is at the correct level as well.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Why is my car's check engine light on?
+                        <button class="toggle-btn">+</button>
+                    </h3>
+                    <p class="faq-answer">A check engine light can indicate various issues, from something minor like a
+                        loose gas cap to more serious problems such as engine misfires. It's best to get it checked with
+                        a diagnostic tool to pinpoint the exact cause.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>How can I improve my car's fuel efficiency?
+                        <button class="toggle-btn">+</button>
+                    </h3>
+                    <p class="faq-answer">To improve fuel efficiency, ensure your car's tires are properly inflated,
+                        avoid aggressive driving, and keep up with regular maintenance like oil changes. Also, consider
+                        removing unnecessary weight and avoiding idling for long periods.</p>
+                </div>
+            </section>
+    </main>
+    <script>
+        // js for toggle function of FAQ'S
+    document.querySelectorAll('.toggle-btn').forEach(button => {
+        button.addEventListener('click', function () {
+            const answer = this.parentElement.nextElementSibling;
+            const isVisible = answer.style.display === 'block';
+            answer.style.display = isVisible ? 'none' : 'block';
+            this.textContent = isVisible ? '+' : '-';
+        });
+    });
+    </script>
+</body>
+
+</html>

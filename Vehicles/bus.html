@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bus</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        header {
+            background: linear-gradient(90deg, #003366, #003366);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.8em;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        header p {
+            margin: 10px 0;
+            font-size: 1.3em;
+            font-weight: 300;
+        }
+
+        nav {
+            background-color: #003366;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 15px 0;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 30px;
+            border-radius: 20px;
+            transition: background-color 0.3s ease;
+            font-size: 1.1em;
+        }
+
+        nav a:hover {
+            color: #00bcd4;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 50px 20px;
+            background: url('https://via.placeholder.com/1200x500') no-repeat center center/cover;
+            color: black;
+        }
+
+        .hero h2 {
+            font-size: 3.5em;
+            margin-bottom: 15px;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.6);
+        }
+
+        .hero p {
+            font-size: 1.7em;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Types of bus*/
+        .bus-type-selection {
+            text-align: center;
+            margin: 60px 20px;
+        }
+
+        .bus-type-selection h2 {
+            font-size: 2.5em;
+            margin-bottom: 30px;
+        }
+
+        .bus-types {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .bus-card {
+            background-color: white;
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            width: 280px;
+            transition: transform 0.3s ease;
+        }
+
+        .bus-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .bus-card img {
+            width: 100%;
+            height: 200px;
+            border-radius: 8px;
+        }
+
+        .bus-card h3 {
+            font-size: 1.7em;
+            margin-top: 15px;
+        }
+
+        .bus-card p {
+            font-size: 1.1em;
+            margin-top: 10px;
+        }
+
+        .bus-card a {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #0047ab;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: background-color 0.3s ease;
+        }
+
+        .bus-card a:hover {
+            background-color: #0066cc;
+        }
+
+        /* Accordian styles*/
+        .accordion-container {
+            margin-top: 30px;
+        }
+
+        .accordion {
+            background-color: #003366;
+            color: white;
+            cursor: pointer;
+            padding: 18px;
+            width: 100%;
+            text-align: left;
+            font-size: 1.3em;
+            border: none;
+            outline: none;
+            transition: background-color 0.3s ease;
+            border-radius: 8px;
+        }
+
+        .accordion:hover {
+            background-color: #0047ab;
+        }
+
+        .accordion-content {
+            padding: 15px;
+            background-color: #f4f4f4;
+            display: none;
+            overflow: hidden;
+            border-radius: 8px;
+        }
+
+        .accordion-item {
+            margin-bottom: 10px;
+        }
+
+        /* Internal CSS for Bus Brand Comparison Table */
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-family: Arial, sans-serif;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 10px;
+        }
+
+        th {
+            background-color: #00457c;
+            color: white;
+        }
+
+        .feature-list,
+        .pros-cons ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .feature-list li,
+        .pros-cons ul li {
+            margin: 5px 0;
+        }
+
+        .price {
+            font-weight: bold;
+            color: black;
+        }
+
+        .best-reason {
+            font-weight: bold;
+            color: black;
+        }
+
+        .pros-cons {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .pros-cons div {
+            width: 48%;
+        }
+
+        /* Suggested bus Section Styling */
+        .suggested-bus {
+            background-color: #f8f9fa;
+            padding: 50px 0;
+            text-align: center;
+        }
+
+        .suggested-bus .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .suggested-bus h2 {
+            font-size: 2em;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .suggested-bus p {
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .bus-grid {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .bus-item {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            max-width: 350px;
+            text-align: left;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .bus-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .bus-item img {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .bus-item h3 {
+            font-size: 1.5em;
+            color: #222;
+            margin: 15px 0 10px;
+        }
+
+        .bus-item p {
+            color: #555;
+            font-size: 1em;
+            line-height: 1.5;
+        }
+
+        .review {
+            margin-top: 15px;
+        }
+
+        .review p {
+            font-style: italic;
+            color: #444;
+        }
+
+        .star-rating span {
+            font-size: 1.2em;
+        }
+
+        .buy-now-btn {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #00457c;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+        }
+
+        .buy-now-btn:hover {
+            background-color: #00457c;
+        }
+
+        /* Styles for the new grid section */
+        .additional-grids {
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        .additional-grids h2 {
+            font-size: 2.5em;
+            margin-bottom: 30px;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            /* 3 columns */
+            gap: 20px;
+            justify-items: center;
+        }
+
+        .grid-item {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 320px;
+            /* Keeps items from getting too wide */
+            transition: transform 0.3s ease;
+        }
+
+        .grid-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .grid-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .grid-item p {
+            margin-top: 15px;
+            font-size: 1.1em;
+        }
+
+        .grid-item a {
+            text-decoration: none;
+            color: #003366;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .grid-item a:hover {
+            color: #00bcd4;
+        }
+
+        /* FAQ styles*/
+        #faq {
+            padding: 20px;
+            background-color: #f9f9f9;
+            text-align: center;
+        }
+
+        #faq h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .faq-item {
+            margin-bottom: 20px;
+        }
+
+        .faq-item h3 {
+            cursor: pointer;
+            padding: 10px;
+            background-color: white;
+            color: #002d72;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .faq-item p {
+            display: none;
+            padding: 10px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-top: none;
+            border-radius: 0 0 5px 5px;
+        }
+
+        .faq-item p.visible {
+            display: block;
+        }
+
+        .faq-answer {
+            display: none;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+        }
+
+        .toggle-btn {
+            margin-left: 10px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>BUS</h1>
+        <p>Explore the Ultimate Guide to Buses, Brands, and Features</p>
+    </header>
+
+    <nav>
+        <a href="buyinguideBus.html">Buying Guide </a>
+        <a href="../reviews.php">Ratings</a>
+    </nav>
+
+    <section class="hero" id="home">
+        <h2>Explore the World of Buses</h2>
+        <p>From city buses to luxurious tour buses, find out everything you need to know about buses worldwide.</p>
+    </section>
+    <section class="bus-type-selection">
+        <h2>TYPES OF BUS</h2>
+        <div class="bus-types">
+            <div class="bus-card" id="city-buses">
+                <img src="../images/bus1.jpg" alt="City Bus">
+                <h3>City Buses</h3>
+                <p>City buses are a primary mode of public transportation in urban areas. Designed for frequent stops
+                    and short trips, they often feature low floors for easy boarding and disembarking. These buses help
+                    reduce traffic congestion and promote sustainable travel within cities. Equipped with modern
+                    amenities like Wi-Fi and air conditioning, city buses offer a comfortable ride for daily
+                    commuters.The integration of real-time tracking and mobile apps allows passengers to plan their
+                    journeys more efficiently, enhancing the overall public transport experience.
+                </p>
+            </div>
+            <div class="bus-card" id="intercity-buses">
+                <img src="../images/bus2.jpg" alt="Intercity Bus">
+                <h3>Intercity Buses</h3>
+                <p>Intercity buses are designed for travel between different cities, offering comfortable seating and
+                    amenities for longer journeys. They often include features such as reclining seats, air
+                    conditioning, onboard restrooms, and Wi-Fi to ensure a pleasant travel experience. Intercity buses
+                    play a crucial role in connecting urban and rural areas, providing an affordable and convenient
+                    transportation option for many passengers.Their spacious and well-equipped interiors make intercity
+                    buses a preferred choice for passengers seeking a comfortable and hassle-free travel experience.</p>
+            </div>
+            <div class="bus-card" id="tour-buses">
+                <img src="../images/bus3.jpg" alt="Tour Bus">
+                <h3>Tour Buses</h3>
+                <p>Tour buses are specially designed for group travel and sightseeing. They offer comfortable seating
+                    and often feature amenities such as air conditioning, onboard restrooms, and audio-visual systems.
+                    These buses provide guided tours, making it easy to explore attractions without the hassle of
+                    planning or navigating. Tour buses are ideal for tourists looking to maximize their experience with
+                    a structured and informative itinerary.With structured itineraries and experienced guides, tour
+                    buses ensure that travelers get the most out of their trips, making them a popular choice for both
+                    tourists and locals.</p>
+
+            </div>
+            <div class="bus-card" id="shuttle-buses">
+                <img src="../images/bus4.jpg" alt="Shuttle Bus">
+                <h3>Shuttle Buses</h3>
+                <p>Shuttle buses provide short-distance transportation between specific locations, such as airports,
+                    hotels, and city centers. They operate on fixed routes and schedules, ensuring timely and convenient
+                    travel for passengers. Often equipped with amenities like air conditioning and luggage storage,
+                    shuttle buses offer a comfortable and efficient service for travelers needing quick and reliable
+                    transport.Shuttle buses help alleviate traffic congestion and promote a more sustainable mode of
+                    short-distance travel.Their convenience and reliability make them a popular choice for passengers
+                    seeking hassle-free transportation. </p>
+
+            </div>
+            <div class="bus-card" id="double-decker-buses">
+                <img src="../images/bus5.jpg" alt="Double Decker Bus">
+                <h3>Double-Decker Buses</h3>
+                <p>Double-decker buses are iconic vehicles featuring two levels of seating, providing increased
+                    passenger capacity. They are commonly used in cities like London for public transportation and
+                    sightseeing tours. With panoramic views from the upper deck, passengers can enjoy a unique and
+                    elevated perspective of the city. These buses are perfect for accommodating large groups while
+                    offering a memorable travel experience.</p>
+
+            </div>
+            <div class="bus-card" id="minibuses">
+                <img src="../images/bus6.jpg" alt="Minibus">
+                <h3>Mini Buses</h3>
+                <p>Minibuses are compact vehicles designed to transport smaller groups of passengers, typically
+                    accommodating 8 to 30 people. They are commonly used for private hires, airport transfers, and
+                    short-distance travel where larger buses aren't needed. With flexible seating arrangements and easy
+                    maneuverability, minibuses offer a convenient and efficient transportation option for both urban and
+                    rural areas.</p>
+
+            </div>
+            <div class="bus-card" id="schoolbuses">
+                <img src="../images/bus7.jpg" alt="Schoolbus">
+                <h3>School Buses</h3>
+                <p>School buses are specifically designed to transport students to and from school safely. They feature
+                    distinct yellow coloring and specialized safety features like flashing lights, stop signs, and
+                    reinforced construction. School buses also have high-backed seats and seat belts to protect students
+                    in case of accidents.School buses adhere to strict regulations to ensure the safety and well-being
+                    of children. Widely recognized and regulated, school buses play a crucial role in ensuring
+                    the safety and convenience of student transportation.</p>
+
+            </div>
+            <div class="bus-card" id="articulatebuses">
+                <img src="../images/bus8.jpg" alt="Articulatedbus">
+                <h3>Articulated Buses</h3>
+                <p>Articulated buses, often referred to as "bendy buses," consist of two sections connected by a
+                    flexible joint. This design allows them to accommodate a higher number of passengers while
+                    maintaining maneuverability on city streets. Commonly used in busy urban areas, articulated buses
+                    are ideal for routes with high passenger demand. Their unique structure ensures efficient and
+                    comfortable public transportation for large groups of people.</p>
+            </div>
+        </div>
+    </section>
+    <section class="brand-accordion">
+        <h2 style="text-align: center;">TOP BUS BRANDS</h2>
+        <div class="accordion-container">
+            <div class="accordion-item">
+                <button class="accordion">
+                    <h3>Mercedes-Benz</h3>
+                </button>
+                <div class="accordion-content">
+                    <p>Mercedes-Benz buses are renowned for their luxury, comfort, and advanced technology. They offer a
+                        wide range of models, including city buses, intercity coaches, and specialized vehicles for
+                        various transportation needs. Known for their reliability and safety features, Mercedes-Benz
+                        buses are equipped with modern amenities like air conditioning, Wi-Fi, and ergonomic seating.
+                        The brand is committed to sustainability, with electric and hybrid models like the eCitaro
+                        leading the way in eco-friendly public transportation.</p>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <button class="accordion">
+                    <h3>Volvo</h3>
+                </button>
+                <div class="accordion-content">
+                    <p>Volvo buses are celebrated for their innovation, safety, and sustainability. They offer a diverse
+                        range of models, including city buses, intercity coaches, and hybrid/electric vehicles. Known
+                        for their durability and advanced safety features, Volvo buses provide a comfortable and
+                        reliable travel experience. The brand is committed to reducing environmental impact, with
+                        cutting-edge technologies aimed at enhancing fuel efficiency and lowering emissions, making them
+                        a leader in sustainable public transportation.</p>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <button class="accordion">
+                    <h3>Ashok Leyland</h3>
+                </button>
+                <div class="accordion-content">
+                    <p>Ashok Leyland is one of India's leading bus manufacturers, renowned for its durable and reliable
+                        vehicles. They offer a broad range of models, from city buses and intercity coaches to school
+                        and tourist buses. Ashok Leyland buses are equipped with modern features such as air
+                        conditioning, GPS tracking, and advanced safety systems to ensure a comfortable and secure ride
+                        for passengers. The brand places a strong emphasis on sustainable transportation, continuously
+                        working on eco-friendly technologies and improving fuel efficiency to reduce environmental
+                        impact.</p>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <button class="accordion">
+                    <h3>Tata Motors</h3>
+                </button>
+                <div class="accordion-content">
+                    <p>Tata Motors is a leading bus manufacturer in India, known for its innovative designs,
+                        reliability, and customer-centric approach. They offer a diverse range of buses, including city
+                        buses, intercity coaches, school buses, and electric vehicles. Tata buses are equipped with
+                        modern features such as air conditioning, GPS tracking, and advanced safety systems to ensure
+                        passenger comfort and security. The brand is committed to sustainable transportation, with a
+                        focus on developing eco-friendly technologies and improving fuel efficiency.</p>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <button class="accordion">
+                    <h3>Scania</h3>
+                </button>
+                <div class="accordion-content">
+                    <p>Scania is a leading global manufacturer of buses and coaches, known for its commitment to
+                        sustainable mobility. They offer a wide range of models, including city buses, intercity
+                        coaches, and specialized vehicles for various transportation needs. Scania buses are equipped
+                        with advanced technology, eco-friendly designs, and high-quality materials to ensure passenger
+                        comfort and safety. The brand is dedicated to innovation and environmental responsibility, with
+                        models like the Scania Touring LBG/LNG winning awards for sustainability.</p>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <button class="accordion">
+                    <h3>MAN</h3>
+                </button>
+                <div class="accordion-content">
+                    <p>MAN Truck & Bus is a leading global manufacturer of commercial vehicles, known for its innovative
+                        and sustainable solutions. They offer a wide range of buses, including city buses, intercity
+                        coaches, and specialized vehicles. MAN buses are equipped with advanced technology, eco-friendly
+                        designs, and high-quality materials to ensure passenger comfort and safety. The brand is
+                        dedicated to innovation and environmental responsibility, with a focus on developing autonomous
+                        and electric vehicles for future CO2-free transport.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <h2 style="color: #00457c; text-align: center;">COMPARISONS OF BUS BRANDS</h2>
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Brand</th>
+                    <th>Specifications</th>
+                    <th>Features</th>
+                    <th>Price</th>
+                    <th>Pros & Cons</th>
+                    <th>Why It's the Best</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Volvo</strong></td>
+                    <td>Engine: 13L, 500HP | Transmission: Automatic</td>
+                    <td>
+                        <ul class="feature-list">
+                            <li>Luxury seating</li>
+                            <li>Advanced safety features</li>
+                            <li>Fuel-efficient engine</li>
+                        </ul>
+                    </td>
+                    <td><span class="price">$250,000</span></td>
+                    <td>
+                        <div class="pros-cons">
+                            <div><strong>Pros:</strong>
+                                <ul>
+                                    <li>Superior comfort</li>
+                                    <li>Reliable and durable</li>
+                                </ul>
+                            </div>
+                            <div><strong>Cons:</strong>
+                                <ul>
+                                    <li>High maintenance cost</li>
+                                    <li>Expensive spare parts</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </td>
+                    <td><span class="best-reason">Premium choice for long-distance travel.</span></td>
+                </tr>
+                <tr>
+                    <td><strong>Scania</strong></td>
+                    <td>Engine: 12L, 450HP | Transmission: Automatic</td>
+                    <td>
+                        <ul class="feature-list">
+                            <li>Eco-friendly fuel system</li>
+                            <li>Spacious interiors</li>
+                            <li>Smart navigation</li>
+                        </ul>
+                    </td>
+                    <td><span class="price">$230,000</span></td>
+                    <td>
+                        <div class="pros-cons">
+                            <div><strong>Pros:</strong>
+                                <ul>
+                                    <li>Great fuel economy</li>
+                                    <li>Reliable build quality</li>
+                                </ul>
+                            </div>
+                            <div><strong>Cons:</strong>
+                                <ul>
+                                    <li>Higher upfront cost</li>
+                                    <li>Requires specialized servicing</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </td>
+                    <td><span class="best-reason">Best for fuel efficiency and sustainability.</span></td>
+                </tr>
+                <tr>
+                    <td><strong>Ashok Leyland</strong></td>
+                    <td>Engine: 8L, 300HP | Transmission: Manual</td>
+                    <td>
+                        <ul class="feature-list">
+                            <li>Affordable maintenance</li>
+                            <li>Rugged durability</li>
+                            <li>Widespread service network</li>
+                        </ul>
+                    </td>
+                    <td><span class="price">$120,000</span></td>
+                    <td>
+                        <div class="pros-cons">
+                            <div><strong>Pros:</strong>
+                                <ul>
+                                    <li>Budget-friendly</li>
+                                    <li>Strong body structure</li>
+                                </ul>
+                            </div>
+                            <div><strong>Cons:</strong>
+                                <ul>
+                                    <li>Less luxurious</li>
+                                    <li>Basic safety features</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </td>
+                    <td><span class="best-reason">Best value for cost-conscious buyers.</span></td>
+                </tr>
+                <tr>
+                    <td><strong>Tata Motors</strong></td>
+                    <td>Engine: 7L, 280HP | Transmission: Manual</td>
+                    <td>
+                        <ul class="feature-list">
+                            <li>Robust build quality</li>
+                            <li>Cost-effective operation</li>
+                            <li>Simple maintenance</li>
+                        </ul>
+                    </td>
+                    <td><span class="price">$110,000</span></td>
+                    <td>
+                        <div class="pros-cons">
+                            <div><strong>Pros:</strong>
+                                <ul>
+                                    <li>Low operational cost</li>
+                                    <li>Easy to repair</li>
+                                </ul>
+                            </div>
+                            <div><strong>Cons:</strong>
+                                <ul>
+                                    <li>Basic interiors</li>
+                                    <li>Limited technology features</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </td>
+                    <td><span class="best-reason">Reliable choice for daily transportation.</span></td>
+                </tr>
+                <tr>
+                    <td><strong>Mercedes-Benz</strong></td>
+                    <td>Engine: 13L, 530HP | Transmission: Automatic</td>
+                    <td>
+                        <ul class="feature-list">
+                            <li>Luxury interiors</li>
+                            <li>Advanced driver assistance</li>
+                            <li>Top-tier safety features</li>
+                        </ul>
+                    </td>
+                    <td><span class="price">$270,000</span></td>
+                    <td>
+                        <div class="pros-cons">
+                            <div><strong>Pros:</strong>
+                                <ul>
+                                    <li>High performance</li>
+                                    <li>Cutting-edge technology</li>
+                                </ul>
+                            </div>
+                            <div><strong>Cons:</strong>
+                                <ul>
+                                    <li>Extremely expensive</li>
+                                    <li>Complex servicing</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </td>
+                    <td><span class="best-reason">Ultimate choice for luxury and comfort.</span></td>
+                </tr>
+                <tr>
+                    <td><strong>MAN</strong></td>
+                    <td>Engine: 10L, 400HP | Transmission: Automatic</td>
+                    <td>
+                        <ul class="feature-list">
+                            <li>Efficient fuel consumption</li>
+                            <li>Strong body build</li>
+                            <li>Ergonomic seating</li>
+                        </ul>
+                    </td>
+                    <td><span class="price">$200,000</span></td>
+                    <td>
+                        <div class="pros-cons">
+                            <div><strong>Pros:</strong>
+                                <ul>
+                                    <li>Balanced pricing</li>
+                                    <li>Durable and reliable</li>
+                                </ul>
+                            </div>
+                            <div><strong>Cons:</strong>
+                                <ul>
+                                    <li>Limited availability</li>
+                                    <li>Not as luxurious</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </td>
+                    <td><span class="best-reason">Best balance of cost and performance.</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Suggested Bus Section -->
+    <section id="suggested-bus" class="suggested-bus">
+        <div class="container">
+            <h2>TOP SELLING BUSES</h2>
+            <p>Explore the most in-demand buses with expert reviews and ratings.</p>
+            <div class="bus-grid">
+                <!-- Bus 1 -->
+                <div class="bus-item">
+                    <img src="../images/bus9.jpg" alt="Volvo 9400">
+                    <h3>Volvo 9400</h3>
+                    <p>
+                        A premium long-distance bus offering exceptional comfort, fuel efficiency, and advanced safety
+                        features.
+                    </p>
+                    <div class="review">
+                        <p><strong>Review:</strong> "Extremely comfortable and smooth ride. Great for long journeys!"
+                        </p>
+                        <div class="star-rating">
+                            <span style="color: gold; font-size: 1.2em;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                        </div>
+
+                        <a href="https://buses.cardekho.com/buses/volvo/9400" class="buy-now-btn">Buy Now</a>
+                    </div>
+                </div>
+                <!-- Bus 2 -->
+                <div class="bus-item">
+                    <img src="../images/bus10.jpg" alt="Mercedes-Benz Tourismo">
+                    <h3>Mercedes-Benz Tourismo</h3>
+                    <p>
+                        A luxury coach with superior passenger comfort, state-of-the-art features, and excellent fuel
+                        efficiency.
+                    </p>
+                    <div class="review">
+                        <p><strong>Review:</strong> "Luxury at its best. Smooth and quiet ride experience!"</p>
+                        <div class="star-rating">
+                            <span style="color: gold; font-size: 1.2em;">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
+                        </div>
+
+                        <a href="https://www.mercedes-benz-bus.com/en_DE/models/tourismo-rhd.html"
+                            class="buy-now-btn">Buy Now</a>
+                    </div>
+                </div>
+                <!-- Bus 3 -->
+                <div class="bus-item">
+                    <img src="../images/bus11.jpg" alt="Scania Metrolink">
+                    <h3>Scania Metrolink</h3>
+                    <p>
+                        A high-performance intercity bus known for its fuel efficiency, safety, and ergonomic seating.
+                    </p>
+                    <div class="review">
+                        <p><strong>Review:</strong> "Reliable, comfortable, and eco-friendly. Ideal for long trips!"</p>
+                        <div class="star-rating">
+                            <span style="color: gold; font-size: 1.2em;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                        </div>
+
+                        <a href="https://www.scania.com/in/en/home.html" class="buy-now-btn">Buy Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <header>RELATED ARTICLES</header>
+    <section class="additional-grids">
+        <div class="grid-container">
+            <div class="grid-item">
+                <img src="../images/bus12.jpg"
+                    alt="Volvo Unveils Ambitious Plan For 100 Percent Clean Transport By 2040">
+                <p><a
+                        href="https://www.businessworld.in/article/ces-2025-volvo-unveils-ambitious-plan-for-100-percent-clean-transport-by-2040-544342">Volvo
+                        Unveils Ambitious Plan For 100 Percent Clean Transport By 2040.</a></p>
+            </div>
+            <div class="grid-item">
+                <img src="../images/bus13.jpg"
+                    alt="Bengaluru's BMTC begins trial runs of AC electric buses">
+                <p><a
+                        href="https://www.moneycontrol.com/news/india/bengaluru-s-bmtc-begins-trial-runs-of-ac-electric-buses-12907868.html">Bengaluru's
+                        BMTC begins trial runs of AC
+                        electric buses</a></p>
+            </div>
+            <div class="grid-item">
+                <img src="../images/bus14.jpg"
+                    alt="Around the world 6200 times! Tata Motors’ electric bus fleet completes 25 crore kms">
+                <p><a
+                        href="https://www.financialexpress.com/business/express-mobility-around-the-world-6200-times-tata-motors-electric-bus-fleet-completesnbsp25-crore-kms-3710349/">Around
+                        the world 6200 times! Tata Motors’ electric
+                        bus fleet completes 25 crore kms</a></p>
+            </div>
+        </div>
+    </section>
+    <section id="faq">
+        <h2>FREQUENTLY ASKED QUESTIONS</h2>
+        <div class="faq-item">
+            <div class="faq-item">
+                <h3>What types of buses are available for purchase?
+                    <button class="toggle-btn">+</button>
+                </h3>
+                <p class="faq-answer">Mini buses, school buses, luxury/coaches, sleeper buses, city transit buses, and electric buses are commonly available.</p>
+            </div>
+        
+            <div class="faq-item">
+                <h3>Should I buy a new or used bus?
+                    <button class="toggle-btn">+</button>
+                </h3>
+                <p class="faq-answer">New buses offer better features and warranty, while used buses are cost-effective but may require maintenance checks.</p>
+            </div>
+        
+            <div class="faq-item">
+                <h3>What is the suitable seating capacity?
+                    <button class="toggle-btn">+</button>
+                </h3>
+                <p class="faq-answer">Choose capacity based on use — common options include 12, 24, 30, or 40+ seaters depending on your transport needs.</p>
+            </div>
+        
+            <div class="faq-item">
+                <h3>Which fuel type is ideal – Diesel, Petrol, CNG, or Electric?
+                    <button class="toggle-btn">+</button>
+                </h3>
+                <p class="faq-answer">Diesel is common for long routes; CNG is eco-friendly for cities; Electric is future-ready; Petrol is rare in buses.</p>
+            </div>
+        
+            <div class="faq-item">
+                <h3>What documents are required when buying a bus?
+                    <button class="toggle-btn">+</button>
+                </h3>
+                <p class="faq-answer">Ensure you get the RC book, insurance papers, fitness certificate, PUC, tax receipts, and service history (if used).</p>
+            </div>
+        
+            <div class="faq-item">
+                <h3>Can the bus be customized after purchase?
+                    <button class="toggle-btn">+</button>
+                </h3>
+                <p class="faq-answer">Yes, you can add AC, change seating layout, or add sleeper berths — but comply with local transport regulations.</p>
+            </div>
+    </section>
+
+
+    <script>
+         // js for toggle function of FAQ'S
+         document.querySelectorAll('.toggle-btn').forEach(button => {
+                button.addEventListener('click', function () {
+                    const answer = this.parentElement.nextElementSibling;
+                    const isVisible = answer.style.display === 'block';
+                    answer.style.display = isVisible ? 'none' : 'block';
+                    this.textContent = isVisible ? '+' : '-';
+                });
+            });
+
+            // Accordion functionality
+            const accordions = document.querySelectorAll('.accordion');
+
+            accordions.forEach(accordion => {
+                accordion.addEventListener('click', function () {
+                    const content = this.nextElementSibling;
+
+                    // Toggle the display of the content
+                    content.style.display = content.style.display === 'block' ? 'none' : 'block';
+                });
+            });
+
+    </script>
+</body>
+
+</html>

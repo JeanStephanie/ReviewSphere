@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laptops</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        header {
+            background: linear-gradient(90deg, #002d72, #002d72);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.8em;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        header p {
+            margin: 10px 0;
+            font-size: 1.3em;
+            font-weight: 300;
+        }
+
+        nav {
+            background-color: #002d72;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 15px 0;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 30px;
+            border-radius: 20px;
+            transition: background-color 0.3s ease;
+            font-size: 1.1em;
+        }
+
+        nav a:hover {
+            color: #80cbc4;
+        }
+
+        .hero-banner {
+            width: 100%;
+            max-width: 800px;
+            display: block;
+            margin: 0 auto 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        /* laptop brands style*/
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            margin: 20px;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+
+        /* Grid Container */
+        .brand-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            /* 3 columns */
+            gap: 20px;
+            max-width: 1000px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        /* Card Styling */
+        .brand-box {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            width: 100%;
+            /* Ensure it fits within the grid */
+        }
+
+        /* Hover Effect */
+        .brand-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Card Title */
+        .brand-front {
+            color: #002d72;
+            padding: 15px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            text-align: center;
+        }
+
+        /* Card Image */
+        .brand-img {
+            width: 100%;
+            /* Make the image flexible */
+            height: 200px;
+            object-fit: cover;
+            background: #ddd;
+        }
+
+        /* Card Content */
+        .brand-back {
+            padding: 15px;
+            color: #333;
+        }
+
+        /* Comparison Table Styles */
+        #comparison {
+            padding: 40px 20px;
+            background-color: #e9f5fb;
+            text-align: center;
+        }
+
+        #comparison h2 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            color: #00457c;
+        }
+
+        table {
+            width: 100%;
+            margin: 0 auto;
+            border-collapse: collapse;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        th,
+        td {
+            padding: 15px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #00457c;
+            color: white;
+        }
+
+        td {
+            background-color: #fff;
+        }
+
+        /* categories of laptop*/
+        .category-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            max-width: 1000px;
+            margin: auto;
+            padding: 20px;
+        }
+
+
+        .grid-box {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .grid-box:hover {
+            transform: scale(1.05);
+        }
+
+        .grid-box img {
+            width: 100%;
+            height: 150px;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+
+        h3 {
+            color: #222;
+            margin: 10px 0;
+        }
+
+        p {
+
+            color: #555;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .grid-container {
+                grid-template-columns: repeat(2, 1fr);
+                /* 2 columns on tablets */
+            }
+        }
+
+        @media (max-width: 768px) {
+            .grid-container {
+                grid-template-columns: repeat(1, 1fr);
+                /* 1 column on mobile */
+            }
+        }
+
+        /* comparison of laptop caategory styles*/
+        .laptop-table-style {
+            max-width: 90%;
+            margin: auto;
+            overflow-x: auto;
+        }
+
+        /* Table Styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        /* Table Header */
+        thead {
+            background-color: #0073e6;
+            color: white;
+        }
+
+        th {
+            padding: 12px;
+            text-align: center;
+        }
+
+        /* Table Rows */
+        td {
+            padding: 12px;
+            text-align: center;
+            color: #333;
+            border-bottom: 1px solid #ddd;
+        }
+
+        /* Alternating Row Colors */
+        tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        /* Hover Effect */
+        tbody tr:hover {
+            background-color: #e3f2fd;
+            transition: 0.3s ease-in-out;
+        }
+
+        /* Responsive Table */
+        @media (max-width: 1024px) {
+            table {
+                font-size: 13px;
+            }
+
+            th,
+            td {
+                padding: 10px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            table {
+                font-size: 12px;
+            }
+
+            th,
+            td {
+                padding: 8px;
+            }
+        }
+
+        /* style for top selling*/
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .grid-box {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+        }
+
+        .grid-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .grid-box img {
+            width: 100%;
+            height: 150px;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+
+        .grid-box h4 {
+            color: #222;
+            margin: 10px 0;
+        }
+
+        .grid-box p {
+            color: #555;
+
+        }
+
+        .review-section {
+            margin-top: 10px;
+        }
+
+        .review-section p {
+            margin: 5px 0;
+        }
+
+        .star-rating {
+            color: gold;
+            font-size: 1.2rem;
+        }
+
+        .buy-now-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-top: 10px;
+            border-radius: 5px;
+            background-color: #002d72;
+            color: white;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .buy-now-btn:hover {
+            background-color: #00457c;
+        }
+
+        /* best rated laptop/
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+
+        /* Heading */
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        /* Product Cards Container */
+        .product-cards {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        /* Individual Card Styles */
+        .card {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            width: 300px;
+            text-align: center;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+        /* Product Image */
+        .card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        /* Product Title */
+        .card h3 {
+            font-size: 1.2em;
+            color: #222;
+            margin: 10px 0;
+        }
+
+        /* Product Description */
+        .card p {
+            font-size: 0.9em;
+            color: #555;
+            margin: 5px 0;
+        }
+
+        /* Buy Now Button */
+        .card a button {
+            background-color: #002d72;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            font-size: 1em;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+
+        .card a button:hover {
+            background-color: #002d72;
+        }
+
+
+        /* related articles style*/
+        .related-articles-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            /* Ensure exactly 3 columns */
+            gap: 20px;
+            margin: 20px 0;
+            max-width: 1200px;
+            /* Adjust width to fit content properly */
+            margin: auto;
+            /* Centering the grid */
+        }
+
+        .related-article-item {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .related-article-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .related-article-item img {
+            width: 100%;
+            height: 200px;
+            margin-bottom: 15px;
+            border-radius: 10px;
+        }
+
+        .related-article-item p {
+            font-size: 1em;
+            color: #00457c;
+        }
+
+        .related-article-item p a {
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .related-article-item p a:hover {
+            color: #00457c;
+        }
+
+        /* FAQ styles*/
+        #faq {
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+
+        #faq h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .faq-item {
+            margin-bottom: 20px;
+        }
+
+        .faq-item h3 {
+            cursor: pointer;
+            padding: 10px;
+            background-color: white;
+            color: #002d72;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .faq-item p {
+            display: none;
+            padding: 10px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-top: none;
+            border-radius: 0 0 5px 5px;
+        }
+
+        .faq-item p.visible {
+            display: block;
+        }
+
+        .faq-answer {
+            display: none;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+        }
+
+        .toggle-btn {
+            margin-left: 10px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Laptops</h1>
+        <p style="color: white;">Discover the Best Laptops for Every Need and Budget</p>
+    </header>
+
+    <nav>
+        <a href="buyinguidelap.html">Buying Guide</a>
+        <a href="../reviews.php">Reviews</a>
+    </nav>
+
+    <section class="hero">
+        <img src="../images/laptop.jpg" alt="Latest Laptops" class="hero-banner">
+        <h2>Unveil the Latest Laptop Innovationss</h2>
+        <p>From gaming beasts to ultra-portable notebooks, find the perfect laptop for your needs.</p>
+    </section>
+    <section class="trending-laptops">
+        <h2>LAPTOP BRANDS</h2>
+        <div class="brand-container">
+            <div class="brand-box">
+                <div class="brand-front">Apple</div>
+                <img src="../images/mac.jpg" alt="Apple Laptop" class="brand-img">
+                <div class="brand-back" id="brandApplee">
+                    <p>Apple laptops, known for their sleek design and premium build quality, offer powerful performance
+                        with
+                        macOS, an intuitive and user-friendly operating system. The MacBook Air is popular for its
+                        portability
+                        and long battery life, while the MacBook Pro caters to professionals with higher processing
+                        power,
+                        exceptional displays, and advanced features. Both models are known for their reliability and
+                        seamless
+                        integration with other Apple devices.</p>
+                </div>
+            </div>
+            <div class="brand-box">
+                <div class="brand-front">Dell</div>
+                <img src="../images/dell.jpg" alt="Dell Laptop" class="brand-img">
+                <div class="brand-back" id="brandDell">
+                    <p>Dell laptops are known for their durability, performance, and versatility, offering a range of
+                        options
+                        from budget-friendly models to high-end business and gaming laptops. The XPS series is
+                        particularly
+                        praised for its premium build, stunning displays, and powerful performance, while the Inspiron
+                        and
+                        Latitude lines cater to everyday users and professionals. Dell laptops are well-regarded for
+                        their
+                        reliability and excellent customer support</p>
+                </div>
+            </div>
+            <div class="brand-box">
+                <div class="brand-front">HP</div>
+                <img src="../images/hp.jpg" alt="HP Laptop" class="brand-img">
+                <div class="brand-back" id="brandHP">
+                    <p>HP laptops are known for their wide range of options, catering to both personal and professional
+                        needs
+                        with solid performance and stylish designs. The Spectre and Envy series offer premium features,
+                        high-end
+                        displays, and strong performance, while the Pavilion and Omen lines focus on budget-friendly
+                        options and
+                        gaming. HP is recognized for its reliable build quality and strong customer service.</p>
+                </div>
+            </div>
+            <div class="brand-box">
+                <div class="brand-front">Lenovo</div>
+                <img src="../images/lenovo.jpg" alt="Lenovo Laptop" class="brand-img">
+                <div class="brand-back" id="brandLenovo">
+                    <p>Lenovo laptops are renowned for their reliability, solid performance, and versatile design,
+                        offering
+                        options for both business and personal use. The ThinkPad series is highly regarded for its
+                        durability,
+                        comfortable keyboards, and strong productivity features, while the Yoga and Legion lines cater
+                        to users
+                        seeking flexibility and gaming power. Lenovo laptops are known for their value, long battery
+                        life, and
+                        innovative features.</p>
+                </div>
+            </div>
+            <div class="brand-box">
+                <div class="brand-front">Acer</div>
+                <img src="../images/acer.jpg" alt="Acer Laptop" class="brand-img">
+                <div class="brand-back" id="brandAcer">
+                    <p>Acer laptops are popular for offering great value with a wide range of models that cater to both
+                        budget-conscious and high-performance users. The Swift and Aspire series are known for their
+                        portability
+                        and solid everyday performance, while the Predator line is aimed at gamers, offering powerful
+                        specs and
+                        impressive graphics. Acer is recognized for delivering reliable laptops at competitive prices,
+                        often
+                        packed with features.</p>
+                </div>
+            </div>
+            <div class="brand-box">
+                <div class="brand-front">Asus</div>
+                <img src="../images/asus.jpg" alt="Asus Laptop" class="brand-img">
+                <div class="brand-back" id="brandAsus">
+                    <p>Asus laptops are known for their innovative features, high performance, and stylish designs,
+                        offering options for various needs, from casual use to gaming and professional tasks. The
+                        ZenBook series
+                        stands out for its sleek build and premium features, while the ROG and TUF lines cater to gamers
+                        with
+                        powerful specs and advanced graphics. Asus is praised for delivering laptops with solid
+                        performance,
+                        excellent displays, and competitive pricing.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!---Laptop categories-->
+    <h2>DIFFERENT CATEGORIES OF LAPTOPS</h2>
+    <div class="grid-container">
+        
+        <div class="grid-box">
+            <img src="../images/gaminglap.jpg" alt="Gaming Laptops">
+            <h3>Gaming Laptops</h3>
+            <p>Equipped with high-end GPUs and high refresh rate screens for immersive gaming.</p>
+        </div>
+       
+        <div class="grid-box">
+            <img src="../images/lap2.jpg" alt="2-in-1 Laptops">
+            <h3>2-in-1 Laptops</h3>
+            <p>Flexible touchscreen devices that work as both laptops and tablets.</p>
+        </div>
+        
+        <div class="grid-box">
+            <img src="../images/workstationlap.jpg" alt="Workstation Laptops">
+            <h3>Workstation Laptops</h3>
+            <p>Designed for professionals needing high-performance computing.</p>
+        </div>
+        
+        <div class="grid-box">
+            <img src="../images/chromebook.jpg" alt="Chromebooks">
+            <h3>Chromebooks</h3>
+            <p>Lightweight and affordable laptops running Chrome OS for cloud computing.</p>
+        </div>
+    </div>
+    <!---category comparison section-->
+    <section class="laptop-table-style">
+        <h2>COMPARISON OF LAPTOP CATEGORIES</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Category</th>
+                    <th>Specifications</th>
+                    <th>Ideal For</th>
+                    <th>Pros</th>
+                    <th>Cons</th>
+                    <th>Examples</th>
+                    <th>Why It's the Best</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Ultrabooks</td>
+                    <td>Lightweight, SSD storage, long battery life, Intel i5/i7</td>
+                    <td>Travelers, Professionals</td>
+                    <td>Portable, Fast performance, Long battery life</td>
+                    <td>Expensive, Limited ports</td>
+                    <td>Dell XPS 13, MacBook Air</td>
+                    <td>Best for professionals and travelers seeking a lightweight, high-performance laptop.</td>
+                </tr>
+                <tr>
+                    <td>Gaming Laptops</td>
+                    <td>High-end GPU, High refresh rate screen, RGB keyboard</td>
+                    <td>Gamers</td>
+                    <td>Powerful performance, High refresh rates</td>
+                    <td>Heavy, Short battery life</td>
+                    <td>Asus ROG, Acer Predator</td>
+                    <td>Best for gamers needing powerful graphics and high refresh rates.</td>
+                </tr>
+                <tr>
+                    <td>Business Laptops</td>
+                    <td>Durable build, Security features, Long battery life</td>
+                    <td>Business Professionals</td>
+                    <td>Secure, Reliable, Long battery life</td>
+                    <td>Expensive, Conservative design</td>
+                    <td>Lenovo ThinkPad, Dell Latitude</td>
+                    <td>Best for business users needing security and reliability.</td>
+                </tr>
+                <tr>
+                    <td>2-in-1 Laptops</td>
+                    <td>Touchscreen, Convertible design, Stylus support</td>
+                    <td>Creatives, Students</td>
+                    <td>Versatile, Portable</td>
+                    <td>Expensive, Can be bulky</td>
+                    <td>HP Spectre x360, Microsoft Surface Pro</td>
+                    <td>Best for users needing flexibility between laptop and tablet modes.</td>
+                </tr>
+                <tr>
+                    <td>Student Laptops</td>
+                    <td>Lightweight, Affordable, Long battery life</td>
+                    <td>Students</td>
+                    <td>Affordable, Portable, Good battery life</td>
+                    <td>Basic performance, Limited storage</td>
+                    <td>Acer Aspire, Lenovo IdeaPad</td>
+                    <td>Best for students needing an affordable and portable laptop for schoolwork.</td>
+                </tr>
+                <tr>
+                    <td>Workstation Laptops</td>
+                    <td>High-end CPU, Large RAM, Dedicated GPU</td>
+                    <td>Professionals, Engineers</td>
+                    <td>Powerful performance, High-end specs</td>
+                    <td>Expensive, Heavy</td>
+                    <td>HP ZBook, Dell Precision</td>
+                    <td>Best for professionals needing high-performance computing for demanding tasks.</td>
+                </tr>
+                <tr>
+                    <td>Budget Laptops</td>
+                    <td>Affordable, Decent performance for everyday tasks</td>
+                    <td>General Users</td>
+                    <td>Cost-effective, Good for everyday use</td>
+                    <td>Basic performance, Limited features</td>
+                    <td>HP Pavilion, Asus VivoBook</td>
+                    <td>Best for users looking for a cost-effective laptop for everyday tasks.</td>
+                </tr>
+                <tr>
+                    <td>Chromebooks</td>
+                    <td>Chrome OS, Lightweight, Cloud-based storage</td>
+                    <td>Students, Casual Users</td>
+                    <td>Affordable, Fast boot time, Secure</td>
+                    <td>Limited offline functionality, Basic performance</td>
+                    <td>Google Pixelbook, Acer Chromebook</td>
+                    <td>Best for users needing an affordable, secure laptop for web-based tasks.</td>
+                </tr>
+            </tbody>
+        </table>
+    </section> <br>
+
+    <!---top selling products-->
+    <header>TOP SELLING LAPTOPS</header>
+
+    <!-- Gaming Laptops Section -->
+    <section class="category-section">
+        <h3>Top Selling Gaming Laptop</h3>
+        <div class="grid-container">
+            <div class="grid-box">
+                <img src="../images/asusG14.jpg" alt="Asus ROG Zephyrus G14">
+                <h4>Asus ROG Zephyrus G14</h4>
+                <p>High-performance laptops with powerful GPUs and fast refresh rate displays for gaming.</p>
+                <div class="review-section">
+                    <p><strong>Review:</strong> "Incredible graphics and performance. Perfect for serious gamers."</p>
+                    <div class="star-rating">&#9733;&#9733;&#9733;&#9733;&#9734;</div>
+                </div>
+                <a href="https://rog.asus.com/laptops/rog-zephyrus/rog-zephyrus-g14-series/" class="buy-now-btn">Buy
+                    Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Business Laptops Section -->
+    <section class="category-section">
+        <h3>Top Selling Business Laptop</h3>
+        <div class="grid-container">
+            <div class="grid-box">
+                <img src="../images/lenovox1.jpg" alt="Lenovo ThinkPad X1 Carbon">
+                <h4>Lenovo ThinkPad X1 Carbon</h4>
+                <p>Durable, secure, and productivity-focused laptops with professional features like TPM and docking
+                    support.</p>
+                <div class="review-section">
+                    <p><strong>Review:</strong> "Reliable and secure. Perfect for all my business needs."</p>
+                    <div class="star-rating">&#9733;&#9733;&#9733;&#9733;&#9734;</div>
+                </div>
+                <a href="https://www.lenovo.com/us/en/laptops/thinkpad/thinkpad-x1/ThinkPad-X1-Carbon-Gen-9-Intel/p/20XWCTO1WWENUS0"
+                    class="buy-now-btn">Buy Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2-in-1 Laptops Section -->
+    <section class="category-section">
+        <h3>Top Selling 2-in-1 Laptop</h3>
+        <div class="grid-container">
+            <div class="grid-box">
+                <img src="../images/microsoftsurface.jpg" alt="Microsoft Surface Pro 7">
+                <h4>Microsoft Surface Pro 7</h4>
+                <p>Laptops with touchscreens that can convert into tablets for flexible usage.</p>
+                <div class="review-section">
+                    <p><strong>Review:</strong> "Versatile and powerful. Perfect for both work and play."</p>
+                    <div class="star-rating">&#9733;&#9733;&#9733;&#9733;&#9734;</div>
+                </div>
+                <a href="https://www.microsoft.com/en-us/p/surface-pro-7/8n17j0m5zzqs" class="buy-now-btn">Buy Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Student Laptops Section -->
+    <section class="category-section">
+        <h3>Top Selling Student Laptop</h3>
+        <div class="grid-container">
+            <div class="grid-box">
+                <img src="../images/aceraspire.jpg" alt="Acer Aspire 5">
+                <h4>Acer Aspire 5</h4>
+                <p>Budget-friendly laptops with essential features for studying and online learning.</p>
+                <div class="review-section">
+                    <p><strong>Review:</strong> "Affordable and reliable. Perfect for my college needs."</p>
+                    <div class="star-rating">&#9733;&#9733;&#9733;&#9733;&#9734;</div>
+                </div>
+                <a href="https://www.acer.com/ac/en/US/content/series/aspire5" class="buy-now-btn">Buy Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Workstation Laptops Section -->
+    <section class="category-section">
+        <h3>Top Selling Workstation Laptop</h3>
+        <div class="grid-container">
+            <div class="grid-box">
+                <img src="../images/dell7550.jpg" alt="Dell Precision 7550">
+                <h4>Dell Precision 7550</h4>
+                <p>High-end laptops with powerful CPUs and GPUs for professional tasks like 3D modeling and video
+                    editing.</p>
+                <div class="review-section">
+                    <p><strong>Review:</strong> "Powerful and reliable. Perfect for demanding tasks."</p>
+                    <div class="star-rating">&#9733;&#9733;&#9733;&#9733;&#9734;</div>
+                </div>
+                <a href="https://www.dell.com/en-us/work/shop/dell-laptops-and-notebooks/precision-15-7550-mobile-workstation/spd/precision-15-7550-laptop"
+                    class="buy-now-btn">Buy Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Chromebooks Section -->
+    <section class="category-section">
+        <h3>Top Selling Chromebook Laptop</h3>
+        <div class="grid-container">
+            <div class="grid-box">
+                <img src="../images/pixelbook.jpg" alt="Google Pixelbook Go">
+                <h4>Google Pixelbook Go</h4>
+                <p>Affordable, lightweight laptops running Chrome OS, ideal for web-based tasks.</p>
+                <div class="review-section">
+                    <p><strong>Review:</strong> "Fast and secure. Perfect for web-based tasks."</p>
+                    <div class="star-rating">&#9733;&#9733;&#9733;&#9733;&#9734;</div>
+                </div>
+                <a href="https://store.google.com/us/product/pixelbook_go" class="buy-now-btn">Buy Now</a>
+            </div>
+        </div>
+    </section> <br>
+
+    <!----Top 3 Best Laptops-->
+    <h2>TOP 3 BEST RATED LAPTOPS</h2>
+    <div class="product-cards">
+        <div class="card">
+            <img src="../images/mac2.jpg" alt="MacBook Air M2">
+            <h3>Apple MacBook Air M2</h3>
+            <p>The MacBook Air M2 is a powerhouse of performance with the latest Apple M2 chip, offering exceptional
+                speed
+                and efficiency. It features a Liquid Retina display, fanless design for silent operation, and an all-day
+                battery life of up to 18 hours. With macOS optimization, this laptop is ideal for professionals and
+                students alike.</p>
+            <p><strong>Processor:</strong> Apple M2</p>
+            <p><strong>Battery Life:</strong> Up to 18 hours</p>
+            <a href="https://www.apple.com/macbook-air-m2/">
+                <button>Buy Now</button></a>
+        </div>
+
+        <div class="card">
+            <img src="../images/dell2.jpg" alt="Dell XPS 15">
+            <h3>Dell XPS 15</h3>
+            <p>The Dell XPS 15 is known for its premium build quality and high-performance specifications. It features a
+                stunning 3.5K OLED touch display, Intel Core i7/i9 processors, and NVIDIA RTX 40-series graphics. With
+                an
+                ultra-thin design and top-tier keyboard, it’s perfect for creative professionals.</p>
+            <p><strong>Processor:</strong> Intel Core i7/i9</p>
+            <p><strong>Graphics:</strong> NVIDIA RTX 4060</p>
+            <a href="https://www.dell.com/en-us/shop/laptops/xps-15">
+                <button>Buy Now</button></a>
+        </div>
+
+        <div class="card">
+            <img src="../images/asus2.jpg" alt="Asus ROG Strix G16">
+            <h3>Asus ROG Strix G16</h3>
+            <p>The Asus ROG Strix G16 is a gaming beast featuring a high-refresh-rate 16-inch display, Intel 13th Gen
+                processor, and RTX 40-series GPU. It comes with an advanced cooling system, RGB keyboard, and AI-powered
+                performance enhancements, making it one of the best gaming laptops available.</p>
+            <p><strong>Processor:</strong> Intel Core i9 13th Gen</p>
+            <p><strong>Graphics:</strong> NVIDIA RTX 4070</p>
+            <a href="https://rog.asus.com/laptops/rog-strix/rog-strix-g16-2023-series/">
+                <button>Buy Now</button></a>
+        </div>
+    </div>
+    <!---Related articles-->
+    <header style="text-align: center;">RELATED ARTICLES</header> <br>
+    <div class="related-articles-container">
+        <div class="related-article-item">
+            <img src="../images/keyboard.jpg"
+                alt="Lenovo Said to Debut Self-Charging Bluetooth Keyboard">
+            <p><a
+                    href="https://www.gadgets360.com/laptops/news/lenovo-bluetooth-self-charging-keyboard-ai-travel-set-launch-ces-2025-7336494">
+                    Lenovo Said to Debut Self-Charging Bluetooth Keyboard</a></p>
+        </div>
+        <div class="related-article-item">
+            <img src="../images/microsoftsurface.jpg" alt="The best laptop 2024 ">
+            <p><a href="https://www.techradar.com/news/mobile-computing/laptops/best-laptops-1304361">
+                    The Best Laptop 2024: Microsoft's Surface Laptop </a></p>
+        </div>
+        <div class="related-article-item">
+            <img src="../images/asusVivobook.jpg"  alt="ASUS Vivobook 14 Flip review: The most versatile laptop ">
+            <p><a
+                    href="https://indianexpress.com/article/technology/tech-reviews/asus-vivobook-14-flip-review-9834145/">
+                    ASUS Vivobook 14 Flip review: The most versatile laptop </a></p>
+        </div>
+    </div> <br>
+
+    <!---FAQ'S section-->
+    <section id="laptop-faq">
+        <header>FREQUENTLY ASKED QUESTIONS </header>
+
+        <div class="faq-item">
+            <h3>What should I consider when buying a new laptop?
+                <button class="toggle-btn">+</button>
+            </h3>
+            <p class="faq-answer">Consider factors such as processor speed, RAM, storage type (SSD vs HDD), battery
+                life, display quality, and your budget to find the best laptop for your needs.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>Which is better: Windows, macOS, or Chrome OS?
+                <button class="toggle-btn">+</button>
+            </h3>
+            <p class="faq-answer">Windows is versatile and widely used, macOS is optimized for Apple devices and
+                creative tasks, while Chrome OS is lightweight and ideal for web-based work.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>How much RAM do I need in a laptop?
+                <button class="toggle-btn">+</button>
+            </h3>
+            <p class="faq-answer">For basic tasks, 8GB RAM is sufficient. For gaming, video editing, or heavy
+                multitasking, consider 16GB or more.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>What is the difference between SSD and HDD storage?
+                <button class="toggle-btn">+</button>
+            </h3>
+            <p class="faq-answer">SSD (Solid State Drive) is much faster, more durable, and energy-efficient compared to
+                HDD (Hard Disk Drive), which is cheaper but slower.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>How can I extend my laptop’s battery life?
+                <button class="toggle-btn">+</button>
+            </h3>
+            <p class="faq-answer">Reduce screen brightness, close unnecessary background apps, enable battery saver
+                mode, and avoid keeping the laptop plugged in all the time.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>What is the best laptop for gaming?
+                <button class="toggle-btn">+</button>
+            </h3>
+            <p class="faq-answer">Gaming laptops should have a high-performance GPU (like NVIDIA RTX), at least 16GB
+                RAM, and a fast refresh rate display (120Hz or higher).</p>
+        </div>
+    </section>
+    <script>
+        // js for toggle function of FAQ'S
+        document.querySelectorAll('.toggle-btn').forEach(button => {
+            button.addEventListener('click', function () {
+                const answer = this.parentElement.nextElementSibling;
+                const isVisible = answer.style.display === 'block';
+                answer.style.display = isVisible ? 'none' : 'block';
+                this.textContent = isVisible ? '+' : '-';
+            });
+        });
+    </script>
+</body>
+
+</html>

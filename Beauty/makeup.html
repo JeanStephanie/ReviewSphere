@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Makeup</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background: linear-gradient(90deg, #002d72, #002d72);
+            color: white;
+            padding: 5px;
+            text-align: center;
+            position: relative;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            text-transform: uppercase;
+        }
+
+        header p {
+            margin: 5px 0 0;
+            font-size: 1.2em;
+            font-weight: 300;
+        }
+
+        nav {
+            background-color: #002d72;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #00bcd4;
+        }
+
+        /* Carousel Styles */
+        #about-carousel {
+            position: relative;
+            max-width: 100%;
+            overflow: hidden;
+            text-align: center;
+            background-color: #eee;
+        }
+
+        .carousel-slides {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .carousel-slide {
+            min-width: 100%;
+            box-sizing: border-box;
+            padding: 50px 20px;
+        }
+
+        .carousel-slide h2 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: #002d72;
+        }
+
+        .carousel-slide p {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.2em;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .carousel-controls {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+        }
+
+        .carousel-control {
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 1.5em;
+        }
+
+        .carousel-control:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .container {
+            width: 80%;
+            margin: 50px auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: white;
+        }
+
+        .dropdown {
+            width: 100%;
+            padding: 15px;
+            background-color: #002d72;
+            color: white;
+            border: none;
+            font-size: 18px;
+            text-align: left;
+            cursor: pointer;
+            margin-bottom: 10px;
+            border-radius: 4px;
+        }
+
+        .dropdown:hover {
+            background-color: #002d72;
+        }
+
+        .dropdown-content {
+            display: none;
+            padding: 15px;
+            margin-top: 10px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .dropdown-content ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .dropdown-content ul li {
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        .dropdown-content ul li strong {
+            color: #002d72;
+        }
+
+        /*Top brands*/
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+
+        .brands-section {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+
+        .brands-section h2 {
+            text-align: center;
+            color: #002d72;
+            font-size: 2rem;
+            margin-bottom: 30px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .brand img {
+            width: 150px;
+            height: auto;
+            object-fit: cover;
+        }
+
+        .brand-details {
+            padding: 15px;
+            flex: 1;
+        }
+
+        .brand-details h3 {
+            margin: 0;
+            color: #002d72;
+            font-size: 1.5rem;
+        }
+
+        .brand-details p {
+            margin: 10px 0;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        .brand-details a {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 15px;
+            background-color: #002d72;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .brand-details a:hover {
+            background-color: #002d72;
+        }
+        
+        /* Suggested makeup Section Styling */
+        .suggested-makeup {
+            background-color: #f8f9fa;
+            padding: 50px 0;
+            text-align: center;
+        }
+
+        .suggested-makeup .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .suggested-makeup h2 {
+            font-size: 2em;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .suggested-makeup p {
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .makeup-grid {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .makeup-item {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            max-width: 350px;
+            text-align: left;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .makeup-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .makeup-item img {
+            width: 100%;
+            height: 250px;
+            border-radius: 10px;
+        }
+
+        .makeup-item h3 {
+            font-size: 1.5em;
+            color: #222;
+            margin: 15px 0 10px;
+        }
+
+        .makeup-item p {
+            color: #555;
+            font-size: 1em;
+            line-height: 1.5;
+        }
+
+        .review {
+            margin-top: 15px;
+        }
+
+        .review p {
+            font-style: italic;
+            color: #444;
+        }
+
+        .star-rating span {
+            font-size: 1.2em;
+        }
+
+        .buy-now-btn {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #00457c;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+        }
+
+        .buy-now-btn:hover {
+            background-color: #00457c;
+        }
+
+        /* Styles for the last new grid section */
+        .additional-grids {
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        .additional-grids h2 {
+            font-size: 2.5em;
+            margin-bottom: 30px;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            /* 3 columns */
+            gap: 20px;
+            justify-items: center;
+        }
+
+        .grid-item {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 320px;
+            /* Keeps items from getting too wide */
+            transition: transform 0.3s ease;
+        }
+
+        .grid-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .grid-item img {
+            width: 100%;
+            height: 200px;
+            border-radius: 8px;
+        }
+
+        .grid-item p {
+            margin-top: 15px;
+            font-size: 1.1em;
+        }
+
+        .grid-item a {
+            text-decoration: none;
+            color: #003366;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .grid-item a:hover {
+            color: #00bcd4;
+        }
+
+        /* FAQ styles*/
+        #faq {
+            padding: 20px;
+            background-color: #f9f9f9;
+            text-align: center;
+        }
+
+        #faq h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .faq-item {
+            margin-bottom: 20px;
+        }
+
+        .faq-item h3 {
+            cursor: pointer;
+            padding: 10px;
+            background-color: white;
+            color: #002d72;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .faq-item p {
+            display: none;
+            padding: 10px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-top: none;
+            border-radius: 0 0 5px 5px;
+        }
+
+        .faq-item p.visible {
+            display: block;
+        }
+
+        .faq-answer {
+            display: none;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+        }
+
+        .toggle-btn {
+            margin-left: 10px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>MAKEUP</h1>
+        <nav>
+            <a href="buyinguidemakeup.html">Buying Guide </a>
+            <a href="../reviews.php">Reviews</a>
+        </nav>
+    </header>
+    <!-- About Us Section with Carousel -->
+    <section id="about-carousel">
+        <div class="carousel-slides">
+            <div class="carousel-slide">
+                <h2>Lips Redefined</h2>
+                <img src="../images/m1.jpg" alt="Lips Redefined"
+                    style="width: 400px; height: 400px; margin: 20px 0;">
+                <p>Trusted and expert guidance to help you choose the perfect lipstick for your style and confidence.
+                    The mission is to empower you with a flawless, vibrant look every day.</p>
+            </div>
+            <div class="carousel-slide">
+                <h2>Soft, Lasting Quality</h2>
+                <img src="../images/m2.jpg" alt="Soft, Lasting Quality"
+                    style="max-width: 400px; height: 400px; margin: 10px 0;">
+                <p>Explore top blush brands, in-depth comparisons, and expert tips to make your blush selection
+                    effortless and perfectly suited to your style.</p>
+            </div>
+            <div class="carousel-slide">
+                <h2>Affordable Glamour</h2>
+                <img src="../images/m3.jpg" alt="Affordable Glamour"
+                    style="max-width: 400px; height:400px; margin: 10px 0;">
+                <p>Whether you're looking for affordability or indulgence, find information tailored to your preferences
+                    and beauty routine with the perfect highlighter.</p>
+            </div>
+        </div>
+        <div class="carousel-controls">
+            <button class="carousel-control" id="prev-btn">&#8249;</button>
+            <button class="carousel-control" id="next-btn">&#8250;</button>
+        </div>
+    </section>
+    <div class="container">
+        <h1 style="color: black;">Makeup Product Categories</h1>
+        <!-- Face Makeup Dropdown -->
+        <button class="dropdown">Face Makeup</button>
+        <div class="dropdown-content">
+            <h3>Face Makeup</h3>
+            <ul>
+                <li><strong>Foundation:</strong> Provides an even base and covers imperfections like blemishes and
+                    uneven skin tone. It comes in liquid, cream, powder, or stick form.</li>
+                <li><strong>Concealer:</strong> Targets specific imperfections such as dark circles, pimples, or
+                    redness. Available in liquid, cream, or stick form.</li>
+                <li><strong>Powder:</strong> Sets foundation and concealer in place, mattifies the face, and controls
+                    shine. It can be loose or pressed.</li>
+                <li><strong>Blush:</strong> Adds color to the cheeks, giving the face a healthy flush. It comes in
+                    powder, cream, or liquid form.</li>
+                <li><strong>Bronzer:</strong> Adds warmth to the face, creating a sun-kissed glow. It comes in powder or
+                    cream form and is used to contour the face.</li>
+                <li><strong>Highlighter:</strong> Adds a radiant glow to the high points of the face like the
+                    cheekbones, nose bridge, and cupid's bow. Available in powder, cream, or liquid form.</li>
+                <li><strong>Setting Spray/Powder:</strong> Locks makeup in place and controls oil, ensuring that makeup
+                    lasts longer. It can come in powder or mist form.</li>
+            </ul>
+        </div>
+
+        <!-- Eye Makeup Dropdown -->
+        <button class="dropdown">Eye Makeup</button>
+        <div class="dropdown-content">
+            <h3>Eye Makeup</h3>
+            <ul>
+                <li><strong>Eyeshadow:</strong> Adds color and depth to the eyelids. It comes in powder, cream, liquid,
+                    and pencil forms, with various finishes like matte, shimmer, and metallic.</li>
+                <li><strong>Eyeliner:</strong> Defines the eyes by outlining the upper and lower lash lines. It can come
+                    in pencil, gel, liquid, or pen form.</li>
+                <li><strong>Mascara:</strong> Darkens, lengthens, and volumizes the eyelashes. It can come in different
+                    formulas like lengthening, volumizing, and curling mascaras.</li>
+                <li><strong>Eyebrow Products:</strong> Shapes and defines eyebrows. Common products include eyebrow
+                    pencils, powders, gels, and pomades.</li>
+                <li><strong>False Lashes:</strong> Adds volume and length to natural eyelashes, creating a more dramatic
+                    look. They come in strip, individual, or flare forms.</li>
+            </ul>
+        </div>
+
+        <!-- Lip Makeup Dropdown -->
+        <button class="dropdown">Lip Makeup</button>
+        <div class="dropdown-content">
+            <h3>Lip Makeup</h3>
+            <ul>
+                <li><strong>Lipstick:</strong> Adds color to the lips in a variety of finishes such as matte, satin,
+                    glossy, or liquid. Available in bullet, liquid, or pencil forms.</li>
+                <li><strong>Lip Gloss:</strong> Adds shine and a subtle tint of color to the lips. It’s often hydrating
+                    and can come in clear, tinted, or shimmery varieties.</li>
+                <li><strong>Lip Liner:</strong> Defines the lips and prevents lipstick from feathering. It comes in
+                    pencil, gel, or liquid form and can help shape and contour the lips.</li>
+                <li><strong>Lip Balm:</strong> Moisturizes and nourishes the lips. It can come in tinted or clear
+                    versions and provides protection from dryness.</li>
+            </ul>
+        </div>
+
+        <!-- Primers & Specialties Dropdown -->
+        <button class="dropdown">Primers & Specialties</button>
+        <div class="dropdown-content">
+            <h3>Primers & Specialties</h3>
+            <ul>
+                <li><strong>Face Primer:</strong> Prepares the skin for foundation, helping it to last longer and
+                    creating a smooth surface. It can be mattifying, hydrating, or pore-filling.</li>
+                <li><strong>Eye Primer:</strong> Helps eyeshadow adhere better and prevents creasing. It can come in
+                    matte or shimmer formulas.</li>
+                <li><strong>Contouring Kits:</strong> Used to sculpt and define facial features. Contour products come
+                    in cream, powder, or stick formulas.</li>
+                <li><strong>Color Correctors:</strong> Neutralize specific skin issues like redness, dark circles, or
+                    dullness. Common colors include green, yellow, peach, and purple.</li>
+            </ul>
+        </div>
+    </div>
+
+    <header>
+        <h1>Explore Top Makeup Brands</h1>
+    </header>
+
+    <section class="brands-section">
+        <h2>Top Makeup Brands</h2>
+
+        <div class="brand">
+            <img src="../images/m4.jpg" alt="MAC Cosmetics">
+            <div class="brand-details">
+                <h3>MAC Cosmetics</h3>
+                <p>Known for its professional-grade products and wide range of colors, MAC is a favorite among makeup
+                    artists and enthusiasts alike. From vibrant lipsticks to high-quality foundations, MAC has it all.
+                </p>
+                <a href="https://www.maccosmetics.in/?srsltid=AfmBOoqjWENpD94VoonkNiiyaNd1oAGRXZusMcO2ebx5skHF1oMSahi6"
+                    target="_blank">Shop Now</a>
+            </div>
+        </div>
+
+        <div class="brand">
+            <img src="../images/m5.jpg" alt="Maybelline">
+            <div class="brand-details">
+                <h3>Maybelline</h3>
+                <p>Maybelline is a household name for affordable and high-quality makeup products. Whether you're
+                    looking
+                    for the perfect mascara or a long-lasting foundation, Maybelline has something for everyone.</p>
+                <a href="https://www.maybelline.co.in/" target="_blank">Shop Now</a>
+            </div>
+        </div>
+
+        <div class="brand">
+            <img src="../images/m6.jpg" alt="Fenty Beauty">
+            <div class="brand-details">
+                <h3>Fenty Beauty</h3>
+                <p>Created by Rihanna, Fenty Beauty is known for its inclusivity and revolutionary foundation shades.
+                    Their highlighters and lip glosses are also fan favorites.</p>
+                <a href="https://fentybeauty.com/" target="_blank">Shop Now</a>
+            </div>
+        </div>
+
+        <div class="brand">
+            <img src="../images/m7.jpg" alt="NYX Professional Makeup">
+            <div class="brand-details">
+                <h3>NYX Professional Makeup</h3>
+                <p>NYX offers professional-grade makeup at drugstore prices. Their range includes everything from highly
+                    pigmented eyeshadows to long-lasting lipsticks.</p>
+                <a href="https://www.nyxcosmetics.com/" target="_blank">Shop Now</a>
+            </div>
+        </div>
+
+        <div class="brand">
+            <img src="../images/m8.jpg" alt="Sephora Collection">
+            <div class="brand-details">
+                <h3>Sephora Collection</h3>
+                <p>The Sephora Collection features a wide range of beauty products at great value. From skincare to
+                    makeup, you'll find everything you need to complete your look.</p>
+                <a href="https://www.sephora.com/" target="_blank">Shop Now</a>
+            </div>
+        </div>
+
+    </section>
+    <!-- Suggested Makeup Section -->
+    <section id="suggested-makeup" class="suggested-makeup">
+        <div class="container">
+            <h2>TOP-SELLING MAKEUP PRODUCTS</h2>
+            <p>Explore the most in-demand makeup products with expert reviews and ratings.</p>
+            <div class="makeup-grid">
+
+                <!-- Makeup Product 1 -->
+                <div class="makeup-item">
+                    <img src="../images/m9.jpg" alt="Flawless Liquid Foundation">
+                    <h3>Flawless Liquid Foundation</h3>
+                    <p>
+                        A high-coverage, lightweight foundation that provides a flawless finish and long-lasting wear.
+                    </p>
+                    <div class="review">
+                        <p><strong>Review:</strong> "Blends perfectly and stays on all day! My go-to foundation."</p>
+                        <div class="star-rating">
+                            <span style="color: gold; font-size: 1.2em;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                        </div>
+
+                        <a href="https://flickacosmetics.com/products/flawless-femme?srsltid=AfmBOopBuSPnEKQN_zweFWKahGCeyfytb-p6ILigpuly6xw_FByw_Kus"
+                            class="buy-now-btn">Buy Now</a>
+                    </div>
+                </div>
+
+                <!-- Makeup Product 2 -->
+                <div class="makeup-item">
+                    <img src="../images/m10.jpg" alt="Matte Lipstick">
+                    <h3>Velvet Matte Lipstick</h3>
+                    <p>
+                        A highly pigmented matte lipstick that provides intense color with a comfortable, non-drying
+                        feel.
+                    </p>
+                    <div class="review">
+                        <p><strong>Review:</strong> "Rich color and smooth application. Love how it lasts for hours!"
+                        </p>
+                        <div class="star-rating">
+                            <span style="color: gold; font-size: 1.2em;">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
+                        </div>
+
+                        <a href="https://swissbeauty.in/products/smooth-velvet-lipstick-matte-sb-202m?srsltid=AfmBOoohzIEDBmnAq9J6DE7LCAI_SCUGDEibIE-4Jw-4sigAcxPVhsJx"
+                            class="buy-now-btn">Buy Now</a>
+                    </div>
+                </div>
+
+                <!-- Makeup Product 3 -->
+                <div class="makeup-item">
+                    <img src="../images/m11.jpg" alt="Volumizing Mascara">
+                    <h3>Volumizing Mascara</h3>
+                    <p>
+                        A waterproof mascara that adds incredible volume and length without clumping or smudging.
+                    </p>
+                    <div class="review">
+                        <p><strong>Review:</strong> "Gives my lashes amazing volume and stays put all day!"</p>
+                        <div class="star-rating">
+                            <span style="color: gold; font-size: 1.2em;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                        </div>
+
+                        <a href="https://www.nykaa.com/volumizing-mascaras/c/4795" class="buy-now-btn">Buy Now</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <header>RELATED ARTICLES</header>
+    <section class="additional-grids">
+        <div class="grid-container">
+            <div class="grid-item">
+                <img src="../images/m12.jpg"
+                    alt="29 Makeup Essentials That Have Changed Our Lives">
+                <p><a href="https://www.elle.com/beauty/makeup-skin-care/g8/best-makeup-products-ever/">29
+                        Makeup Essentials That Have Changed Our Lives</a></p>
+            </div>
+            <div class="grid-item">
+                <img src="../images/m13.jpg" alt="Five festive beauty trends">
+                <p><a
+                        href="https://www.indiatoday.in/india-today-insight/story/five-festive-beauty-trends-2620125-2024-10-20">Discover
+                        Five Exciting and Trendsetting Beauty Looks That Will Sparkle and Shine Throughout the Festive
+                        Season, Bringing Glamour to Every Celebration!</a></p>
+            </div>
+            <div class="grid-item">
+                <img src="../images/m14.jpg" alt="The 15 Best Lip Glosses of All-Time">
+                <p><a href="https://www.harpersbazaar.com/beauty/makeup/g41613194/lip-gloss-for-women/">The
+                        15 Best Lip Glosses of All-Time</a></p>
+            </div>
+        </div>
+    </section>
+    <!-- Makeup FAQ Section -->
+    <section id="faq">
+        <h2>Frequently Asked Questions</h2>
+
+        <div class="faq-item">
+            <h3>How do I choose the right foundation shade?
+                <button class="toggle-btn">+</button>
+            </h3>
+            <p class="faq-answer">To find your perfect shade, test the foundation on your jawline in natural light. The
+                right shade should seamlessly blend into your skin tone.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>What is the best way to apply foundation?
+                <button class="toggle-btn">+</button>
+            </h3>
+            <p class="faq-answer">Use a damp beauty sponge for a natural finish, a brush for full coverage, or your
+                fingers for a lightweight look. Always blend well.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>How can I make my lipstick last longer?
+                <button class="toggle-btn">+</button>
+            </h3>
+            <p class="faq-answer">Exfoliate your lips, apply a lip primer or concealer, line your lips with a matching
+                lip liner, and use a matte or long-wearing lipstick.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>What’s the best way to remove makeup without damaging my skin?
+                <button class="toggle-btn">+</button>
+            </h3>
+            <p class="faq-answer">Use a gentle makeup remover or micellar water, followed by a mild cleanser. Avoid
+                scrubbing and always moisturize after cleansing.</p>
+        </div>
+
+    </section>
+    <script>
+        const slides = document.querySelector('.carousel-slides');
+        const totalSlides = slides.children.length;
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        let currentIndex = 0;
+
+        prevBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex === 0) ? totalSlides - 1 : currentIndex - 1;
+            updateCarousel();
+        });
+
+        nextBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex === totalSlides - 1) ? 0 : currentIndex + 1;
+            updateCarousel();
+        });
+
+        function updateCarousel() {
+            const offset = -currentIndex * 100;
+            slides.style.transform = `translateX(${offset}%)`;
+        }
+
+        // JavaScript to handle the dropdown toggle
+        const dropdowns = document.querySelectorAll('.dropdown');
+
+        dropdowns.forEach(dropdown => {
+            dropdown.addEventListener('click', function () {
+                const content = this.nextElementSibling;
+                content.style.display = content.style.display === 'block' ? 'none' : 'block';
+            });
+        });
+        // JS for horizontal slider
+        function showDetails(productId) {
+            document.getElementById('overlay').style.display = 'block';
+            document.getElementById(productId).style.display = 'block';
+        }
+
+        function closeDetails() {
+            document.getElementById('overlay').style.display = 'none';
+            document.querySelectorAll('.details').forEach(detail => {
+                detail.style.display = 'none';
+            });
+        }
+        // js for toggle function of FAQ'S
+        document.querySelectorAll('.toggle-btn').forEach(button => {
+            button.addEventListener('click', function () {
+                const answer = this.parentElement.nextElementSibling;
+                const isVisible = answer.style.display === 'block';
+                answer.style.display = isVisible ? 'none' : 'block';
+                this.textContent = isVisible ? '+' : '-';
+            });
+        });
+    </script>

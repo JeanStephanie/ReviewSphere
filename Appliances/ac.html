@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Air Conditioner</title>
+    <style>
+        * {
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f5f5f5;
+            text-align: center;
+        }
+
+        /* Header with top navigation */
+        header {
+            background-color: #00457c;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        header nav ul {
+            list-style-type: none;
+            display: flex;
+            justify-content: center;
+        }
+
+        header nav ul li {
+            margin: 0 15px;
+        }
+
+        header nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.1em;
+        }
+
+        header nav ul li a:hover {
+            color: #00bcd4;
+        }
+
+        /* style for explore category*/
+        section.explore-category {
+            background-color: white;
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        section.explore-category h2 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            letter-spacing: 1px;
+        }
+
+        .categories-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            justify-items: center;
+            padding: 0 20px;
+        }
+
+        .category-item {
+            background-color: #00457c;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            width: 450px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .category-item h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .category-item p {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+
+        .category-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .category-item img {
+            width: 100%;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            object-fit: cover;
+            height: 250px;
+            transition: transform 0.3s ease;
+        }
+
+        .category-item img:hover {
+            transform: scale(1.1);
+        }
+
+        /* Comaprison table styles*/
+        h2 {
+            color: #333;
+            text-align: center;
+        }
+
+        #comparison {
+            padding: 40px 20px;
+            background-color: #e9f5fb;
+            text-align: center;
+        }
+
+        #comparison h2 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            color: #00457c;
+        }
+
+        table {
+            width: 80%;
+            margin: 0 auto;
+            border-collapse: collapse;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        th,
+        td {
+            padding: 15px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #00457c;
+            color: white;
+        }
+
+        td {
+            background-color: #fff;
+        }
+
+        /* Hover effect */
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        /* styles fortop 3 ac's*/
+        h2 {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .product-cards {
+            display: flex;
+            gap: 50px;
+            justify-content: center;
+            margin-top: 50px;
+        }
+
+        .card {
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+        }
+
+        .card img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .card h3 {
+            font-size: 1.2em;
+            margin: 10px 0;
+        }
+
+        .card p {
+            font-size: 0.9em;
+            margin: 5px 0;
+        }
+
+        .card button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9em;
+        }
+
+        .card button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Centering the grid */
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        .product-cards {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            gap: 20px;
+        }
+
+        .card {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            width: calc(33.333% - 40px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .card img {
+            max-width: 100%;
+            height: 200px;
+            border-radius: 8px 8px 0 0;
+        }
+
+        .card h3 {
+            font-size: 1.25em;
+            color: #333;
+            margin-top: 10px;
+        }
+
+        .card p {
+            color: #666;
+            font-size: 0.95em;
+            margin: 10px 0;
+        }
+
+        .card a {
+            text-decoration: none;
+        }
+
+        .card button {
+            background-color: #00457c;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .card button:hover {
+            background-color: #00457c;
+        }
+
+        /* Suggested ac Section Styling */
+        .suggested-ac {
+            background-color: #f8f9fa;
+            padding: 50px 0;
+            text-align: center;
+        }
+
+        .suggested-ac .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .suggested-ac h2 {
+            font-size: 2em;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .suggested-ac p {
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .ac-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .ac-item {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            max-width: 350px;
+            text-align: left;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .ac-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .ac-item img {
+            width: 100%;
+            height: 200px;
+            border-radius: 10px;
+        }
+
+        .ac-item h3 {
+            font-size: 1.5em;
+            color: #222;
+            margin: 15px 0 10px;
+        }
+
+        .ac-item p {
+            color: #555;
+            font-size: 1em;
+            line-height: 1.5;
+        }
+
+        .review {
+            margin-top: 15px;
+        }
+
+        .review p {
+            font-style: italic;
+            color: #444;
+        }
+
+        .star-rating span {
+            font-size: 1.2em;
+        }
+
+        .buy-now-btn {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #00457c;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+        }
+
+        .buy-now-btn:hover {
+            background-color: #00457c;
+        }
+
+        /* Related Articles Section */
+        .article-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto;
+            padding: 20px;
+            max-width: 1200px;
+        }
+
+
+        .article-item {
+            background-color: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            padding: 15px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .article-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .article-item img {
+            width: auto;
+            height: 200px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .article-item p {
+            font-size: 1rem;
+            color: #333;
+            line-height: 1.5;
+        }
+
+        .article-item a {
+            text-decoration: none;
+            color: #0047ab;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .article-item a:hover {
+            color: #0056b3;
+        }
+
+        /* FAQ styles*/
+        #faq {
+            padding: 20px;
+            background-color: #f9f9f9;
+            text-align: center;
+        }
+
+        #faq h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .faq-item {
+            margin-bottom: 20px;
+        }
+
+        .faq-item h3 {
+            cursor: pointer;
+            padding: 10px;
+            background-color: white;
+            color: #002d72;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .faq-item p {
+            display: none;
+            padding: 10px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-top: none;
+            border-radius: 0 0 5px 5px;
+        }
+
+        .faq-item p.visible {
+            display: block;
+        }
+
+        .faq-answer {
+            display: none;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+        }
+
+        .toggle-btn {
+            margin-left: 10px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <h1>AIR CONDITIONER</h1>
+            <nav>
+                <ul>
+                    <li><a href="buyinguideAC.html">Buying Guide</a></li>
+                    <li><a href="../reviews.php">Reviews</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <!-- Explore by Category Section -->
+    <section class="explore-category">
+        <h2>EXPLORE BY CATEGORY</h2>
+
+        <div class="categories-container">
+            <div class="category-item">
+                <img src="../images/splitAC.jpg" alt="Split AC">
+                <h3>Split AC</h3>
+                <p>A split air conditioner consists of two main units: an indoor unit, which is placed inside the room,
+                    and an outdoor unit, which is installed outside the building. The indoor unit is responsible for
+                    cooling the air, while the outdoor unit houses the compressor, which helps expel heat. Split ACs are
+                    popular for their quiet operation, energy efficiency, and ability to provide effective cooling for
+                    individual rooms or space.</p>
+            </div>
+
+            <div class="category-item">
+                <img src="../images/windowAC.jpg" alt="Window AC">
+                <h3>Window AC</h3>
+                <p>A window air conditioner is a compact cooling unit designed to fit into a window frame. It houses
+                    all the components, including the compressor, evaporator, and condenser, in a single unit. The
+                    unit cools the air by drawing warm air from the room, passing it over a cooling coil, and then
+                    releasing the chilled air back into the room. Window ACs are generally more affordable and
+                    easier to install compared to split units, but they can be noisier.</p>
+            </div>
+
+            <div class="category-item">
+                <img src="../images/portableAC.jpg" alt="Portable AC">
+                <h3>Portable AC</h3>
+                <p>A portable air conditioner is a self-contained unit that can be moved easily from room to room.
+                    It typically features a hose that vents hot air out through a window or sliding door. These
+                    units combine cooling, dehumidifying, and fan functions in a single device, making them a
+                    versatile option for temporary or supplementary cooling. Portable ACs are ideal for small spaces
+                    or areas where permanent installations like window or split units are not feasible.</p>
+            </div>
+
+            <div class="category-item">
+                <img src="../images/inverterAC.jpg" alt="Inverter AC">
+                <h3>Inverter AC</h3>
+                <p>An inverter air conditioner uses a variable-speed compressor that adjusts its speed to maintain
+                    the desired temperature, making it more energy-efficient than traditional AC units. Unlike
+                    conventional models that turn the compressor on and off, inverter ACs continuously adjust the
+                    cooling output, resulting in less energy consumption and more consistent cooling. This type of
+                    air conditioner also operates more quietly and can cool the room faster. Inverter ACs are often
+                    considered a long-term investment due to their lower operational costs and better performance.</p>
+            </div>
+
+            <div class="category-item">
+                <img src="../images/cassetteAC.jpg" alt="Cassette AC">
+                <h3>Cassette AC</h3>
+                <p>A cassette air conditioner is a type of split AC that is installed in the ceiling, making it
+                    ideal for spaces where floor or wall-mounted units are impractical. It features a square or
+                    circular grille that disperses cool air evenly in all directions, providing more uniform cooling
+                    throughout the room. Cassette ACs are commonly used in commercial spaces like offices, retail
+                    stores, and hotels due to their discreet installation and ability to cool large areas. They are
+                    also quieter than many other AC types, as most components are hidden within the ceiling.</p>
+            </div>
+
+            <div class="category-item">
+                <img src="../images/ductedAC.jpg" alt="Ducted AC">
+                <h3>Ducted AC</h3>
+                <p>A ducted air conditioning system is a central cooling solution that uses a network of ducts to
+                    distribute cooled air throughout a building. It consists of an indoor unit, typically placed in
+                    the ceiling or basement, and an outdoor unit that houses the compressor. Ducted ACs offer
+                    efficient, even cooling for large spaces, as they can be connected to multiple rooms or zones.
+                    They are often chosen for their discreet installation, as the ducts are hidden within walls or
+                    ceilings, making them ideal for both residential and commercial properties.</p>
+            </div>
+        </div>
+    </section>
+    <h2>AIR CONDITIONER COMPARISONS</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Brand</th>
+                <th>Type</th>
+                <th>Capacity</th>
+                <th>Energy Efficiency</th>
+                <th>Key Features</th>
+                <th>Pros</th>
+                <th>Cons</th>
+                <th>Price Range</th>
+                <th>Warranty</th>
+                <th>Why do they stand out?</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Daikin</td>
+                <td>Split AC</td>
+                <td>1.5 Ton</td>
+                <td>5-Star</td>
+                <td>Inverter Technology, Anti-Bacterial Filter</td>
+                <td>Highly energy efficient, Silent operation</td>
+                <td>Higher initial cost</td>
+                <td>$700 - $1,000</td>
+                <td>10 Years on Compressor</td>
+                <td> Superior energy efficiency and long warranty period.</td>
+            </tr>
+            <tr>
+                <td>LG</td>
+                <td>Dual Inverter AC</td>
+                <td>1.5 Ton</td>
+                <td>4-Star</td>
+                <td>Wi-Fi Control, Air Purification</td>
+                <td>Smart features, Durable build</td>
+                <td>Moderately noisy at high speeds</td>
+                <td>$650 - $950</td>
+                <td>10 Years on Compressor, 1 Year on Product</td>
+                <td>Smart features and air purification make it a top choice for tech-savvy users.</td>
+            </tr>
+            <tr>
+                <td>Samsung</td>
+                <td>Split AC</td>
+                <td>1 Ton</td>
+                <td>3-Star</td>
+                <td>Digital Inverter, Fast Cooling</td>
+                <td>Compact design, Good for small rooms</td>
+                <td>Not ideal for large spaces</td>
+                <td>$500 - $800</td>
+                <td>5 Years on Compressor</td>
+                <td>Ideal for compact spaces with its sleek design and efficient cooling.</td>
+            </tr>
+            <tr>
+                <td>Blue Star</td>
+                <td>Window AC</td>
+                <td>1.5 Ton</td>
+                <td>3-Star</td>
+                <td>Turbo Cooling, Dust Filter</td>
+                <td>Affordable, Easy installation</td>
+                <td>Noisy operation</td>
+                <td>$400 - $700</td>
+                <td>5 Years on Compressor</td>
+                <td>Budget-friendly option with reliable performance.</td>
+            </tr>
+            <tr>
+                <td>Voltas</td>
+                <td>Split AC</td>
+                <td>2 Ton</td>
+                <td>4-Star</td>
+                <td>Inverter Compressor, Multi-Stage Filtration</td>
+                <td>Efficient cooling, Wide coverage</td>
+                <td>High power consumption</td>
+                <td>$750 - $1,200</td>
+                <td>5 Years on Compressor</td>
+                <td>Excellent for large spaces with wide coverage and powerful cooling.</td>
+            </tr>
+            <tr>
+                <td>Hitachi</td>
+                <td>Split AC</td>
+                <td>1.5 Ton</td>
+                <td>5-Star</td>
+                <td>Expandable Inverter, Auto-Filter Cleaning</td>
+                <td>Excellent performance, Advanced features</td>
+                <td>Expensive</td>
+                <td>$850 - $1,300</td>
+                <td>10 Years on Compressor</td>
+                <td>High-end option with cutting-edge technology and durability.</td>
+            </tr>
+        </tbody>
+    </table>
+    <!----Top 3 best AC's-->
+    <h2>TOP 3 BEST RATED AC'S</h2>
+    <div class="product-cards">
+        <div class="card">
+            <img src="../images/ac1.jpg" alt="Daikin AC">
+            <h3>Daikin FTKF Series</h3>
+            <p>The Daikin FTKF Series air conditioners are equipped with Streamer Technology and Filter Enzyme Blue +
+                PM2.5, which purify the air by neutralizing bacteria, viruses, and mold. They also feature a Mold Proof
+                function to prevent odors and mold inside the AC. The Inverter Technology ensures optimal power saving
+                with a CSPF power saving index as high as 5.38. The Coanda Airflow distributes air evenly throughout the
+                room, ensuring consistent cooling.</p>
+            <p><strong>Capacity:</strong> 1.5 Ton</p>
+            <p><strong>Energy Efficiency:</strong> 5-Star</p>
+            <a href="https://www.daikinindia.com/products-services/split-ac-residential/ftkf/5.2/ftkf">
+                <button>Buy Now</button></a>
+        </div>
+
+        <div class="card">
+            <img src="../images/ac2.jpg" alt="LG AC">
+            <h3>LG Dual Inverter</h3>
+            <p>The LG Dual Inverter air conditioners are known for their advanced cooling technology and energy
+                efficiency. They feature a Dual Inverter Compressor that provides faster, more powerful cooling while
+                being quieter and more durable. These models also come with AI Convertible 6-in-1 functionality,
+                allowing for various modes like cooling, heating, dehumidifying, and more. Additionally, they offer
+                UVnano and Plasmaster Ionizer+ technologies to keep the air clean and fresh.</p>
+            <p><strong>Capacity:</strong> 1.5 Ton</p>
+            <p><strong>Energy Efficiency:</strong> 4-Star</p>
+            <a href="https://www.lg.com/levant_en/air-conditioning-units/lg-s4-w18kl2mc">
+                <button>Buy Now</button></a>
+        </div>
+        <div class="card">
+            <img src="../images/ac3.jpg" alt="Hitachi AC">
+            <h3>Hitachi Expandable Inverter</h3>
+            <p>The Hitachi Expandable Inverter AC series offers powerful cooling with variable-speed compressor
+                technology, ensuring efficient energy use and consistent temperature control. These models come with
+                iSense activity sensors to detect movement and adjust cooling accordingly, and FrostWash technology for
+                self-cleaning. They also feature SuperFine Mesh Filters and Stainless Steel Coated Filters for improved
+                air quality, making them a reliable choice for year-round comfort.</p>
+            <p><strong>Capacity:</strong> 1.5 Ton</p>
+            <p><strong>Energy Efficiency:</strong> 5-Star</p>
+            <a href="https://buy.hitachiaircon.in/e-shop/viewall/Inverter-Split-Air-Conditioners">
+                <button>Buy Now</button></a>
+        </div>
+    </div>
+    <!-- Suggested AC Section -->
+    <section id="suggested-ac" class="suggested-ac">
+        <div class="container">
+            <h2>TOP SELLING AIR CONDITIONERS</h2>
+            <p>Explore the most in-demand air conditioners with expert reviews and ratings.</p>
+            <div class="ac-grid">
+                <!-- AC 1 -->
+                <div class="ac-item">
+                    <img src="../images/ac4.jpg" alt="LG Dual Inverter AC">
+                    <h3>LG Dual Inverter AC</h3>
+                    <p>
+                        A high-efficiency air conditioner with dual inverter technology, energy-saving features,
+                        and ultra-fast cooling for maximum comfort.
+                    </p>
+                    <div class="review">
+                        <p><strong>Review:</strong> "Super quiet and energy-efficient. Cools the room in no time!"</p>
+                        <div class="star-rating">
+                            <span style="color: gold; font-size: 1.2em;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                        </div>
+                        <a href="https://www.lg.com/levant_en/air-conditioning-units/lg-s4-w18kl2mc"
+                            class="buy-now-btn">Buy Now</a>
+                    </div>
+                </div>
+                <!-- AC 2 -->
+                <div class="ac-item">
+                    <img src="../images/ac5.jpg" alt="Samsung Wind-Free AC">
+                    <h3>Samsung Wind-Free AC</h3>
+                    <p>
+                        An advanced air conditioner with wind-free cooling technology, smart control features,
+                        and an energy-efficient design for comfortable living.
+                    </p>
+                    <div class="review">
+                        <p><strong>Review:</strong> "No direct airflow and super comfortable. A must-buy!"</p>
+                        <div class="star-rating">
+                            <span style="color: gold; font-size: 1.2em;">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
+                        </div>
+                        <a href="https://www.samsung.com/in/air-conditioners/all-air-conditioners/?wind-free=&srsltid=AfmBOoqBjQjMEIvt0vQCRsERVbgHi3XsxPvSslsIKBpug8U_Wv5u_R4g"
+                            class="buy-now-btn">Buy Now</a>
+                    </div>
+                </div>
+                <!-- AC 3 -->
+                <div class="ac-item">
+                    <img src="../images/ac6.jpg" alt="Daikin Split AC">
+                    <h3>Daikin Split AC</h3>
+                    <p>
+                        A reliable split air conditioner with superior cooling performance, air purification,
+                        and a sleek design for modern homes.
+                    </p>
+                    <div class="review">
+                        <p><strong>Review:</strong> "Powerful cooling and great air filtration. Highly recommended!"</p>
+                        <div class="star-rating">
+                            <span style="color: gold; font-size: 1.2em;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                        </div>
+                        <a href="https://www.mydaikinstore.com/en/splitac/Highest-ISEER-series/1.5-Ton-5-Star-Inverter-Split-AC-Copper-FTKF50U/FTKF50UV16T"
+                            class="buy-now-btn">Buy Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Related Articles Section -->
+    <header>RELATED ARTICLES</header>
+    <div class="article-grid">
+        <div class="article-item">
+            <img src="../images/ac7.jpg" alt="Best AC's in India">
+            <p><a
+                    href="https://www.hindustantimes.com/technology/best-ac-in-india-keep-the-heat-at-bay-with-top-10-models-from-lg-daikin-panasonic-and-more-101739781509093.html">Best
+                    AC in India in 2025: Keep the heat at bay with top 10 models from LG, Daikin, Panasonic and more</a>
+            </p>
+        </div>
+        <div class="article-item">
+            <img src="../images/ac8.jpg" alt="Top 23 best speaker brands on the market">
+            <p><a
+                    href="https://www.hindustantimes.com/technology/best-5-star-split-ac-in-india-top-9-high-efficiency-air-conditioners-to-save-energy-101714098830634.html">Best
+                    5 star split ACs in Feb 2025: Top 9 must
+                    have ACs for instant cooling and maximum energy savings</a></p>
+        </div>
+        <div class="article-item">
+            <img src="../images/ac9.jpg" alt="The best ac brands">
+            <p><a
+                    href="https://www.herzindagi.com/your-picks/home-solutions-electronics/best-ac-brands-in-india-for-the-year-powerful-and-efficient-cooling-solution-1784">Best
+                    AC Brands In India For 2025: Powerful And Efficient Cooling Solution</a>
+            </p>
+        </div>
+    </div>
+    <section id="faq">
+        <h2>FREQUENTLY ASKED QUESTIONS</h2>
+        <div class="faq-item">
+            <h3>How do I clean my air conditioner filter?
+                <button class="toggle-btn">+</button>
+            </h3>
+            <p class="faq-answer">Turn off the AC unit, carefully remove the filter, and rinse it under running water.
+                Let it air-dry completely before placing it back in the unit.</p>
+        </div>
+        <div class="faq-item">
+            <h3>Why is my air conditioner not cooling properly?
+                <button class="toggle-btn">+</button>
+            </h3>
+            <p class="faq-answer">This could be due to a dirty filter, low refrigerant levels, or a clogged condenser
+                coil. Regular maintenance or professional servicing can resolve this issue.</p>
+        </div>
+        <div class="faq-item">
+            <h3>What should I do if water is leaking from my air conditioner?
+                <button class="toggle-btn">+</button>
+            </h3>
+            <p class="faq-answer">Check for a clogged drain pipe or a frozen evaporator coil. Clean the drain pipe and
+                ensure proper airflow to prevent freezing.</p>
+        </div>
+        <div class="faq-item">
+            <h3>How often should I service my air conditioner?
+                <button class="toggle-btn">+</button>
+            </h3>
+            <p class="faq-answer">It's recommended to service your air conditioner at least once a year, ideally before
+                the summer season, to ensure optimal performance and efficiency.</p>
+        </div>
+        <div class="faq-item">
+            <h3>Can I install my air conditioner myself?
+                <button class="toggle-btn">+</button>
+            </h3>
+            <p class="faq-answer">While it’s possible, professional installation is highly recommended to ensure proper
+                setup, avoid damage, and validate warranty requirements.</p>
+        </div>
+
+    </section>
+    </main>
+
+    <script>
+        // Function to hide all sections
+        function hideSections() {
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                section.classList.remove('show');
+            });
+        }
+
+        // Function to show the clicked section
+        function showSection(sectionId) {
+            hideSections();
+            const section = document.getElementById(sectionId);
+            section.classList.add('show');
+        }
+
+        // Add event listeners to the navigation links
+        document.querySelectorAll('.nav-box a').forEach(link => {
+            link.addEventListener('click', function (event) {
+                event.preventDefault(); // Prevent default link behavior
+                const sectionId = this.getAttribute('href').substring(1); // Get the section ID from the link's href
+                showSection(sectionId); // Show the corresponding section
+            });
+        });
+        // js for toggle function of FAQ'S
+        document.querySelectorAll('.toggle-btn').forEach(button => {
+            button.addEventListener('click', function () {
+                const answer = this.parentElement.nextElementSibling;
+                const isVisible = answer.style.display === 'block';
+                answer.style.display = isVisible ? 'none' : 'block';
+                this.textContent = isVisible ? '+' : '-';
+            });
+        });
+    </script>
+</body>
+
+</html>

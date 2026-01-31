@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bedsheets</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 3px;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f5f5f5;
+            text-align: center;
+        }
+
+        header {
+            background: linear-gradient(to right, #00457c, #00457c);
+            color: white;
+            padding: 15px;
+            margin:0;
+            text-align: center;
+            position:relative;
+        }
+
+        header h1 {
+            color:white;
+            font-size: 2rem;
+            margin: 0;
+        }
+
+        header nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 1rem;
+            font-size: 1rem;
+        }
+
+        header nav a:hover {
+            color: #00bcd4;
+        }
+
+        .carousel {
+            position: relative;
+            overflow: hidden;
+            max-width: 100%;
+            height: 300px;
+            background: #ddd;
+        }
+
+        .carousel-images {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .carousel-images img {
+            width: 100%;
+            flex-shrink: 0;
+            height: 300px;
+            object-fit: contain;
+        }
+
+        .carousel-buttons {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+        }
+
+        .carousel-buttons button {
+            background: rgba(0, 0, 0, 0.5);
+            border: none;
+            color: white;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            font-size: 1.5rem;
+            border-radius: 5px;
+        }
+
+        .carousel-buttons button:hover {
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        .section {
+            padding: 3rem 2rem;
+            background: white;
+            margin: 2rem auto;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            max-width: 1200px;
+        }
+
+        .section h3 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+        }
+
+        /* Styles for types*/
+        .fade-in-section {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            padding: 2rem;
+        }
+
+        .fade-item {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .fade-item img {
+            width: 300px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .fade-item h3 {
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .fade-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /*Comparison styles*/
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        label {
+            font-size: 18px;
+            margin-bottom: 10px;
+            display: block;
+            color: #555;
+        }
+
+        select {
+            padding: 8px;
+            font-size: 16px;
+            width: 100%;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+
+        .comparison-box {
+            padding: 20px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .comparison-box p {
+            color: #555;
+            font-size: 18px;
+        }
+
+        /* Individual brand card */
+        .brand-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+            padding: 1.5rem;
+        }
+
+        .brand-card img {
+            width: 100%;
+            height: auto;
+            max-width: 200px;
+            margin-bottom: 1rem;
+            object-fit: contain;
+        }
+
+        .brand-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #00457c;
+        }
+
+        .brand-card p {
+            font-size: 1rem;
+            color: #666;
+        }
+
+        /* Hover effects */
+        .brand-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            .brand-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .brand-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Suggested bedsheets Section Styling */
+        .suggested-bed {
+            background-color: #f8f9fa;
+            padding: 50px 0;
+            text-align: center;
+        }
+
+        .suggested-bed .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .suggested-bed h2 {
+            font-size: 2em;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .suggested-bed p {
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .bed-grid {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .bed-item {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            max-width: 350px;
+            text-align: left;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .bed-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .bed-item img {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .bed-item h3 {
+            font-size: 1.5em;
+            color: #222;
+            margin: 15px 0 10px;
+        }
+
+        .bed-item p {
+            color: #555;
+            font-size: 1em;
+            line-height: 1.5;
+        }
+
+        .review {
+            margin-top: 15px;
+        }
+
+        .review p {
+            font-style: italic;
+            color: #444;
+        }
+
+        .star-rating span {
+            font-size: 1.2em;
+        }
+
+        .buy-now-btn {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #00457c;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+        }
+
+        .buy-now-btn:hover {
+            background-color: #00457c;
+        }
+
+
+        /* FAQ styles*/
+        #faq {
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+
+        #faq h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .faq-item {
+            margin-bottom: 20px;
+        }
+
+        .faq-item h3 {
+            cursor: pointer;
+            padding: 10px;
+            background-color: white;
+            color: #002d72;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .faq-item p {
+            display: none;
+            padding: 10px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-top: none;
+            border-radius: 0 0 5px 5px;
+        }
+
+        .faq-item p.visible {
+            display: block;
+        }
+
+        .faq-answer {
+            display: none;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+        }
+
+        .toggle-btn {
+            margin-left: 10px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>BEDSHEETS</h1>
+        <nav>
+            <a href="bgBedsheet.html">Buying Guide</a>
+            <a href="../reviews.php">Reviews</a>
+        </nav>
+    </header>
+
+    <section class="carousel">
+        <div class="carousel-images" id="carouselImages">
+            <img src="../images/bedsheet1.jpg" alt="Bedsheet 1">
+            <img src="../images/bedsheet2.jpg" alt="Bedsheet 2">
+            <img src="../images/bedsheet3.jpg" alt="Bedsheet 3">
+        </div>
+        <div class="carousel-buttons">
+            <button id="prevBtn">&#10094;</button>
+            <button id="nextBtn">&#10095;</button>
+        </div>
+    </section>
+
+    <!-----Types-->
+    <h1>TYPES OF BEDSHEETS</h1>
+    <section class="fade-in-section">
+        <div class="fade-item">
+            <img src="../images/bedsheet4.jpg" alt="Geometric Print">
+            <h3>Modern Geometric Print</h3>
+            <p>The Modern Geometric Print Bedsheet adds a bold, contemporary touch to any bedroom. Featuring dynamic
+                shapes and vibrant patterns, it creates an eye-catching focal point in the room. Made from high-quality,
+                durable fabric, it combines both style and comfort, ensuring a restful night’s sleep.Perfect for those
+                who love to embrace modern design, this bedsheet blends well with minimalistic and eclectic decor styles
+                alike. Whether you’re looking to refresh your space or make a statement, it’s the perfect choice for a
+                chic, modern bedroom.</p>
+        </div>
+        <div class="fade-item">
+            <img src="../images/bedsheet5.jpg" alt="Silk Bedsheet">
+            <h3>Luxury Silk Bedsheet</h3>
+            <p>Indulge in the ultimate comfort with the Luxury Silk Bedsheet, designed to elevate your bedroom into a
+                sanctuary of elegance. Made from premium silk, this bedsheet offers a smooth, lustrous texture that
+                feels incredibly soft against the skin. Its rich sheen and sophisticated design add a touch of opulence
+                to any room, making it perfect for creating a lavish atmosphere. The breathable fabric ensures comfort
+                year-round, keeping you cool in the summer and warm in the winter. Ideal for those seeking luxury and
+                refinement, it’s a perfect addition to any stylish bedroom.</p>
+        </div>
+        <div class="fade-item">
+            <img src="../images/bedsheet6.jpg" alt="Cotton Bedsheet">
+            <h3>Organic Cotton Bedsheet</h3>
+            <p>The Organic Cotton Bedsheet offers a natural, eco-friendly alternative without compromising on comfort.
+                Made from 100% organic cotton, it is free from harmful chemicals, providing a healthier option for your
+                skin and the environment. The soft, breathable fabric ensures a cool and comfortable sleep, making it
+                perfect for all seasons. Its durable and high-quality material ensures long-lasting use, while the
+                subtle, natural colors add a calming touch to your bedroom decor. Ideal for those who value
+                sustainability and quality, this bedsheet offers both luxury and peace of mind.</p>
+        </div>
+        <div class="fade-item">
+            <img src="../images/bedsheet7.jpg" alt="Bamboo Bedsheet">
+            <h3>Bamboo Bedsheet</h3>
+            <p>Bamboo Bedsheets are known for their eco-friendly properties and luxurious feel. Made from bamboo fibers,
+                they are naturally soft, breathable, and hypoallergenic, making them an ideal choice for those with
+                sensitive skin. The sheets are moisture-wicking, keeping you cool and comfortable throughout the night,
+                and they are also resistant to odors and bacteria. Bamboo fabric is durable and has a silky smooth
+                texture that provides a luxurious sleeping experience. Additionally, it’s an environmentally sustainable
+                option for those looking to reduce their carbon footprint.</p>
+        </div>
+        <div class="fade-item">
+            <img src="../images/bedsheet8.jpg" alt="Egyptian Cotton Bedsheet">
+            <h3>Egyptian Cotton Bedsheet</h3>
+            <p>Egyptian Cotton Bedsheets are renowned for their exceptional quality and luxurious feel. Made from
+                long-staple cotton fibers, they are incredibly soft, durable, and resistant to fraying. These sheets
+                have a smooth, silky texture that becomes even softer with each wash. Egyptian cotton is breathable,
+                helping to regulate body temperature, making it perfect for all seasons. The high thread count of
+                Egyptian cotton ensures a superior, long-lasting product, offering both comfort and elegance for your
+                bedroom.</p>
+        </div>
+        <div class="fade-item">
+            <img src="../images/bedsheet9.jpg" alt="Percale Cotton Bedsheets">
+            <h3>Percale Cotton Bedsheets</h3>
+            <p>Percale cotton bedsheets are made from a tightly woven fabric, known for its crisp, cool feel. The high
+                thread count results in a smooth, durable texture that offers a luxurious sleep experience. These sheets
+                are breathable, making them ideal for warmer climates or for those who prefer a cooler sleep surface.
+                Percale cotton is soft yet crisp, and with regular use, the fabric becomes even softer without losing
+                its fresh, cool feel. Its simple, timeless design adds an elegant touch to any bedroom.</p>
+        </div>
+    </section>
+    <div class="container">
+        <h1>BEDSHEET TYPES COMPARISON</h1>
+        <label for="bedsheetFilter">Choose a Bedsheet Type:</label>
+        <select id="bedsheetFilter" onchange="updateComparison()">
+            <option value="">Select...</option>
+            <option value="egyptianCotton">Egyptian Cotton</option>
+            <option value="bamboo">Bamboo</option>
+            <option value="linen">Linen</option>
+            <option value="microfiber">Microfiber</option>
+            <option value="satin">Satin</option>
+            <option value="silk">Silk</option>
+            <option value="percale">Percale</option>
+            <option value="flannel">Flannel</option>
+            <option value="jersey">Jersey</option>
+            <option value="tencel">Tencel (Lyocell)</option>
+        </select>
+
+        <div id="comparison" class="comparison-box">
+            <p>Select a bedsheet type to see the comparison details.</p>
+        </div>
+    </div>
+    <!---Brands-->
+    <section class="brand-section">
+        <h2>TOP BEDSHEET BRANDS</h2>
+        <div class="brand-grid">
+            <!-- Brooklinen Brand -->
+            <div class="brand-card">
+                <img src="../images/bedsheet10.jpg" alt="Brooklinen">
+                <h3>Brooklinen</h3>
+                <p>Brooklinen is renowned for offering luxury-quality bedding at a reasonable price. They have a wide
+                    variety of sheets, from their soft linen and percale cotton sheets to luxurious sateen options.
+                    Their sheets are highly praised for comfort, durability, and breathability.</p>
+            </div>
+            <!-- Parachute Brand -->
+            <div class="brand-card">
+                <img src="../images/bedsheet11.jpg" alt="Parachute">
+                <h3>Parachute</h3>
+                <p>Parachute is known for its premium, well-crafted linens and bedding. They focus on high-quality
+                    materials like Egyptian cotton, linen, and sateen. Their products are loved for their durability,
+                    soft feel, and chic, minimalist design.</p>
+            </div>
+            <!-- Frette Brand -->
+            <div class="brand-card">
+                <img src="../images/bedsheet12.jpg" alt="Frette">
+                <h3>Frette</h3>
+                <p>Frette is a luxury brand that offers ultra-high-end sheets, commonly seen in 5-star hotels around the
+                    world. Their products are made from the finest materials like Egyptian cotton and feature elegant,
+                    timeless designs. They are perfect for those seeking luxury, sophistication, and ultimate comfort.
+                </p>
+            </div>
+        </div>
+    </section>
+    <!-- Suggested Bedsheets Section -->
+    <section id="suggested-bed" class="suggested-bed">
+        <div class="container">
+            <h2>TOP SELLING BEDSHEETS</h2>
+            <p>Explore the most in-demand bedsheets with expert reviews and ratings.</p>
+            <div class="bed-grid">
+                <!-- Bedsheet 1 -->
+                <div class="bed-item">
+                    <img src="../images/bedsheet13.jpg" alt="Luxury Cotton Bedsheet" style="max-width: 500px; height: 200px;">
+                    <h3>Luxury Cotton Bedsheet</h3>
+                    <p>
+                        Made from 100% premium cotton, this soft and breathable bedsheet ensures a comfortable sleep.
+                        Available in various colors and patterns to match your style.
+                    </p>
+                    <div class="review">
+                        <p><strong>Review:</strong> "Super soft and feels amazing! The quality is top-notch."</p>
+                        <div class="star-rating">
+                            <span style="color: gold; font-size: 1.2em;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                        </div>
+                        <a href="https://bluedahlia.in/collections/luxury-bed-sheets?srsltid=AfmBOorOsPfpLdme155JhIrNKapOHehBn4zurVW4srv4HEmIqSxO0AuX"
+                            class="buy-now-btn">Buy Now</a>
+                    </div>
+                </div>
+                <!-- Bedsheet 2 -->
+                <div class="bed-item">
+                    <img src="../images/bedsheet14.jpg" alt="Microfiber Printed Bedsheet"
+                        style="max-width: 500px; height: 200px;">
+                    <h3>Microfiber Printed Bedsheet</h3>
+                    <p>
+                        This stylish microfiber bedsheet is wrinkle-resistant and fade-proof, making it perfect for
+                        everyday use.
+                        Comes in vibrant prints to brighten up any bedroom.
+                    </p>
+                    <div class="review">
+                        <p><strong>Review:</strong> "Bright colors and very comfortable. It doesn’t wrinkle at all!"</p>
+                        <div class="star-rating">
+                            <span style="color: gold; font-size: 1.2em;">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
+                        </div>
+                        <a href="https://www.urbanspacestore.in/collections/microfiber-bedsheet?srsltid=AfmBOooVwVnsSnMniQ784TiSXRF8c1lkllpIzt2dvEBJcz4YORPHKjIc"
+                            class="buy-now-btn">Buy Now</a>
+                    </div>
+                </div>
+                <!-- Bedsheet 3 -->
+                <div class="bed-item">
+                    <img src="../images/bedsheet15.jpg" alt="Silk Satin Bedsheet" style="max-width: 500px; height: 200px;">
+                    <h3>Silk Satin Bedsheet</h3>
+                    <p>
+                        Indulge in luxury with this smooth silk satin bedsheet that provides an ultra-soft and elegant
+                        feel.
+                        Perfect for a premium bedroom experience.
+                    </p>
+                    <div class="review">
+                        <p><strong>Review:</strong> "Feels luxurious and silky smooth. Highly recommend!"</p>
+                        <div class="star-rating">
+                            <span style="color: gold; font-size: 1.2em;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                        </div>
+                        <a href="https://www.seevo.in/products/satin-bedsheet?srsltid=AfmBOopNkdCl8OATkZJHdA_4uY09k7r4PeLpRiFpf9ksmj-SY33w3DJY"
+                            class="buy-now-btn">Buy Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="faq">
+        <h2>FREQUENTLY ASKED QUESTIONS</h2>
+
+        <div class="faq-item">
+            <h3>How often should I wash my bedsheets?
+                <button class="toggle-btn">+</button>
+            </h3>
+            <p class="faq-answer">It’s recommended to wash your bedsheets at least once a week to maintain hygiene and
+                remove sweat, dust, and allergens.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>What is the best material for bedsheets?
+                <button class="toggle-btn">+</button>
+            </h3>
+            <p class="faq-answer">Cotton is the most popular choice due to its softness and breathability. Other great
+                options include linen, bamboo, and microfiber, depending on your preference for comfort and durability.
+            </p>
+        </div>
+
+        <div class="faq-item">
+            <h3>How do I keep my bedsheets from fading?
+                <button class="toggle-btn">+</button>
+            </h3>
+            <p class="faq-answer">Wash your bedsheets in cold water with mild detergent, avoid excessive sunlight
+                exposure, and opt for a gentle cycle to preserve colors.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>What thread count is best for bedsheets?
+                <button class="toggle-btn">+</button>
+            </h3>
+            <p class="faq-answer">A thread count between 300-600 is ideal for softness and durability. Higher thread
+                counts are not always better and may reduce breathability.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>How do I prevent my bedsheets from wrinkling?
+                <button class="toggle-btn">+</button>
+            </h3>
+            <p class="faq-answer">Remove sheets from the dryer while slightly damp, smooth them out, or use
+                wrinkle-resistant fabric like microfiber or cotton blends.</p>
+        </div>
+
+    </section>
+    <script>
+        const carouselImages = document.getElementById('carouselImages');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        let currentIndex = 0;
+
+        const totalImages = carouselImages.children.length;
+
+        prevBtn.addEventListener('click', () => {
+        currentIndex = (currentIndex === 0) ? totalImages - 1 : currentIndex - 1;
+        updateCarousel();
+        });
+
+        nextBtn.addEventListener('click', () => {
+        currentIndex = (currentIndex === totalImages - 1) ? 0 : currentIndex + 1;
+        updateCarousel();
+        });
+
+        function updateCarousel() {
+        const offset = currentIndex * -100;
+        carouselImages.style.transform = `translateX(${offset}%)`;
+        }
+        {
+        const fadeItems = document.querySelectorAll('.fade-item');
+
+        function handleScroll() {
+            fadeItems.forEach(item => {
+            const rect = item.getBoundingClientRect();
+            if (rect.top < window.innerHeight && rect.bottom > 0) {
+                item.classList.add('visible');
+            }
+            });
+        }
+
+        window.addEventListener('scroll', handleScroll);
+        document.addEventListener('DOMContentLoaded', handleScroll);
+
+        }
+
+        function updateComparison() {
+        const sheetType = document.getElementById("bedsheetFilter").value;
+        const comparisonBox = document.getElementById("comparison");
+
+        const comparisons = {
+            egyptianCotton: `
+                <h2>Egyptian Cotton</h2>
+                <p><strong>Material:</strong> 100% Egyptian Cotton</p>
+                <p><strong>Comfort:</strong> Soft, smooth, breathable. Luxurious feel due to long fibers.</p>
+                <p><strong>Durability:</strong> Very durable. Long fibers result in stronger fabric.</p>
+                <p><strong>Care:</strong> Machine washable, gentle cycle. Tumble dry on low heat or air dry.</p>
+                <p><strong>Best For:</strong> Soft, smooth, breathable bedding that lasts long.</p>
+            `,
+            bamboo: `
+                <h2>Bamboo</h2>
+                <p><strong>Material:</strong> Bamboo fibers (rayon)</p>
+                <p><strong>Comfort:</strong> Silky smooth, soft, hypoallergenic, moisture-wicking, breathable.</p>
+                <p><strong>Durability:</strong> Durable, but requires more delicate care.</p>
+                <p><strong>Care:</strong> Machine wash in cold water, gentle cycle. Tumble dry low or air dry.</p>
+                <p><strong>Best For:</strong> Eco-friendly, hypoallergenic bedding.</p>
+            `,
+            linen: `
+                <h2>Linen</h2>
+                <p><strong>Material:</strong> Flax fibers</p>
+                <p><strong>Comfort:</strong> Crisp, cool, breathable. Natural temperature-regulating properties.</p>
+                <p><strong>Durability:</strong> Very durable, but prone to wrinkling. Needs gentle care.</p>
+                <p><strong>Care:</strong> Machine wash, gentle cycle. Air dry or tumble dry on low heat.</p>
+                <p><strong>Best For:</strong> Warm climates or anyone seeking natural cooling bedding.</p>
+            `,
+            microfiber: `
+                <h2>Microfiber</h2>
+                <p><strong>Material:</strong> Synthetic (Polyester)</p>
+                <p><strong>Comfort:</strong> Soft, lightweight, wrinkle-resistant, stain-resistant.</p>
+                <p><strong>Durability:</strong> Highly durable, though may degrade over time.</p>
+                <p><strong>Care:</strong> Machine washable in cold water. Tumble dry low heat.</p>
+                <p><strong>Best For:</strong> Budget-friendly, low-maintenance bedding.</p>
+            `,
+            satin: `
+                <h2>Satin</h2>
+                <p><strong>Material:</strong> Polyester, Silk, or Nylon</p>
+                <p><strong>Comfort:</strong> Smooth, glossy, luxurious feel, but can feel cool to the touch.</p>
+                <p><strong>Durability:</strong> Less durable than cotton or linen, requires delicate care.</p>
+                <p><strong>Care:</strong> Hand wash or machine wash on delicate. Avoid heat and bleach.</p>
+                <p><strong>Best For:</strong> Those seeking a shiny, luxurious feel.</p>
+            `,
+            silk: `
+                <h2>Silk</h2>
+                <p><strong>Material:</strong> Natural Silk fibers</p>
+                <p><strong>Comfort:</strong> Soft, smooth, hypoallergenic, cooling, luxurious feel.</p>
+                <p><strong>Durability:</strong> Less durable, requires extra care.</p>
+                <p><strong>Care:</strong> Hand wash or delicate cycle, cold water. Hang dry.</p>
+                <p><strong>Best For:</strong> Luxury seekers, those with sensitive skin or allergies.</p>
+            `,
+            percale: `
+                <h2>Percale</h2>
+                <p><strong>Material:</strong> Cotton or Cotton-blend</p>
+                <p><strong>Comfort:</strong> Crisp, cool, slightly stiff but softens over time. Feels fresh and breathable.</p>
+                <p><strong>Durability:</strong> Very durable with high-quality cotton.</p>
+                <p><strong>Care:</strong> Machine washable, gentle cycle. Avoid bleach and fabric softeners.</p>
+                <p><strong>Best For:</strong> Crisp, structured feel, ideal for warmer weather.</p>
+            `,
+            flannel: `
+                <h2>Flannel</h2>
+                <p><strong>Material:</strong> Cotton, usually brushed</p>
+                <p><strong>Comfort:</strong> Warm, cozy, fuzzy texture. Ideal for cold weather.</p>
+                <p><strong>Durability:</strong> Moderate, may wear out with frequent use.</p>
+                <p><strong>Care:</strong> Wash in cold water, low heat drying to prevent pilling.</p>
+                <p><strong>Best For:</strong> Cozy warmth during colder months.</p>
+            `,
+            jersey: `
+                <h2>Jersey</h2>
+                <p><strong>Material:</strong> Knit Cotton or Cotton-blend</p>
+                <p><strong>Comfort:</strong> Soft, stretchy, t-shirt-like fabric, relaxed feel.</p>
+                <p><strong>Durability:</strong> Durable, but may stretch over time with use.</p>
+                <p><strong>Care:</strong> Machine wash warm water, tumble dry low.</p>
+                <p><strong>Best For:</strong> Casual, comfortable bedding, easy maintenance.</p>
+            `,
+            tencel: `
+                <h2>Tencel (Lyocell)</h2>
+                <p><strong>Material:</strong> Wood pulp (usually eucalyptus)</p>
+                <p><strong>Comfort:</strong> Soft, silky, breathable, moisture-wicking, eco-friendly.</p>
+                <p><strong>Durability:</strong> Durable, resistant to wrinkles.</p>
+                <p><strong>Care:</strong> Machine wash, gentle cycle. Tumble dry on low or air dry.</p>
+                <p><strong>Best For:</strong> Eco-conscious individuals looking for smooth, breathable bedding.</p>
+            `
+        };
+
+        comparisonBox.innerHTML = comparisons[sheetType] || "<p>Select a bedsheet type to see the comparison details.</p>";
+        }
+
+        // js for toggle function of FAQ'S
+        document.querySelectorAll('.toggle-btn').forEach(button => {
+        button.addEventListener('click', function () {
+            const answer = this.parentElement.nextElementSibling;
+            const isVisible = answer.style.display === 'block';
+            answer.style.display = isVisible ? 'none' : 'block';
+            this.textContent = isVisible ? '+' : '-';
+        });
+        });
+    </script>
+</body>
+
+</html>

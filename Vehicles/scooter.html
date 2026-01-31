@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scooters</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        header {
+            background: linear-gradient(90deg, #002d72, #002d72);
+            color: white;
+            padding: 5px;
+            text-align: center;
+            position: relative;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            text-transform: uppercase;
+        }
+
+        header p {
+            margin: 5px 0 0;
+            font-size: 1.2em;
+            font-weight: 300;
+        }
+
+        nav {
+            background-color: #002d72;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 15px 0;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #00bcd4;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 80px 20px;
+            background: url('https://via.placeholder.com/1200x500') no-repeat center center/cover;
+            color: black;
+        }
+
+        .hero h2 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero p {
+            font-size: 1.5em;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .categories {
+            text-align: center;
+            margin: 40px 20px;
+        }
+
+        .categories h2 {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        .categories a {
+            display: inline-block;
+            margin: 10px;
+            padding: 15px 25px;
+            background-color: #0047ab;
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .categories a:hover {
+            background-color: #0056d6;
+        }
+
+        .features {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-evenly;
+            padding: 40px 20px;
+            background-color: #eef3fc;
+        }
+
+        .feature-card {
+            background-color: white;
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px;
+            flex: 1 1 calc(30% - 40px);
+            max-width: 300px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        .feature-card h3 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+
+        .comparison {
+            background-color: #f9f9f9;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .comparison h2 {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        .comparison-table {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            border-collapse: collapse;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            border: 1px solid #ddd;
+            padding: 10px 15px;
+            text-align: left;
+        }
+
+        .comparison-table th {
+            background-color: #0047ab;
+            color: white;
+            font-weight: bold;
+        }
+
+        .comparison-table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .comparison-table th {
+            top: 0;
+        }
+
+
+        /* Grid*/
+        .brands-grid {
+            text-align: center;
+            margin: 40px 20px;
+        }
+
+
+        .grid-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-evenly;
+            gap: 20px;
+        }
+
+        .grid-item {
+            flex: 1 1 45%;
+            background-color: #f9f9f9;
+            border-radius: 12px;
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            margin: 10px;
+        }
+
+        .scooter-card {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            /* Adds spacing between items */
+        }
+
+        .scooter-content {
+            display: flex;
+            flex-direction: column;
+            /* Ensures text stacks vertically */
+            gap: 5px;
+        }
+
+        .scooter-card h4 {
+            color: #002d72;
+            margin-bottom: 8px;
+        }
+
+        .scooter-card p {
+            margin: 5px 0;
+        }
+
+        .scooter-card img {
+            width: 100px !important;
+            /*Adding !important ensures that this rule overrides any other styles.*/
+            height: 80px !important;
+            object-fit: cover;
+            border-radius: 6px;
+            display: block;
+            margin-top: 10px;
+        }
+
+        /* Suggested scooter Section Styling */
+        .suggested-scooter {
+            background-color: #f8f9fa;
+            padding: 50px 0;
+            text-align: center;
+        }
+
+        .suggested-scooter .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .suggested-scooter h2 {
+            font-size: 2em;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .suggested-scooter p {
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .scooter-grid {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .scooter-item {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            max-width: 350px;
+            text-align: left;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .scooter-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .scooter-item img {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .scooter-item h3 {
+            font-size: 1.5em;
+            color: #222;
+            margin: 15px 0 10px;
+        }
+
+        .scooter-item p {
+            color: #555;
+            font-size: 1em;
+            line-height: 1.5;
+        }
+
+        .review {
+            margin-top: 15px;
+        }
+
+        .review p {
+            font-style: italic;
+            color: #444;
+        }
+
+        .star-rating span {
+            font-size: 1.2em;
+        }
+
+        .buy-now-btn {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #00457c;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+        }
+
+        .buy-now-btn:hover {
+            background-color: #00457c;
+        }
+
+        /* css for grids*/
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .grid-item {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .grid-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .grid-item img {
+            width: 100%;
+            height: auto;
+            margin-bottom: 15px;
+            border-radius: 10px;
+        }
+
+        .grid-item p {
+            font-size: 1em;
+            color: #00457c;
+        }
+
+        .grid-item p a {
+            text-decoration: none;
+            color: #0047ab;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .grid-item p a:hover {
+            color: #00457c;
+        }
+
+        /* FAQ styles*/
+        #faq {
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+
+        #faq h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .faq-item {
+            margin-bottom: 20px;
+        }
+
+        .faq-item h3 {
+            cursor: pointer;
+            padding: 10px;
+            background-color: white;
+            color: #002d72;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .faq-item p {
+            display: none;
+            padding: 10px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-top: none;
+            border-radius: 0 0 5px 5px;
+        }
+
+        .faq-item p.visible {
+            display: block;
+        }
+
+        .faq-answer {
+            display: none;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+        }
+
+        .toggle-btn {
+            margin-left: 10px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1> Scooters</h1>
+        <p>Experience the Future of Urban and Classic Mobility</p>
+    </header>
+
+    <nav>
+        <a href="buyinguideSc.html">Buying Guide </a>
+        <a href="../reviews.php">Reviews</a>
+    </nav>
+
+    <section class="hero" id="home">
+        <h2>Stylish. Smart. Reliable.</h2>
+        <p>Discover the perfect ride with electric and non-electric scooters designed for every lifestyle.</p>
+    </section>
+
+    <section class="categories" id="categories">
+        <h2>SCOOTER CATEGORIES</h2>
+        <a href="#electric">Electric Scooters</a>
+        <a href="#non-electric">Non-Electric Scooters</a>
+    </section>
+
+    <section class="features" id="electric">
+        <h2>ELECTRIC SCOOTERS</h2>
+        <div class="feature-card">
+            <h3>Long Battery Life</h3>
+            <p>Enjoy a range of up to 90km on a single charge.</p>
+        </div>
+        <div class="feature-card">
+            <h3>Eco-Friendly</h3>
+            <p>Zero emissions and noiseless operation.</p>
+        </div>
+        <div class="feature-card">
+            <h3>Smart Connectivity</h3>
+            <p>Stay connected with real-time app integration.</p>
+        </div>
+    </section>
+
+    <section class="features" id="non-electric">
+        <h2>NON-ELECTRIC SCOOTERS</h2>
+        <div class="feature-card">
+            <h3>High Performance</h3>
+            <p>Experience unmatched power and speed.</p>
+        </div>
+        <div class="feature-card">
+            <h3>Durability</h3>
+            <p>Built to last with premium materials.</p>
+        </div>
+        <div class="feature-card">
+            <h3>Rider Comfort</h3>
+            <p>Designed for a smooth and comfortable ride.</p>
+        </div>
+    </section>
+
+    <section class="comparison" id="comparison">
+        <h2>ELECTRIC vs NON-ELECTRIC SCOOTERS</h2>
+        <table class="comparison-table">
+            <tr>
+                <th>Feature</th>
+                <th>Electric Scooters</th>
+                <th>Non-Electric Scooters</th>
+            </tr>
+            <tr>
+                <td>Performance</td>
+                <td>High torque, suitable for urban commuting.</td>
+                <td>Higher speed, suitable for long-distance travel.</td>
+            </tr>
+            <tr>
+                <td>Environmental Impact</td>
+                <td>Zero emissions, eco-friendly.</td>
+                <td>Produces emissions, less eco-friendly.</td>
+            </tr>
+            <tr>
+                <td>Cost</td>
+                <td>Higher upfront cost, but lower running cost.</td>
+                <td>Lower upfront cost, higher fuel cost.</td>
+            </tr>
+            <tr>
+                <td>Maintenance</td>
+                <td>Low maintenance due to fewer moving parts.</td>
+                <td>Regular maintenance needed for engine and parts.</td>
+            </tr>
+            <tr>
+                <td>Fuel</td>
+                <td>Powered by electricity, needs charging.</td>
+                <td>Runs on petrol or diesel, needs refueling.</td>
+            </tr>
+            <tr>
+                <td>Range</td>
+                <td>Can travel distances between 10–50 miles (16–80 km) on a single charge, depending on battery size,
+                    terrain, and weight.</td>
+                <td>The range depends on the rider's endurance, as it’s powered entirely by leg effort.</td>
+            </tr>
+            <tr>
+                <td>Safety</td>
+                <td> Can reach higher speeds, making accidents potentially more dangerous if not careful, especially if
+                    riders aren’t wearing safety gear.</td>
+                <td>Slower speeds generally make them less risky, but balance and control are essential, especially for
+                    beginners.</td>
+            </tr>
+            <tr>
+                <td>Battery Life</td>
+                <td> Battery life degrades over time, meaning you’ll eventually need to replace the battery (typically
+                    after 1-3 years).</td>
+                <td>No battery to worry about, so no concerns over battery degradation.</td>
+            </tr>
+        </table>
+    </section>
+    <section class="comparison" id="brands">
+        <h2>TOP SCOOTER BRANDS, MODELS, AND PRICES</h2>
+        <table class="comparison-table">
+            <tr>
+                <th>Scooter Type</th>
+                <th>Brand</th>
+                <th>Model</th>
+                <th>Price (INR)</th>
+            </tr>
+            <tr>
+                <td>Electric</td>
+                <td>Ola</td>
+                <td>S1 Pro Gen 2</td>
+                <td>₹1,34,999</td>
+            </tr>
+            <tr>
+                <td>Electric</td>
+                <td>Ather</td>
+                <td>450X Gen 3</td>
+                <td>₹1,42,646 – ₹1,57,046</td>
+            </tr>
+            <tr>
+                <td>Electric</td>
+                <td>Hero Electric</td>
+                <td>Optima CX</td>
+                <td>₹83,300 – ₹1,04,360</td>
+            </tr>
+            <tr>
+                <td>Electric</td>
+                <td>TVS</td>
+                <td>iQube ST</td>
+                <td>₹1,20,000+</td>
+            </tr>
+            <tr>
+                <td>Electric</td>
+                <td>Bajaj</td>
+                <td>Chetak</td>
+                <td>₹1,50,000+</td>
+            </tr>
+            <tr>
+                <td>Non-Electric</td>
+                <td>Honda</td>
+                <td>Activa 6G</td>
+                <td>₹74,536 – ₹80,537</td>
+            </tr>
+            <tr>
+                <td>Non-Electric</td>
+                <td>TVS</td>
+                <td>Jupiter</td>
+                <td>₹69,990 – ₹85,246</td>
+            </tr>
+            <tr>
+                <td>Non-Electric</td>
+                <td>Suzuki</td>
+                <td>Access 125</td>
+                <td>₹77,600 – ₹87,200</td>
+            </tr>
+            <tr>
+                <td>Non-Electric</td>
+                <td>Yamaha</td>
+                <td>Fascino 125</td>
+                <td>₹76,600 – ₹87,830</td>
+            </tr>
+            <tr>
+                <td>Non-Electric</td>
+                <td>Hero</td>
+                <td>Maestro Edge 125</td>
+                <td>₹77,196 – ₹85,948</td>
+            </tr>
+        </table>
+    </section>
+    <section class="brands-grid" id="top-brands">
+        <h2>TOP RATED SCOOTER'S</h2>
+        <div class="grid-container">
+            <!-- Electric Scooters -->
+            <div class="grid-item">
+                <h3>ELECTRIC SCOOTERS</h3>
+                <div class="scooter-card">
+                    <h4>Ola Electric</h4>
+                    <p><strong>Model:</strong> Ola S1 Pro Gen 2</p>
+                    <p><strong>Price:</strong> ₹1,34,999</p>
+                    <p>Long range, app connectivity, multiple riding modes.</p>
+                    <img src="../images/scooter1.jpg" alt="Ola S1 Pro">
+                </div>
+                <div class="scooter-card">
+                    <h4>Ather Energy</h4>
+                    <p><strong>Model:</strong> Ather 450X Gen 3</p>
+                    <p><strong>Price:</strong> ₹1,42,646 – ₹1,57,046</p>
+                    <p>Fast charging, smart dashboard, powerful motor.</p>
+                    <img src="../images/scooter2.jpg" alt="ather energy">
+                </div>
+                <div class="scooter-card">
+                    <h4>TVS</h4>
+                    <p><strong>Model:</strong> TVS iQube ST</p>
+                    <p><strong>Price:</strong> ₹1,20,000+</p>
+                    <p>Sleek design, advanced connectivity, long battery life.</p>
+                    <img src="../images/scooter3.jpg" alt="tvs">
+                </div>
+            </div>
+
+            <!-- Non-Electric Scooters -->
+            <div class="grid-item">
+                <h3>NON-ELECTRIC SCOOTER</h3>
+                <div class="scooter-card">
+                    <h4>Honda</h4>
+                    <p><strong>Model:</strong> Activa 6G</p>
+                    <p><strong>Price:</strong> ₹74,536 – ₹80,537</p>
+                    <p>Reliable performance, excellent resale value, smooth ride.</p>
+                    <img src="../images/scooter4.jpg" alt="honda">
+                </div>
+                <div class="scooter-card">
+                    <h4>TVS</h4>
+                    <p><strong>Model:</strong> TVS Jupiter</p>
+                    <p><strong>Price:</strong> ₹69,990 – ₹85,246</p>
+                    <p>Efficient engine, comfortable design, high fuel efficiency.</p>
+                    <img src="../images/scooter5.jpg" alt="tvs">
+                </div>
+                <div class="scooter-card">
+                    <h4>Suzuki</h4>
+                    <p><strong>Model:</strong> Suzuki Access 125</p>
+                    <p><strong>Price:</strong> ₹77,600 – ₹87,200</p>
+                    <p>Smooth handling, premium build, good mileage.</p>
+                    <img src="../images/scooter6.jpg" alt="suzuki">
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Suggested scooter Section -->
+    <section id="suggested-scooter" class="suggested-scooter">
+        <div class="container">
+            <h2>TOP-SELLING SCOOTERS</h2>
+            <p>Explore the most in-demand scooters with expert reviews and ratings.</p>
+            <div class="scooter-grid">
+                <!-- Scooter 1 -->
+                <div class="scooter-item">
+                    <img src="../images/scooter4.jpg" alt="Honda Activa 6G" style="max-width: 500px; height:200px;">
+                    <h3>Honda Activa 6G</h3>
+                    <p>
+                        India's best-selling scooter, offering excellent mileage, smooth performance, and superior
+                        reliability.
+                    </p>
+                    <div class="review">
+                        <p><strong>Review:</strong> "Best in class mileage and smooth ride experience!"</p>
+                        <div class="star-rating">
+                            <span style="color: gold; font-size: 1.2em;">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
+                        </div>
+                        <br>
+                        <a href="https://www.honda2wheelersindia.com/activa/" class="buy-now-btn">Buy Now</a>
+                    </div>
+                </div>
+                <!-- Scooter 2 -->
+                <div class="scooter-item">
+                    <img src="../images/scooter5.jpg" alt="TVS Jupiter" style="max-width: 100%; height: auto;">
+                    <h3>TVS Jupiter</h3>
+                    <p>
+                        A powerful and fuel-efficient scooter designed for comfortable city commuting and long rides
+                        alike.
+                    </p>
+                    <div class="review">
+                        <p><strong>Review:</strong> "Reliable, stylish, and economical. A great choice for daily use!"
+                        </p>
+                        <div class="star-rating">
+                            <span style="color: gold; font-size: 1.2em;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                        </div>
+
+                        <a href="https://www.tvsmotor.com/tvs-jupiter/jupiter-disc-smartxonnect" class="buy-now-btn">Buy
+                            Now</a>
+                    </div>
+                </div>
+                <!-- Scooter 3 -->
+                <div class="scooter-item">
+                    <img src="../images/scooter1.jpg" alt="Ola S1 Pro" style="max-width: 500px; height: 200px;">
+                    <h3>Ola S1 Pro</h3>
+                    <p>
+                        A revolutionary electric scooter with high-tech features, impressive range, and eco-friendly
+                        performance.
+                    </p>
+                    <div class="review">
+                        <p><strong>Review:</strong> "Futuristic design and smooth ride. The best EV scooter in the
+                            market!"</p>
+                        <div class="star-rating">
+                            <span style="color: gold; font-size: 1.2em;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                        </div>
+                        <br>
+                        <a href="https://www.olaelectric.com/s1-pro" class="buy-now-btn">Buy Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <header>RELATED ARTICLES</header>
+    <div class="grid-container">
+        <div class="grid-item">
+            <img src="../images/scooter7.jpg" alt=" Best mileage scooter">
+            <p><a
+                    href="https://zeenews.india.com/top-deals/automobiles/top-5-scooters-for-every-commuter-in-2024-2781628.html">Best
+                    Mileage Scooter: These 3 scooters offer best mileage, price under 1 lakh.</a></p>
+        </div>
+        <div class="grid-item">
+            <img src="../images/scooter8.jpg" alt="Top 5 most powerful petrol scooters in India">
+            <p><a
+                    href="https://www.financialexpress.com/auto/bike-news/top-5-most-powerful-petrol-scooters-in-india/3590551/">Top
+                    5 most powerful petrol scooters in India.</a>
+            </p>
+        </div>
+        <div class="grid-item">
+            <img src="../images/scooter9.jpg" alt="India's 4 best electric scooters">
+            <p><a
+                    href="https://www.timesbull.com/autos/bikes/indias-4-best-electric-scooters-price-range-and-features-details-book-now-219.html">India's
+                    4 best electric scooters.</a>
+            </p>
+        </div>
+        <section id="faq">
+            <h2>FREQUENTLY ASKED QUESTIONS</h2>
+            <div class="faq-item">
+                <h3>How often should I service my scooter?
+                    <button class="toggle-btn">+</button>
+                </h3>
+                <p class="faq-answer">It is recommended to service your scooter every 3,000-5,000 km or as advised in
+                    the owner's manual. Regular servicing ensures better performance and longevity.</p>
+            </div>
+            <div class="faq-item">
+                <h3>What type of fuel should I use for my scooter?
+                    <button class="toggle-btn">+</button>
+                </h3>
+                <p class="faq-answer">Most scooters run on unleaded petrol. Check your scooter's manual for the
+                    recommended fuel type to ensure optimal performance.</p>
+            </div>
+            <div class="faq-item">
+                <h3>Why is my scooter not starting?
+                    <button class="toggle-btn">+</button>
+                </h3>
+                <p class="faq-answer">Common reasons include a dead battery, clogged carburetor, or fuel issues. Check
+                    the battery and fuel levels before troubleshooting further.</p>
+            </div>
+            <div class="faq-item">
+                <h3>How can I improve my scooter’s mileage?
+                    <button class="toggle-btn">+</button>
+                </h3>
+                <p class="faq-answer">Maintain proper tire pressure, avoid sudden acceleration, and get regular
+                    servicing to maximize fuel efficiency.</p>
+            </div>
+        </section>
+
+        </main>
+        <script>
+            // js for toggle function of FAQ'S
+            document.querySelectorAll('.toggle-btn').forEach(button => {
+                button.addEventListener('click', function () {
+                    const answer = this.parentElement.nextElementSibling;
+                    const isVisible = answer.style.display === 'block';
+                    answer.style.display = isVisible ? 'none' : 'block';
+                    this.textContent = isVisible ? '+' : '-';
+                });
+            });
+
+        </script>
+</body>
+
+</html>

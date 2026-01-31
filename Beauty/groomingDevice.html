@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grooming</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background: linear-gradient(90deg, #002d72, #002d72);
+            color: white;
+            padding: 5px;
+            text-align: center;
+            position: relative;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            text-transform: uppercase;
+        }
+
+        header p {
+            margin: 5px 0 0;
+            font-size: 1.2em;
+            font-weight: 300;
+        }
+
+        nav {
+            background-color: #002d72;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #00bcd4;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 80px 20px;
+            background: url('https://via.placeholder.com/1200x500') no-repeat center center/cover;
+            color: black;
+        }
+
+        .hero h2 {
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 1.5em;
+        }
+
+        /* Carousel vd*/
+        .carousel {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            background: #000;
+            margin-top: 20px;
+        }
+
+        .carousel-container {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .carousel-item {
+            min-width: 100%;
+            text-align: center;
+        }
+
+        .carousel-item img,
+        .carousel-item video {
+            width: 100%;
+            height: auto;
+        }
+
+        .prev,
+        .next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.5);
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .prev {
+            left: 10px;
+        }
+
+        .next {
+            right: 10px;
+        }
+
+
+        /* Types Section */
+        #types {
+            padding: 40px 20px;
+            background-color: #e9f5fb;
+            text-align: center;
+        }
+
+        #types h2 {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        .types-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            /* Creates 4 equal columns */
+            gap: 20px;
+            justify-items: center;
+            padding: 20px;
+        }
+
+        .type-card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+            max-width: 250px;
+            transition: transform 0.3s;
+        }
+
+        .type-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .type-card h3 {
+            margin-bottom: 10px;
+            color: #00457c;
+        }
+
+        .shop-now {
+            display: block;
+            margin: 10px 0;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+
+        /* Comparison Table Styles */
+        #comparison {
+            padding: 40px 20px;
+            background-color: #e9f5fb;
+            text-align: center;
+        }
+
+        #comparison h2 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            color: #00457c;
+        }
+
+        table {
+            width: 80%;
+            margin: 0 auto;
+            border-collapse: collapse;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        th,
+        td {
+            padding: 15px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #00457c;
+            color: white;
+        }
+
+        td {
+            background-color: #fff;
+        }
+
+        /* Hover effect */
+        tr:hover {
+            background-color: #f1f1f1;
+
+        }
+
+        /* styles for top products*/
+        .container {
+            width: 90%;
+            margin: 30px auto;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .product-card {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .product-card img {
+            width: 90%;
+            height: 300px;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+
+        .product-card h3 {
+            font-size: 18px;
+            color: #333;
+            margin-top: 15px;
+        }
+
+        .product-card p {
+            color: #777;
+            font-size: 14px;
+            margin: 10px 0;
+        }
+
+        .product-card .price {
+            font-size: 16px;
+            color: #e74c3c;
+            font-weight: bold;
+        }
+
+        .product-card .purchase-btn {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .product-card .purchase-btn:hover {
+            background-color: #2980b9;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 900px) {
+            .grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Styles for the new grid section */
+        .additional-grids {
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        .additional-grids h2 {
+            font-size: 2.5em;
+            margin-bottom: 30px;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            /* 3 columns */
+            gap: 20px;
+            justify-items: center;
+        }
+
+        .grid-item {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 320px;
+            /* Keeps items from getting too wide */
+            transition: transform 0.3s ease;
+        }
+
+        .grid-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .grid-item img {
+            width: 100%;
+            height: 200px;
+            border-radius: 8px;
+        }
+
+        .grid-item p {
+            margin-top: 15px;
+            font-size: 1.1em;
+        }
+
+        .grid-item a {
+            text-decoration: none;
+            color: #003366;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .grid-item a:hover {
+            color: #00bcd4;
+        }
+
+        /* Suggested grooming device Section Styling */
+        .suggested-groom {
+            background-color: #f8f9fa;
+            padding: 50px 0;
+            text-align: center;
+        }
+
+        .suggested-groom .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .suggested-groom h2 {
+            font-size: 2em;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .suggested-groom p {
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .groom-grid {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .groom-item {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            max-width: 350px;
+            text-align: left;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .groom-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .groom-item img {
+            width: 100%;
+            height: 300px;
+            border-radius: 10px;
+        }
+
+        .groom-item h3 {
+            font-size: 1.5em;
+            color: #222;
+            margin: 15px 0 10px;
+        }
+
+        .groom-item p {
+            color: #555;
+            font-size: 1em;
+            line-height: 1.5;
+        }
+
+        .review {
+            margin-top: 15px;
+        }
+
+        .review p {
+            font-style: italic;
+            color: #444;
+        }
+
+        .star-rating span {
+            font-size: 1.2em;
+        }
+
+        .buy-now-btn {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #00457c;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+        }
+
+        .buy-now-btn:hover {
+            background-color: #00457c;
+        }
+
+        /* Styles for the new grid section */
+        .additional-grids {
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        .additional-grids h2 {
+            font-size: 2.5em;
+            margin-bottom: 30px;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            /* 3 columns */
+            gap: 20px;
+            justify-items: center;
+        }
+
+        .grid-item {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 320px;
+            /* Keeps items from getting too wide */
+            transition: transform 0.3s ease;
+        }
+
+        .grid-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .grid-item img {
+            width: 100%;
+            height: 200px;
+            border-radius: 8px;
+        }
+
+        .grid-item p {
+            margin-top: 15px;
+            font-size: 1.1em;
+        }
+
+        .grid-item a {
+            text-decoration: none;
+            color: #003366;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .grid-item a:hover {
+            color: #00bcd4;
+        }
+
+        /* FAQ styles*/
+        #faq {
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+
+        #faq h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .faq-item {
+            margin-bottom: 20px;
+        }
+
+        .faq-item h3 {
+            cursor: pointer;
+            padding: 10px;
+            background-color: white;
+            color: #002d72;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .faq-item p {
+            display: none;
+            padding: 10px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-top: none;
+            border-radius: 0 0 5px 5px;
+        }
+
+        .faq-item p.visible {
+            display: block;
+        }
+
+        .faq-answer {
+            display: none;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+        }
+
+        .toggle-btn {
+            margin-left: 10px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        /* FAQ styles*/
+        #faq {
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+
+        #faq h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .faq-item {
+            margin-bottom: 20px;
+        }
+
+        .faq-item h3 {
+            cursor: pointer;
+            padding: 10px;
+            background-color: white;
+            color: #002d72;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .faq-item p {
+            display: none;
+            padding: 10px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-top: none;
+            border-radius: 0 0 5px 5px;
+        }
+
+        .faq-item p.visible {
+            display: block;
+        }
+
+        .faq-answer {
+            display: none;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+        }
+
+        .toggle-btn {
+            margin-left: 10px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>GROOMING DEVICES</h1>
+        <nav>
+            <a href="buyinguidegrooming.html">Buying Guide </a>
+            <a href="../reviews.php">Reviews</a>
+        </nav>
+    </header>
+    <section class="hero" id="home">
+        <h2>Comfortable. Gentle. Powerful.</h2>
+        <p>Experience the perfect grooming solution with devices that are comfortable to use, gentle on your skin, and
+            powerful enough to deliver exceptional results.</p>
+    </section>
+    <!---Carousel Video-->
+    <section class="carousel">
+        <div class="carousel-container">
+            <div class="carousel-item active">
+                <video src="../video/groomingDevice.mp4" autoplay muted loop></video>
+            </div>
+        </div>
+    </section>
+
+    <!-- Types Section -->
+    <section id="types">
+        <h2>Types of Grooming Devices</h2>
+        <div class="types-container">
+            <div class="type-card">
+                <h3>Hair Removal Devices</h3>
+                <img src="../images/g1.jpg" alt="Hair Removal Device"
+                    style="width:100%; height:200px; border-radius:10px; margin-bottom:15px;">
+                <p>Hair removal devices cater to various preferences and skin types. Traditional razors and electric
+                    shavers provide quick and convenient results but require frequent use. Epilators, which pull hair
+                    from the root, offer longer-lasting smoothness, though the process can be a bit uncomfortable. IPL
+                    (Intense Pulsed Light) devices use light pulses to target hair follicles, reducing hair growth over
+                    time and offering a more permanent solution, albeit at a higher cost. It's important to consider
+                    your pain tolerance and budget when choosing a hair removal device to find the
+                    best fit for your needs.</p>
+                <a href="https://www.ulike.com/products/sapphire-air-3-ipl-hair-removal?srsltid=AfmBOorTbH94--hcAy4gfGMCnJkkODYot9eFtoOsoTVRrqXyOv7nduHQ"
+                    class="shop-now">Shop Now</a>
+            </div>
+            <div class="type-card">
+                <h3>Facial Grooming Devices</h3>
+                <img src="../images/g2.jpg" alt="Hair Removal Device"
+                    style="width:100%; height:200px; border-radius:10px; margin-bottom:15px;">
+                <p>Facial grooming devices are essential tools for maintaining a polished and radiant appearance. They
+                    cater to various grooming needs, including trimming, exfoliating, and cleansing. Designed to be
+                    gentle on the skin, these devices often come with multiple attachments for different tasks, ensuring
+                    versatility. Features like LED lights for precision and multiple speed settings enhance their
+                    usability. Compact and travel-friendly, they are perfect for maintaining your grooming routine on
+                    the go, providing a convenient and efficient solution.</p>
+                <a href="https://in.braun.com/en-in/male-grooming/stylers-and-trimmers/beard-trimmer/beard-trimmer-bt9420"
+                    class="shop-now">Shop Now</a>
+            </div>
+            <div class="type-card">
+                <h3>Oral Care Devices</h3>
+                <img src="../images/g3.jpg" alt="Hair Removal Device"
+                    style="width:100%; height:200px; border-radius:10px; margin-bottom:15px;">
+                <p>Oral care devices are integral for maintaining top-notch dental hygiene. These include electric
+                    toothbrushes, water flossers, and teeth whitening kits, each designed to remove plaque, prevent gum
+                    disease, and enhance oral health. Equipped with advanced technology, these devices often feature
+                    multiple cleaning modes, built-in timers, and pressure sensors to ensure a thorough and effective
+                    clean. They promote healthier gums and whiter teeth, making them essential tools for a radiant smile
+                    and optimal dental care.</p>
+                <a href="https://oralb.com/en-us/products/more-products/water-flosser/water-flosser-advanced-portable-oral-irrigator-handle/"
+                    class="shop-now">Shop Now</a>
+            </div>
+            <div class="type-card">
+                <h3>Skin and Body care Devices</h3>
+                <img src="../images/g4.jpg" alt="Hair Removal Device"
+                    style="width:100%; height:200px; border-radius:10px; margin-bottom:15px;">
+                <p>Skin and body care devices are designed to enhance personal grooming routines by providing advanced
+                    care and treatment for the skin and body. These devices include items such as massagers, exfoliation
+                    tools, and body brushes, each serving specific functions to improve skin texture, stimulate blood
+                    circulation, and promote overall skin health. They often feature adjustable settings, various
+                    attachments, and ergonomic designs to cater to different needs and preferences, making them
+                    essential tools for comprehensive self-care.
+                    <a href="https://shop.panasonic.com/products/body-hair-groomer-adjustable-length-settings?srsltid=AfmBOoqNGnJBFfMARkBLgB3_mIaw5-UL9aGB4uOII3o1mlBLhbYvfkVp"
+                        class="shop-now">Shop Now</a>
+                </p>
+            </div>
+            <div class="type-card">
+                <h3>Nail Care Devices</h3>
+                <img src="../images/g5.jpg" alt="Hair Removal Device"
+                    style="width:100%; height:200px; border-radius:10px; margin-bottom:15px;">
+                <p>
+                    Nail care devices are indispensable tools for achieving well-groomed and healthy nails. They
+                    encompass a range of tools, including nail trimmers, electric nail files, cuticle pushers, and nail
+                    dryers, each tailored to offer precise and efficient nail maintenance. These devices typically
+                    feature multiple speed settings, ergonomic designs, and interchangeable attachments to cater to
+                    various nail care needs. They allow for the smooth shaping, polishing, and care of nails, preventing
+                    common issues like breakage and uneven edges. </p>
+                <a href="https://www.amazon.in/SS-107-Stainless-Steel-Toenail-Clipper/dp/B000F37UNM"
+                    class="shop-now">Shop Now</a>
+            </div>
+            <div class="type-card">
+                <h3>Beard and Mustache Grooming Devices</h3>
+                <img src="../images/g6.jpg" alt="Hair Removal Device"
+                    style="width:100%; height:200px; border-radius:10px; margin-bottom:15px;">
+                <p>Beard and mustache grooming devices are specifically designed to help you achieve a sharp and
+                    well-defined look. These devices include beard trimmers, electric shavers, and detail trimmers, each
+                    offering precise control and various length settings. With ergonomic grips, long battery life, and
+                    washable attachments, they provide a convenient and efficient way to maintain facial hair. Whether
+                    you're aiming for a clean shave or a stylish beard, these tools are essential for any grooming
+                    routine.</p>
+                <a href="https://www.amazon.in/Philips-OneBlade-Electric-QP6530-70/dp/B08T37X4SP" class="shop-now">Shop
+                    Now</a>
+            </div>
+        </div>
+    </section>
+    <!-- Grooming Devices Comparison Table -->
+    <section id="comparison">
+        <h2>Grooming Devices Description</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Product Category</th>
+                    <th>Specifications</th>
+                    <th>Features</th>
+                    <th>Pros</th>
+                    <th>Cons</th>
+                    <th>Why It's the Best</th>
+                    <th>Price Range</th>
+                    <th>Warranty/Guarantee</th>
+                    <th>Compatibility</th>
+                    <th>Cleaning/Maintenance</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Hair Removal -->
+                <tr>
+                    <td>Hair Removal</td>
+                    <td>Battery operated, multiple speed settings, LED light for precision</td>
+                    <td>Painless, quick results, works on different skin types</td>
+                    <td>Convenient, no salon trips, suitable for sensitive skin</td>
+                    <td>May cause skin irritation if not used properly, limited battery life</td>
+                    <td>Perfect for at-home use with long-lasting smoothness</td>
+                    <td>$40 - $100</td>
+                    <td>1-year warranty</td>
+                    <td>All skin types</td>
+                    <td>Clean blades after every use, replace batteries as needed</td>
+                </tr>
+
+                <!-- Facial Grooming -->
+                <tr>
+                    <td>Facial Grooming</td>
+                    <td>Compact size, ergonomic handle, hypoallergenic blades</td>
+                    <td>Gentle on skin, removes peach fuzz, shapes eyebrows</td>
+                    <td>Portable, precise, quick facial touch-ups</td>
+                    <td>Frequent use may dull blades, some models need regular charging</td>
+                    <td>Ideal for quick, easy grooming without irritation or cuts</td>
+                    <td>$20 - $70</td>
+                    <td>6-month warranty</td>
+                    <td>Sensitive and normal skin</td>
+                    <td>Wipe with a dry cloth, replace blades periodically</td>
+                </tr>
+
+                <!-- Oral Care -->
+                <tr>
+                    <td>Oral Care</td>
+                    <td>Rechargeable, multi-mode brushing, timer for brushing intervals</td>
+                    <td>Whitening, gum care, plaque control, pressure sensors</td>
+                    <td>Improves oral hygiene, dentist-recommended, customizable settings</td>
+                    <td>Expensive, requires charging, brush heads need replacement</td>
+                    <td>Effective for cleaner teeth and healthier gums compared to manual brushing</td>
+                    <td>$50 - $150</td>
+                    <td>2-year warranty</td>
+                    <td>All dental types</td>
+                    <td>Replace brush heads every 3 months, clean after use</td>
+                </tr>
+
+                <!-- Skin & Body Care -->
+                <tr>
+                    <td>Skin & Body Care</td>
+                    <td>Waterproof, adjustable intensity, multiple attachments</td>
+                    <td>Exfoliates, massages, improves circulation</td>
+                    <td>Multi-functional, safe for sensitive skin, spa-like experience</td>
+                    <td>May cause redness if used too often, attachment can wear out</td>
+                    <td>Helps achieve smoother, softer skin and improves circulation</td>
+                    <td>$60 - $120</td>
+                    <td>1-year warranty</td>
+                    <td>All skin types</td>
+                    <td>Wash attachments after each use, store in a clean, dry place</td>
+                </tr>
+
+                <!-- Nail Care -->
+                <tr>
+                    <td>Nail Care</td>
+                    <td>Rotating head, multiple attachments (file, buff, polish)</td>
+                    <td>File, buff, shine nails, remove dead skin around cuticles</td>
+                    <td>Compact, easy to use, good for at-home manicure/pedicure</td>
+                    <td>Requires some time to master technique, battery life limitations</td>
+                    <td>Convenient for salon-quality nail care in the comfort of your home</td>
+                    <td>$25 - $80</td>
+                    <td>6-month warranty</td>
+                    <td>All nail types</td>
+                    <td>Clean attachments after use, replace batteries as needed</td>
+                </tr>
+
+                <!-- Beard & Mustache Care -->
+                <tr>
+                    <td>Beard & Mustache Care</td>
+                    <td>Multi-length settings, stainless steel blades, cordless</td>
+                    <td>Trims, shapes, and styles beards and mustaches</td>
+                    <td>Precise cuts, easy to clean, great for maintaining facial hair</td>
+                    <td>Needs regular charging, may require more maintenance for thick beards</td>
+                    <td>Ensures a polished and well-groomed look with minimal effort</td>
+                    <td>$30 - $90</td>
+                    <td>1-year warranty</td>
+                    <td>All hair types</td>
+                    <td>Oil blades occasionally, clean after every use</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <div class="container">
+        <h2>Top Grooming Devices</h2>
+
+        <div class="grid">
+            <!-- Product 1 -->
+            <div class="product-card">
+                <img src="../images/g7.jpg" alt="Hair Removal Device">
+                <h3>Hair Removal Device</h3>
+                <p>Effective for permanent hair removal with 5 energy levels and LCD display.</p>
+                <a href="https://www.philips.com/c-p/BRI945_00/lumea-prestige-ipl-hair-removal-device"
+                    class="purchase-btn">Buy Now</a>
+            </div>
+
+            <!-- Product 2 -->
+            <div class="product-card">
+                <img src="../images/g8.jpg" alt="Beard Trimmer">
+                <h3>Beard Trimmer X100</h3>
+                <p>Precision trimming with 20 length settings and long-lasting battery.</p>
+                <a href="https://www.amazon.in/Philips-Norelco-Multigroom-attachments-MG7750/dp/B07145GM4B"
+                    class="purchase-btn">Buy Now</a>
+            </div>
+
+            <!-- Product 3 -->
+            <div class="product-card">
+                <img src="../images/g9.jpg" alt="Electric Toothbrush">
+                <h3>Electric Toothbrush </h3>
+                <p>Multiple brushing modes with a pressure sensor and 2-week battery life.</p>
+                <a href="https://oralb.com/en-us/products/electric-toothbrushes/oral-b-io-series-9-rechargeable-electric-toothbrush-rose-quartz/"
+                    class="purchase-btn">Buy Now</a>
+            </div>
+
+            <!-- Product 4 -->
+            <div class="product-card">
+                <img src="../images/g10.jpg" alt="Facial Hair Remover">
+                <h3>Facial Hair Remover </h3>
+                <p>Compact and hypoallergenic device for gentle removal of facial hair.</p>
+                <a href="https://www.nykaa.com/flawless-facial-hair-remover/p/305174" class="purchase-btn">Buy Now</a>
+            </div>
+        </div>
+    </div>
+    <!-- Suggested Grooming Devices Section -->
+    <section id="suggested-groom" class="suggested-groom">
+        <div class="container">
+            <h2>TOP-SELLING GROOMING DEVICES</h2>
+            <p>Explore the most in-demand grooming devices with expert reviews and ratings.</p>
+            <div class="groom-grid">
+
+                <!-- Grooming Device 1 -->
+                <div class="groom-item">
+                    <img src="../images/g11.jpg" alt="Electric Beard Trimmer">
+                    <h3>Electric Beard Trimmer</h3>
+                    <p>
+                        A high-precision trimmer with multiple length settings for a clean, sharp look.
+                        Designed for smooth and irritation-free grooming.
+                    </p>
+                    <div class="review">
+                        <p><strong>Review:</strong> "Cuts smoothly and lasts long. A must-have for grooming!"</p>
+                        <div class="star-rating">
+                            <span style="color: gold; font-size: 1.2em;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                        </div>
+                        <a href="https://www.shop.philips.co.in/beard-trimmer" class="buy-now-btn">Buy Now</a>
+                    </div>
+                </div>
+
+                <!-- Grooming Device 2 -->
+                <div class="groom-item">
+                    <img src="../images/g12.jpg" alt="Professional Hair Dryer">
+                    <h3>Professional Hair Dryer</h3>
+                    <p>
+                        A powerful yet lightweight hair dryer with adjustable heat settings and ionic technology
+                        for frizz-free, salon-quality results.
+                    </p>
+                    <div class="review">
+                        <p><strong>Review:</strong> "Dries hair quickly without damage. Great for styling!"</p>
+                        <div class="star-rating">
+                            <span style="color: gold; font-size: 1.2em;">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
+                        </div>
+                        <a href="https://www.amazon.in/Hair-Dryers/b?ie=UTF8&node=1374351031" class="buy-now-btn">Buy Now</a>
+                    </div>
+                </div>
+
+                <!-- Grooming Device 3 -->
+                <div class="groom-item">
+                    <img src="../images/g13.jpg" alt="Rechargeable Electric Shaver">
+                    <h3>Rechargeable Electric Shaver</h3>
+                    <p>
+                        Experience a close and comfortable shave with this cordless, waterproof electric shaver.
+                        Ideal for daily grooming with minimal effort.
+                    </p>
+                    <div class="review">
+                        <p><strong>Review:</strong> "Glides smoothly and provides a close shave without irritation!"</p>
+                        <div class="star-rating">
+                            <span style="color: gold; font-size: 1.2em;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                        </div>
+                        <a href="https://www.amazon.in/Electric-Shavers/b?ie=UTF8&node=1374647031" class="buy-now-btn">Buy Now</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <header>RELATED ARTICLES</header>
+    <section class="additional-grids">
+        <div class="grid-container">
+            <div class="grid-item">
+                <img src="../images/g14.jpg"
+                    alt="The 8 best new grooming gadgets you need in your life">
+                <p><a
+                        href="https://www.bing.com/ck/a?!&&p=569587b39da93bbd7942731556f55645e07699c981cf0227ebd7a213cc2c75d0JmltdHM9MTczNzY3NjgwMA&ptn=3&ver=2&hsh=4&fclid=3c6a6b46-3eb7-66fa-0ca3-7e223f056728&psq=recent+good+news+on+grooming+device+products&u=a1aHR0cHM6Ly93d3cuZ3EuY29tLmF1L2dyb29taW5nL2d1aWRlcy9ncm9vbWluZy1nYWRnZXRzL2ltYWdlLWdhbGxlcnkvZWZiYjg1Yzg1NzZlMDQ0M2E4NGYxZjk5OTgwYTQwODM&ntb=1">The
+                        8 best new grooming gadgets you need in your life</a></p>
+            </div>
+            <div class="grid-item">
+                <img src="../images/g15.jpg" alt="15 Best Trimmers for Women">
+                <p><a
+                        href="https://www.bing.com/ck/a?!&&p=bd849f88275c86c4178b81cebdb2576e44b18f96183b6bab8d7028d416c25109JmltdHM9MTczNzY3NjgwMA&ptn=3&ver=2&hsh=4&fclid=3c6a6b46-3eb7-66fa-0ca3-7e223f056728&psq=recent+good+news+on+grooming+device+brands+womens&u=a1aHR0cHM6Ly9oYXBweWNyZWRpdC5pbi9ibG9nL2Jlc3QtdHJpbW1lci1mb3Itd29tZW4v&ntb=1">15
+                        Best Trimmers for Women</a></p>
+            </div>
+            <div class="grid-item">
+                <img src="../images/g16.jpg"
+                    alt="The 5 Best Body Groomers and Pubic Hair Trimmers for Men">
+                <p><a
+                        href="https://www.nykaa.com/beauty-blog/how-to-choose-the-right-straightener-for-your-hair-type/">The
+                        How to choose the right hair straightener</a></p>
+            </div>
+        </div>
+        <section id="faq">
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq-item">
+                <h3>Are grooming devices safe for sensitive skin?
+                    <button class="toggle-btn">+</button>
+                </h3>
+                <p class="faq-answer">Yes, many grooming devices are designed to be safe for sensitive skin. Look for
+                    hypoallergenic blades and adjustable settings.</p>
+            </div>
+            <div class="faq-item">
+                <h3>How often should I clean my grooming device?
+                    <button class="toggle-btn">+</button>
+                </h3>
+                <p class="faq-answer">It is recommended to clean your grooming device after every use to maintain
+                    hygiene and prolong its lifespan.</p>
+            </div>
+            <div class="faq-item">
+                <h3>What should I do if my device stops working?
+                    <button class="toggle-btn">+</button>
+                </h3>
+                <p class="faq-answer">First, check if the device needs charging or if the batteries need replacement. If
+                    it still doesn't work, refer to the warranty details for repair or replacement.</p>
+            </div>
+            <div class="faq-item">
+                <h3>Can I use the same device for multiple purposes?
+                    <button class="toggle-btn">+</button>
+                </h3>
+                <p class="faq-answer">Some devices come with interchangeable attachments, allowing them to serve
+                    multiple purposes like trimming, exfoliating, or massaging.</p>
+            </div>
+        </section>
+
+        <script>
+            let currentIndex = 0;
+
+            function moveSlide(direction) {
+                const slider = document.querySelector('.slider');
+                const slides = document.querySelectorAll('.slide');
+                const totalSlides = slides.length;
+
+                // Update the current index
+                currentIndex = (currentIndex + direction + totalSlides) % totalSlides;
+
+                // Move the slider
+                slider.style.transform = `translateX(-${currentIndex * 100}%)`;
+            }
+            function showProduct(category, event) {
+                // Prevent the default action of the anchor tag (scrolling to top)
+                event.preventDefault();
+
+                // Hide all product sections
+                const sections = document.querySelectorAll('.product-section');
+                sections.forEach(section => section.style.display = 'none');
+
+                // Show the selected category section
+                const selectedSection = document.getElementById(category);
+                selectedSection.style.display = 'block';
+            }
+            // parallax scrolling
+            document.addEventListener("DOMContentLoaded", function () {
+                const deviceElements = document.querySelectorAll('.device');
+
+                function checkScroll() {
+                    const triggerBottom = window.innerHeight / 5 * 4;
+
+                    deviceElements.forEach(device => {
+                        const deviceTop = device.getBoundingClientRect().top;
+
+                        if (deviceTop < triggerBottom) {
+                            device.classList.add('show');
+                        } else {
+                            device.classList.remove('show');
+                        }
+                    });
+                }
+
+                window.addEventListener('scroll', checkScroll);
+                checkScroll(); // Initial call
+            });
+            // js for toggle function of FAQ'S
+            document.querySelectorAll('.toggle-btn').forEach(button => {
+                button.addEventListener('click', function () {
+                    const answer = this.parentElement.nextElementSibling;
+                    const isVisible = answer.style.display === 'block';
+                    answer.style.display = isVisible ? 'none' : 'block';
+                    this.textContent = isVisible ? '+' : '-';
+                });
+            });
+        </script>
+
+</body>
+
+</html>

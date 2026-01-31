@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width: device-width, initial-scale=1.0">
+    <title>Skincare</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: #00457c;
+            color: white;
+            padding: 5px;
+            text-align: center;
+            position: relative;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            text-transform: uppercase;
+        }
+
+        header p {
+            margin: 5px 0 0;
+            font-size: 1.2em;
+            font-weight: 300;
+        }
+
+        nav {
+            background-color: #00457c;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #00bcd4;
+        }
+
+        .banner-container {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            background-image: url('../images/skincare.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .banner-container .overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: black;
+            font-size: 2rem;
+            text-transform: uppercase;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .banner-container:hover .overlay {
+            opacity: 1;
+        }
+
+        /* styles for grids */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .grid-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            text-align: center;
+            padding: 10px;
+        }
+
+        .grid-card:hover {
+            transform: scale(1.05);
+        }
+
+        .grid-card img {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .grid-card h3 {
+            font-size: 1.5em;
+            margin: 15px 0;
+        }
+
+        .grid-card p {
+            font-size: 1em;
+            color: #777;
+            margin: 0 15px 15px;
+        }
+
+        /* button styling */
+        .grid-card button {
+            padding: 10px 20px;
+            background-color: #00457c;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s ease;
+        }
+
+        .grid-card button:hover {
+            background-color: #00bcd4;
+        }
+
+        /* Comparison table container */
+        .comparison-table h2 {
+            text-align: center;
+            color: #000;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .table-wrapper {
+            max-width: 80%;
+            margin: 0 auto;
+            overflow-x: auto;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            padding: 10px;
+            margin-bottom: 20px;
+            background-color: #f9f9f9;
+        }
+
+        /* Table styles */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #00457c;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        /* Product comparison container */
+        /* comparison between 2 brand products*/
+
+        h1 {
+            margin: 0;
+            font-size: 2.5em;
+            text-transform: uppercase;
+        }
+
+        .comparison-container {
+            padding: 40px;
+            margin: 0 auto;
+            width: 90%;
+        }
+
+        .product-comparison {
+            margin-bottom: 40px;
+        }
+
+        .product-comparison h2 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            color: #002d72;
+            text-align: center;
+        }
+
+        .product {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            width: 45%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+            vertical-align: top;
+            margin: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .product:hover {
+            transform: translateY(-10px);
+        }
+
+        .product h3 {
+            font-size: 1.5em;
+            color: #002d72;
+            margin-bottom: 10px;
+        }
+
+        .product img {
+            width: 250px;
+            height: 250px;
+            object-fit: contain;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .product p {
+            font-size: 1em;
+            line-height: 1.5;
+            margin: 10px 0;
+        }
+
+        /* Suggested Skincare Section */
+        .skincare-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .skincare-item {
+            background-color: #ffffff;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            justify-content: center;
+            text-align: center;
+            transition: transform 0.3s ease;
+            max-width: 500px;
+        }
+
+        .skincare-item:hover {
+            transform: translateY(-3px);
+        }
+
+        .skincare-item img {
+            width: 200px;
+            height: 200px;
+            border-radius: 5px;
+        }
+
+        .skincare-item h3 {
+            font-size: 1.2em;
+            color: #002d72;
+            margin-top: 8px;
+        }
+
+        .skincare-item p {
+            font-size: 0.9em;
+            color: #555;
+            margin-top: 8px;
+        }
+
+
+        /* Review section */
+        .review {
+            margin-top: 10px;
+        }
+
+        .star-rating {
+            margin-top: 5px;
+        }
+
+        .buy-now-btn {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #00457c;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .buy-now-btn:hover {
+            background-color: #00bcd4;
+        }
+
+        /* Styles for the related articles section */
+        .additional-grids {
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        .additional-grids h2 {
+            font-size: 2.5em;
+            margin-bottom: 30px;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            /* 3 columns */
+            gap: 20px;
+            justify-items: center;
+        }
+
+        .grid-item {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 320px;
+            /* Keeps items from getting too wide */
+            transition: transform 0.3s ease;
+        }
+
+        .grid-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .grid-item img {
+            width: 100%;
+            height: 200px;
+            border-radius: 8px;
+        }
+
+        .grid-item p {
+            margin-top: 15px;
+            font-size: 1.1em;
+        }
+
+        .grid-item a {
+            text-decoration: none;
+            color: #003366;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .grid-item a:hover {
+            color: #00bcd4;
+        }
+
+        /* FAQ styles*/
+        #faq {
+            padding: 20px;
+            background-color: #f9f9f9;
+            text-align: center;
+        }
+
+        #faq h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .faq-item {
+            margin-bottom: 20px;
+        }
+
+        .faq-item h3 {
+            cursor: pointer;
+            padding: 10px;
+            background-color: white;
+            color: #002d72;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .faq-item p {
+            display: none;
+            padding: 10px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-top: none;
+            border-radius: 0 0 5px 5px;
+        }
+
+        .faq-item p.visible {
+            display: block;
+        }
+
+        .faq-answer {
+            display: none;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+        }
+
+        .toggle-btn {
+            margin-left: 10px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Skincare</h1>
+        <nav>
+            <a href="buyinguideskin.html">Buying Guide </a>
+            <a href="../reviews.php">Reviews</a>
+        </nav>
+    </header>
+
+    <!-- Carousel -->
+    <div class="banner-container">
+        <div class="overlay">Amazing Skincare Awaits You</div>
+    </div>
+
+    <div class="grid-container">
+        <!-- Grid Cards -->
+        <div class="grid-card">
+            <img src="../images/cleanser.jpg" alt="Product 1">
+            <h3>Cleansers</h3>
+            <p>Cleansers remove dirt, oil, and impurities, leaving the skin clean and refreshed without stripping its natural moisture.</p>
+            <a href="https://www.instyle.com/best-face-wash-6892278"><button>Learn More</button></a>
+        </div>
+
+        <div class="grid-card">
+            <img src="../images/toner.jpg" alt="Product 2">
+            <h3>Toners</h3>
+            <p>Toners help remove residual impurities, balance skin's pH, and prepare it for better absorption of moisturizers or serums.</p>
+            <a href="https://www.glamour.com/gallery/best-toners"><button>Learn More</button></a>
+        </div>
+
+        <div class="grid-card">
+            <img src="../images/exfoliater.jpg" alt="Product 3">
+            <h3>Exfoliators</h3>
+            <p>Exfoliators remove dead skin cells, unclog pores, and promote smoother, brighter, and healthier-looking skin.</p>
+            <a href="https://www.nbcnews.com/select/shopping/best-exfoliating-products-rcna104357"><button>Learn More</button></a>
+        </div>
+
+        <div class="grid-card">
+            <img src="../images/serum.jpg" alt="Product 4">
+            <h3>Serums</h3>
+            <p>Serums are concentrated skincare treatments designed to target specific skin concerns like hydration, brightening, or anti-aging.</p>
+            <a href="https://www.herzindagi.com/your-picks/glam-and-glamour/best-face-serums-to-hydrate-brighten-and-rejuvenate-your-skin-435"><button>Learn More</button></a>
+        </div>
+
+        <div class="grid-card">
+            <img src="../images/moisturiser.jpg" alt="Product 5">
+            <h3>Moisturizers</h3>
+            <p>Moisturizers hydrate and lock in moisture, keeping the skin soft, smooth, and protected from dryness.</p>
+            <a href="https://people.com/moisturizing-winter-skincare-products-dermatologist-january-2025-8779863"><button>Learn More</button></a>
+        </div>
+
+        <div class="grid-card">
+            <img src="../images/sunscreen.jpg" alt="Product 6">
+            <h3>Sunscreens</h3>
+            <p>Sunscreens protect the skin from harmful UV rays, preventing sunburn, premature aging, and skin cancer.</p>
+            <a href="sunscreen.html"><button>Learn More</button></a>
+        </div>
+    </div>
+
+    <!-- Comparison Table -->
+    <section class="comparison-table">
+        <h2>SKINCARE PRODUCT INSIGHTS</h2>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Specifications</th>
+                        <th>Features</th>
+                        <th>Pros</th>
+                        <th>Cons</th>
+                        <th>How to Use</th>
+                        <th>Why It's the Best</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Cleansers -->
+                    <tr>
+                        <td><strong>Cleansers</strong></td>
+                        <td>Volume: 250ml, Type: Hydrating, Foaming</td>
+                        <td>Removes dirt and oil, Hydrates, Refreshes skin</td>
+                        <td>Gentle on skin, Maintains moisture balance, Removes impurities</td>
+                        <td>May cause dryness if overused, Not suitable for all skin types</td>
+                        <td>Apply to wet face, Massage gently, Rinse with water</td>
+                        <td>Best for daily cleansing and maintaining skin hydration</td>
+                    </tr>
+                    <!-- Toners -->
+                    <tr>
+                        <td><strong>Toners</strong></td>
+                        <td>Volume: 200ml, Type: Alcohol-Free, pH Balancing</td>
+                        <td>Balances pH, Removes residual impurities, Prepares skin for other products</td>
+                        <td>Refreshes skin, Reduces pore size, Hydrates</td>
+                        <td>May cause irritation for sensitive skin, Can be drying</td>
+                        <td>Apply to a cotton pad, Swipe over face, Do not rinse</td>
+                        <td>Best for preparing skin for better absorption of subsequent products</td>
+                    </tr>
+                    <!-- Exfoliators -->
+                    <tr>
+                        <td><strong>Exfoliators</strong></td>
+                        <td>Volume: 100ml, Type: Physical, Chemical</td>
+                        <td>Removes dead skin cells, Unclogs pores, Smoothens skin</td>
+                        <td>Brightens complexion, Promotes cell turnover, Improves texture</td>
+                        <td>Overuse can cause irritation, May not be suitable for sensitive skin</td>
+                        <td>Apply to damp skin, Massage gently, Rinse thoroughly</td>
+                        <td>Best for maintaining a clear and radiant complexion</td>
+                    </tr>
+                    <!-- Serums -->
+                    <tr>
+                        <td><strong>Serums</strong></td>
+                        <td>Volume: 30ml, Type: Hydrating, Anti-Aging</td>
+                        <td>Targets specific skin concerns, High concentration of active ingredients</td>
+                        <td>Effective, Fast-absorbing, Lightweight</td>
+                        <td>Can be expensive, May cause irritation</td>
+                        <td>Apply a few drops to face, Massage gently, Follow with moisturizer</td>
+                        <td>Best for delivering powerful ingredients directly to the skin</td>
+                    </tr>
+                    <!-- Moisturizers -->
+                    <tr>
+                        <td><strong>Moisturizers</strong></td>
+                        <td>Volume: 50ml, Type: Hydrating, Oil-Free</td>
+                        <td>Hydrates, Locks in moisture, Protects skin barrier</td>
+                        <td>Keeps skin hydrated, Improves texture, Non-greasy</td>
+                        <td>Some may feel heavy, May cause breakouts</td>
+                        <td>Apply to clean face, Massage gently, Use daily</td>
+                        <td>Vital for maintaining skin hydration and health</td>
+                    </tr>
+                    <!-- Sunscreens -->
+                    <tr>
+                        <td><strong>Sunscreens</strong></td>
+                        <td>Volume: 100ml, Type: SPF 30+, Broad Spectrum</td>
+                        <td>Protects from UV rays, Prevents sunburn, Reduces risk of skin cancer</td>
+                        <td>Prevents sun damage, Essential for skin health, Non-greasy</td>
+                        <td>May leave a white cast, Needs reapplication</td>
+                        <td>Apply generously to face, Reapply every 2 hours, Use daily</td>
+                        <td>Crucial for preventing long-term skin damage and aging</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <h2 style="text-align: center;"> COMPARISON OF LEADING SKINCARE PRODUCTS</h2>
+    <section class="comparison-container">
+        <!-- Cleansers Comparison -->
+        <div class="product-comparison">
+            <h2>Cleansers Comparison</h2>
+            <div class="product">
+                <h3>Cetaphil Gentle Skin Cleanser</h3>
+                <img src="../images/cleanser.jpg" alt="Cetaphil Cleanser">
+                <p><strong>Description:</strong> A mild, non-irritating cleanser that removes dirt and oil without
+                    drying out the skin.</p>
+                <p><strong>Best For:</strong> Sensitive and dry skin.</p>
+            </div>
+            <div class="product">
+                <h3>CeraVe Hydrating Cleanser</h3>
+                <img src="../images/cerave.jpg" alt="CeraVe Cleanser">
+                <p><strong>Description:</strong> A hydrating cleanser enriched with ceramides and hyaluronic acid for
+                    deep hydration.</p>
+                <p><strong>Best For:</strong> Normal to dry skin.</p>
+            </div>
+        </div>
+
+        <!-- Toners Comparison -->
+        <div class="product-comparison">
+            <h2>Toners Comparison</h2>
+            <div class="product">
+                <h3>Pixi Glow Tonic</h3>
+                <img src="../images/toner2.jpg" alt="Pixi Glow Tonic">
+                <p><strong>Description:</strong> Exfoliating toner with 5% glycolic acid to remove dead skin cells.</p>
+                <p><strong>Best For:</strong> Dull and uneven skin texture.</p>
+            </div>
+            <div class="product">
+                <h3>Kiehl's Calendula Herbal Extract Toner</h3>
+                <img src="../images/toner3.jpg" alt="Kiehl's Toner">
+                <p><strong>Description:</strong> Alcohol-free toner with calendula petals to soothe and refresh skin.
+                </p>
+                <p><strong>Best For:</strong> Sensitive and oily skin.</p>
+            </div>
+        </div>
+
+        <!-- Exfoliator Comparison  -->
+        <div class="product-comparison">
+            <h2>Exfoliator Comparison </h2>
+            <div class="product">
+                <h3>The Ordinary AHA 30% + BHA 2% Peeling Solution</h3>
+                <img src="../images/exfoliater1.jpg" alt="The Ordinary Peeling Solution">
+                <p><strong>Description:</strong> A chemical exfoliator that improves skin texture and unclogs pores.</p>
+                <p><strong>Best For:</strong> Oily, acne-prone, and uneven skin tone.</p>
+            </div>
+            <div class="product">
+                <h3>St. Ives Fresh Skin Apricot Scrub</h3>
+                <img src="../images/exfoliater2.jpg" alt="St. Ives Apricot Scrub">
+                <p><strong>Description:</strong> A physical scrub with natural exfoliants to remove dead skin cells and
+                    brighten the skin.</p>
+                <p><strong>Best For:</strong> Normal to oily skin types.</p>
+            </div>
+        </div>
+
+        <!-- Serum Comparison -->
+        <div class="product-comparison">
+            <h2>Serum Comparison</h2>
+            <div class="product">
+                <h3>Estee Lauder Advanced Night Repair</h3>
+                <img src="../images/serum1.jpg" alt="Estee Lauder Serum">
+                <p><strong>Description:</strong> A fast-absorbing serum that reduces fine lines and boosts radiance
+                    overnight.</p>
+                <p><strong>Best For:</strong> Aging and dehydrated skin.</p>
+            </div>
+            <div class="product">
+                <h3>Vichy Mineral 89 Serum</h3>
+                <img src="../images/serum2.jpg" alt="Vichy Mineral Serum">
+                <p><strong>Description:</strong> Contains 89% mineral water and hyaluronic acid to strengthen and
+                    hydrate skin.</p>
+                <p><strong>Best For:</strong> Dehydrated and dull skin.</p>
+            </div>
+        </div>
+        <!-- Moisturizer Comparison -->
+        <div class="product-comparison">
+            <h2>Moisturizer Comparison</h2>
+            <div class="product">
+                <h3>Clinique Moisture Surge</h3>
+                <img src="../images/moisturiser1.jpg" alt="Clinique Moisture Surge">
+                <p><strong>Description:</strong> A lightweight gel-cream that provides 72-hour hydration.</p>
+                <p><strong>Best For:</strong> All skin types, especially dry and sensitive skin.</p>
+            </div>
+            <div class="product">
+                <h3>Neutrogena Hydro Boost Gel</h3>
+                <img src="../images/moisturiser2.jpg" alt="Neutrogena Hydro Boost">
+                <p><strong>Description:</strong> Infused with hyaluronic acid, it boosts skin hydration and locks in
+                    moisture.</p>
+                <p><strong>Best For:</strong> Normal to combination skin.</p>
+            </div>
+        </div>
+    </section>
+    <!-- Sunscreen Comparison -->
+    <div class="product-comparison">
+        <h2>Sunscreen Comparison</h2>
+        <div class="product">
+            <h3>La Roche-Posay Anthelios SPF 50</h3>
+            <img src="../images/sunscreen2.jpg" alt="La Roche-Posay Sunscreen">
+            <p><strong>Description:</strong> A lightweight, broad-spectrum sunscreen that protects from UVA and UVB
+                rays.</p>
+            <p><strong>Best For:</strong> Sensitive and acne-prone skin.</p>
+        </div>
+        <div class="product">
+            <h3>Neutrogena Ultra Sheer Dry-Touch SPF 55</h3>
+            <img src="../images/sunscreen3.jpg" alt="Neutrogena Sunscreen">
+            <p><strong>Description:</strong> A fast-absorbing, non-greasy formula that offers high sun protection.
+            </p>
+            <p><strong>Best For:</strong> All skin types, including oily skin.</p>
+        </div>
+    </div>
+    </section>
+
+    <!-- Suggested Skincare Section -->
+    <section id="suggested-skincare" class="suggested-skincare">
+        <div class="container">
+            <h2 style="text-align: center;">TOP SELLING SKINCARE PRODUCTS</h2>
+            <p style="text-align: center;">Explore the most popular skincare products with expert reviews and ratings.
+            </p>
+            <div class="skincare-grid">
+                <!-- Skincare Product 1 -->
+                <div class="skincare-item">
+                    <img src="../images/cleanser.jpg" alt="Gentle Cleanser">
+                    <h3>Gentle Cleanser</h3>
+                    <p>
+                        A mild, non-foaming cleanser that removes dirt and oil without stripping moisture.
+                        Ideal for sensitive skin.
+                    </p>
+                    <div class="review">
+                        <p><strong>Review:</strong> "Leaves my skin feeling fresh and clean without dryness!"</p>
+                        <div class="star-rating">
+                            <span style="color: gold; font-size: 1.2em;">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
+                        </div>
+                        <a href="https://www.amazon.in/gentle-cleanser/s?k=gentle+cleanser" class="buy-now-btn">Buy
+                            Now</a>
+                    </div>
+                </div>
+
+                <!-- Skincare Product 2 -->
+                <div class="skincare-item">
+                    <img src="../images/moisturiser3.jpg" alt="Hydrating Moisturizer">
+                    <h3>Hydrating Moisturizer</h3>
+                    <p>
+                        A lightweight, oil-free moisturizer that hydrates and locks in moisture.
+                        Suitable for all skin types.
+                    </p>
+                    <div class="review">
+                        <p><strong>Review:</strong> "Keeps my skin soft and moisturized throughout the day!"</p>
+                        <div class="star-rating">
+                            <span style="color: gold; font-size: 1.2em;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                        </div>
+                        <a href="https://www.amazon.in/face-moisturizer/b?ie=UTF8&node=10257749031"
+                            class="buy-now-btn">Buy Now</a>
+                    </div>
+                </div>
+
+                <!-- Skincare Product 3 -->
+                <div class="skincare-item">
+                    <img src="../images/sheth.jpg" alt="SPF 50 Sunscreen">
+                    <h3>SPF 50 Sunscreen</h3>
+                    <p>
+                        A broad-spectrum SPF 50 sunscreen that protects from UV rays without leaving a white cast.
+                        Perfect for daily use.
+                    </p>
+                    <div class="review">
+                        <p><strong>Review:</strong> "Lightweight and non-greasy – perfect under makeup!"</p>
+                        <div class="star-rating">
+                            <span style="color: gold; font-size: 1.2em;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                        </div>
+                        <a href="https://www.amazon.in/sunscreen-spf-50/s?k=sunscreen+spf+50" class="buy-now-btn">Buy
+                            Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <br> <br>
+    <!----Related articles-->
+    <h2 style="text-align: center;">RELATED ARTICLES</h2>
+    <section class="additional-grids">
+        <div class="grid-container">
+            <div class="grid-item">
+                <img src="../images/skincare1.jpg" alt="Best products for acne-prone">
+                <p><a
+                        href="https://www.nbcnews.com/select/shopping/what-are-best-skin-care-products-acne-prone-skin-look-ncna1032911">The
+                        best products for acne-prone skin</a></p>
+            </div>
+            <div class="grid-item">
+                <img src="../images/skincare2.jpg" alt="essential face moisturiser">
+                <p><a
+                        href="https://zeenews.india.com/top-deals/personal-care/the-essential-role-of-face-moisturizers-in-skincare-2873165.html">The
+                        Essential Role of Face Moisturizers in Skincare</a></p>
+            </div>
+            <div class="grid-item">
+                <img src="../images/skincare3.jpg" alt=" Best toners">
+                <p><a href="https://www.nbcnews.com/select/shopping/best-toners-rcna104668">The
+                        11 best toners in 2025</a></p>
+            </div>
+        </div>
+    </section>
+
+    <!--FAQ section-->
+    <section id="faq">
+        <h2>FREQUENTLY ASKED QUESTIONS</h2>
+
+        <div class="faq-item">
+            <h3>How often should I wash my face?
+                <button class="toggle-btn">+</button>
+            </h3>
+            <p class="faq-answer">Washing your face twice a day—morning and night—is ideal. Overwashing can strip
+                natural oils, while under-washing can cause buildup and breakouts.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>What is the best way to treat acne?
+                <button class="toggle-btn">+</button>
+            </h3>
+            <p class="faq-answer">Use gentle cleansers, avoid harsh scrubbing, and incorporate products with salicylic
+                acid or benzoyl peroxide. Staying hydrated and maintaining a healthy diet also helps.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>How can I reduce dark circles under my eyes?
+                <button class="toggle-btn">+</button>
+            </h3>
+            <p class="faq-answer">Apply a cold compress, use eye creams with vitamin C or retinol, and ensure you're
+                getting enough sleep. Staying hydrated can also help reduce puffiness.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>Should I apply sunscreen indoors?
+                <button class="toggle-btn">+</button>
+            </h3>
+            <p class="faq-answer">Yes, UV rays can penetrate windows and cause skin damage. Wearing sunscreen daily,
+                even indoors, helps protect your skin from premature aging.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>Can I use face oils if I have oily skin?
+                <button class="toggle-btn">+</button>
+            </h3>
+            <p class="faq-answer">Yes, lightweight, non-comedogenic oils like jojoba or rosehip can balance oil
+                production and improve skin texture without clogging pores.</p>
+        </div>
+    </section>
+
+</body>
+<script>
+    // js for toggle function of FAQ'S
+    document.querySelectorAll('.toggle-btn').forEach(button => {
+        button.addEventListener('click', function () {
+            const answer = this.parentElement.nextElementSibling;
+            const isVisible = answer.style.display === 'block';
+            answer.style.display = isVisible ? 'none' : 'block';
+            this.textContent = isVisible ? '+' : '-';
+        });
+    });
+</script>
+
+</html>

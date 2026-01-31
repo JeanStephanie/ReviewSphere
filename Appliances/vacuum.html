@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vacuum Cleaner</title>
+</head>
+<style>
+    /* General Styles */
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f9f9f9;
+        color: #333;
+    }
+
+    header {
+        background-color: #00457c;
+        color: white;
+        padding: 10px 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    header h1 {
+        font-size: 2.5em;
+        margin-bottom: 10px;
+    }
+
+    header p {
+        font-size: 1.2em;
+    }
+
+    .nav {
+        margin-top: 0.5rem;
+    }
+
+    .nav a {
+        margin: 0 1rem;
+        text-decoration: none;
+        color: white;
+        font-weight: bold;
+    }
+
+    .nav a:hover {
+        text-decoration: #00bcd4;
+    }
+
+    /* video styles*/
+
+    .carousel {
+        position: relative;
+        width: 100%;
+        overflow: hidden;
+        background: #000;
+        margin-top: 20px;
+    }
+
+    .carousel-container {
+        display: flex;
+        transition: transform 0.5s ease-in-out;
+    }
+
+    .carousel-item {
+        min-width: 100%;
+        text-align: center;
+    }
+
+    .carousel-item img,
+    .carousel-item video {
+        width: 100%;
+        height: auto;
+    }
+
+    .prev,
+    .next {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(255, 255, 255, 0.5);
+        border: none;
+        padding: 10px;
+        cursor: pointer;
+        font-size: 18px;
+    }
+
+    .prev {
+        left: 10px;
+    }
+
+    .next {
+        right: 10px;
+    }
+
+    /* Types Section */
+    #types {
+        padding: 40px 20px;
+        background-color: #e9f5fb;
+        text-align: center;
+    }
+
+    #types h2 {
+        font-size: 2em;
+        margin-bottom: 20px;
+    }
+
+    .types-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+        justify-items: center;
+    }
+
+    .type-card {
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        text-align: center;
+        max-width: 250px;
+        transition: transform 0.3s;
+    }
+
+    .type-card:hover {
+        transform: translateY(-10px);
+    }
+
+    .type-card img {
+        width: 200px;
+        height: 200px;
+        margin-bottom: 15px;
+    }
+
+    .type-card h3 {
+        margin-bottom: 10px;
+        color: #00457c;
+    }
+
+    /* comparison*/
+    #comparison {
+        padding: 40px 20px;
+        background-color: #e9f5fb;
+        text-align: center;
+    }
+
+    #comparison h2 {
+        font-size: 2em;
+        margin-bottom: 20px;
+        color: #00457c;
+    }
+
+    table {
+        width: 80%;
+        margin: 0 auto;
+        border-collapse: collapse;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    th,
+    td {
+        padding: 15px;
+        text-align: center;
+        border: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #00457c;
+        color: white;
+    }
+
+    td {
+        background-color: #fff;
+    }
+
+    /* Hover effect */
+    tr:hover {
+        background-color: #f1f1f1;
+    }
+
+    /* General Body Styles */
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+    }
+
+    /* Features Section */
+    #features {
+        padding: 50px 20px;
+        background-color: #fff;
+        text-align: center;
+    }
+
+    h2 {
+        font-size: 2rem;
+        color: #333;
+        margin-bottom: 30px;
+    }
+
+    /* Grid Layout for Features */
+    .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 60px;
+        justify-items: center;
+    }
+
+    /* Feature Card Styling */
+    .feature {
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        text-align: center;
+        padding: 20px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .feature:hover {
+        transform: scale(1.05);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Feature Image Styling */
+    .feature img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 10px;
+        margin-bottom: 15px;
+    }
+
+    /* Feature Title Styling */
+    .feature h3 {
+        font-size: 1.5rem;
+        color: #333;
+        margin-bottom: 10px;
+    }
+
+    /* Feature Description Styling */
+    .feature p {
+        font-size: 1rem;
+        color: #666;
+        line-height: 1.5;
+    }
+
+    /* brand comparison*/
+    .comparison-container {
+        max-width: 1200px;
+        margin: 20px auto;
+        padding: 20px;
+        background: #fff;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+    }
+
+    .comparison-title {
+        text-align: center;
+        font-size: 24px;
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th,
+    td {
+        border: 1px solid #ddd;
+        padding: 10px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #00457c;
+        color: white;
+        font-weight: bold;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    /* top 3 vc style*/
+    .card-container {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        padding: 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .card {
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        width: 300px;
+        overflow: hidden;
+        text-align: center;
+    }
+
+    .card img {
+        width: 100%;
+        height: 250px;
+        object-fit: cover;
+    }
+
+    .card-content {
+        padding: 15px;
+    }
+
+    .card-title {
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 10px;
+        color: #333;
+    }
+
+    .card-price {
+        font-size: 16px;
+        color: #007BFF;
+        margin-bottom: 10px;
+    }
+
+    .card-description {
+        font-size: 14px;
+        color: #555;
+        margin-bottom: 20px;
+    }
+
+    .buy-now-btn {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #007BFF;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        font-size: 14px;
+        transition: background-color 0.3s;
+    }
+
+    .buy-now-btn:hover {
+        background-color: #0056b3;
+    }
+
+    /* Suggested vacuum cleaner Section Styling */
+    .suggested-vc {
+        background-color: #f8f9fa;
+        padding: 50px 0;
+        text-align: center;
+    }
+
+    .suggested-vc .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+
+    .suggested-vc h2 {
+        font-size: 2em;
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    .suggested-vc p {
+        color: #666;
+        margin-bottom: 30px;
+    }
+
+    .vc-grid {
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+    }
+
+    .buy-now-btn {
+        display: inline-block;
+        margin-top: 10px;
+        padding: 10px 20px;
+        background-color: #00457c;
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+        border-radius: 5px;
+        transition: background 0.3s ease;
+    }
+    
+    .buy-now-btn:hover {
+        background-color: #00457c;
+    }
+
+    .vc-item {
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        max-width: 350px;
+        text-align: left;
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .vc-item:hover {
+        transform: translateY(-5px);
+    }
+
+    .vc-item img {
+        width: 100%;
+        height: 250px;
+        border-radius: 10px;
+    }
+
+    .vc-item h3 {
+        font-size: 1.5em;
+        color: #222;
+        margin: 15px 0 10px;
+    }
+
+    .vc-item p {
+        color: #555;
+        font-size: 1em;
+        line-height: 1.5;
+    }
+
+    .review {
+        margin-top: 15px;
+    }
+
+    .review p {
+        font-style: italic;
+        color: #444;
+    }
+
+    .star-rating span {
+        font-size: 1.2em;
+    }
+
+    /* css for article grids */
+    .grid-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+        gap: 20px;
+        margin: 20px 0;
+    }
+
+    .grid-item {
+        background-color: white;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        padding: 15px;
+        text-align: center;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .grid-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    .grid-item img {
+        width: 100%;
+        height: auto;
+        margin-bottom: 15px;
+        border-radius: 10px;
+    }
+
+    .grid-item p {
+        font-size: 1em;
+        color: #00457c;
+    }
+
+    .grid-item p a {
+        text-decoration: none;
+        color: black;
+        font-weight: bold;
+        transition: color 0.3s ease;
+    }
+
+    .grid-item p a:hover {
+        color: #00457c;
+    }
+
+    /* FAQ styles*/
+    #faq {
+        padding: 20px;
+        background-color: #f9f9f9;
+    }
+
+    #faq h2 {
+        text-align: center;
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    .faq-item {
+        margin-bottom: 20px;
+    }
+
+    .faq-item h3 {
+        cursor: pointer;
+        padding: 10px;
+        background-color: white;
+        color: #002d72;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+    }
+
+    .faq-item p {
+        display: none;
+        padding: 10px;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-top: none;
+        border-radius: 0 0 5px 5px;
+    }
+
+    .faq-item p.visible {
+        display: block;
+    }
+
+    .faq-answer {
+        display: none;
+        padding: 10px;
+        background-color: #f9f9f9;
+        border: 1px solid #ddd;
+    }
+
+    .toggle-btn {
+        margin-left: 10px;
+        cursor: pointer;
+        background: none;
+        border: none;
+        font-size: 18px;
+        font-weight: bold;
+    }
+</style>
+
+<body>
+    <!-- Header Section -->
+    <header>
+        <h1>Vacuum Cleaner</h1>
+        <nav class="nav">
+            <a href="buyinguideVacuum.html">Buying Guide </a>
+            <a href="../reviews.php">Reviews</a>
+        </nav>
+    </header>
+    <section class="carousel">
+        <div class="carousel-container">
+            <div class="carousel-item active">
+                <video src="../video/vacuumCleaner.mp4" autoplay muted loop></video>
+            </div>
+        </div>
+    </section>
+    </div>
+    </section>
+
+    <!-- Types Section -->
+    <section id="types">
+        <h2>Types of Vacuum Cleaners</h2>
+        <div class="types-container">
+            <div class="type-card">
+                <img src="../images/vacuum1.jpg" alt="Upright Vacuum">
+                <h3>Upright Vacuum</h3>
+                <p>Upright vacuums are designed for efficient, deep cleaning, offering powerful suction and easy
+                    maneuverability across carpets, rugs, and hard floors. With a large cleaning path and upright
+                    design, they allow for quick and thorough coverage of larger areas.</p>
+            </div>
+            <div class="type-card">
+                <img src="../images/vacuum2.jpg" alt="Canister Vacuum">
+                <h3>Canister Vacuum</h3>
+                <p>Canister vacuums are versatile and lightweight, offering powerful suction for deep cleaning on both
+                    carpets and hard floors. With a separate canister and hose, they provide greater maneuverability and
+                    are ideal for reaching tight spaces, stairs, and upholstery, while advanced filtration ensures
+                    cleaner air..</p>
+            </div>
+            <div class="type-card">
+                <img src="../images/vacuum.jpg" alt="Robot Vacuum">
+                <h3>Robot Vacuum</h3>
+                <p>Robot vacuums offer automated cleaning with minimal effort, navigating your home to remove dirt,
+                    dust, and debris on carpets and hard floors. Equipped with smart sensors, they efficiently clean
+                    around furniture and obstacles, and many models can be controlled remotely via apps.</p>
+            </div>
+            <div class="type-card">
+                <img src="../images/vacuum3.jpg" alt="Handheld Vacuum">
+                <h3>Handheld Vacuum</h3>
+                <p>Handheld vacuums are compact, lightweight, and perfect for quick clean-ups of small messes on
+                    surfaces like upholstery, stairs, and car interiors. With powerful suction in a portable design,
+                    they efficiently capture dust, dirt, and debris, making them ideal for tight spaces and
+                    hard-to-reach areas.</p>
+            </div>
+        </div>
+    </section>
+    <!---Comparison table-->
+    <section id="comparison">
+        <h2>Vacuum Cleaner Comparison</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Vacuum Type</th>
+                    <th>Specifications</th>
+                    <th>Features</th>
+                    <th>Pros</th>
+                    <th>Cons</th>
+                    <th>Price</th>
+                    <th>Why is it the Best?</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Upright Vacuum</td>
+                    <td>High power, great for large areas</td>
+                    <td>Adjustable height, strong suction</td>
+                    <td>Powerful, effective on carpets</td>
+                    <td>Heavy, hard to maneuver</td>
+                    <td>$150 - $500</td>
+                    <td>Best for large carpeted areas</td>
+                </tr>
+                <tr>
+                    <td>Canister Vacuum</td>
+                    <td>Versatile, good for corners & stairs</td>
+                    <td>Detachable hose, multiple attachments</td>
+                    <td>Flexible, can clean multiple surfaces</td>
+                    <td>Can be bulky, not ideal for large homes</td>
+                    <td>$100 - $400</td>
+                    <td>Best for versatility and multiple surfaces</td>
+                </tr>
+                <tr>
+                    <td>Robot Vacuum</td>
+                    <td>Automatic cleaning, small footprint</td>
+                    <td>Smart navigation, app control</td>
+                    <td>Convenient, requires little effort</td>
+                    <td>Limited power, needs charging</td>
+                    <td>$200 - $700</td>
+                    <td>Best for convenience and automation</td>
+                </tr>
+                <tr>
+                    <td>Handheld Vacuum</td>
+                    <td>Compact, lightweight</td>
+                    <td>Portable, easy storage</td>
+                    <td>Quick cleanups, lightweight</td>
+                    <td>Limited suction, not for deep cleaning</td>
+                    <td>$30 - $150</td>
+                    <td>Best for quick and easy cleanups</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <!-- Brands Section -->
+    <section id="features">
+        <h2>Top Brands of Vacuum Cleaner</h2>
+        <div class="features-grid">
+            <div class="feature">
+                <img src="../images/dysonvac.jpg" alt="Dyson Vacuum Cleaner">
+                <h3>Dyson</h3>
+                <p>Renowned for powerful suction, innovative design, and advanced filtration systems, Dyson vacuums are
+                    popular for both home and pet cleaning.</p>
+            </div>
+            <div class="feature">
+                <img src="../images/sharkvac.jpg" alt="Shark Vacuum Cleaner">
+                <h3>Shark</h3>
+                <p> Known for affordable, user-friendly vacuums, Shark offers a variety of models with strong suction,
+                    versatility, and features like anti-hair wrap technology.</p>
+            </div>
+            <div class="feature">
+                <img src="../images/mielevac.jpg" alt="Miele Vacuum Cleaner">
+                <h3>Miele</h3>
+                <p>High-quality, durable vacuums that provide exceptional suction power and filtration, Miele is known
+                    for its premium models, especially in the canister vacuum category..</p>
+            </div>
+            <div class="feature">
+                <img src="../images/bissellvac.jpg" alt="Bissell Vacuum Cleaner">
+                <h3>Bissell</h3>
+                <p>Offering a range of vacuum cleaners at various price points, Bissell vacuums are known for their
+                    reliability and effective cleaning of both carpets and hard floors.</p>
+            </div>
+        </div>
+    </section>
+    <main>
+
+        <!---Comaparison between top 5 vc brands-->
+        <div class="comparison-container">
+            <h1 class="comparison-title">Top 5 Vacuum Cleaner Brands Comparison</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Brand</th>
+                        <th>Specifications</th>
+                        <th>Features</th>
+                        <th>Price</th>
+                        <th>Pros</th>
+                        <th>Cons</th>
+                        <th>Why It's the Best</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Dyson</td>
+                        <td>Power: 1400W, Cordless, HEPA Filter</td>
+                        <td>Lightweight, Advanced suction, Long battery life</td>
+                        <td>$500</td>
+                        <td>Powerful suction, Innovative design, Suitable for all floors</td>
+                        <td>Expensive, Short runtime on max mode</td>
+                        <td class="highlight">Advanced technology ensures deep cleaning with minimal effort.</td>
+                    </tr>
+                    <tr>
+                        <td>Shark</td>
+                        <td>Power: 1200W, Bagless, Anti-Allergen Seal</td>
+                        <td>Dual brush roll, Pet hair attachment</td>
+                        <td>$300</td>
+                        <td>Affordable, Great for pet owners, Easy maintenance</td>
+                        <td>Heavier than competitors, Noisy operation</td>
+                        <td class="highlight">Perfect for pet owners due to its specialized attachments.</td>
+                    </tr>
+                    <tr>
+                        <td>Miele</td>
+                        <td>Power: 1600W, Bagged, HEPA Filter</td>
+                        <td>Quiet operation, Durable design</td>
+                        <td>$600</td>
+                        <td>Superior build quality, Excellent filtration system</td>
+                        <td>High maintenance cost, Heavy</td>
+                        <td class="highlight">Known for its durability and exceptional filtration system.</td>
+                    </tr>
+                    <tr>
+                        <td>Bissell</td>
+                        <td>Power: 1100W, Bagless, Multi-Cyclonic System</td>
+                        <td>Specialized for pet messes, Easy empty bin</td>
+                        <td>$250</td>
+                        <td>Budget-friendly, Compact design, Great for small spaces</td>
+                        <td>Limited power on thick carpets, Smaller dustbin</td>
+                        <td class="highlight">Affordable and effective for everyday cleaning tasks.</td>
+                    </tr>
+                    <tr>
+                        <td>Roomba (iRobot)</td>
+                        <td>Robotic, Wi-Fi Connected, Smart Navigation</td>
+                        <td>Self-charging, App control, Scheduled cleaning</td>
+                        <td>$700</td>
+                        <td>Convenient, Hands-free operation, Intelligent mapping</td>
+                        <td>Expensive, Limited deep cleaning capabilities</td>
+                        <td class="highlight">Best for automated cleaning and modern smart home integration.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <h2 style="text-align: center;">Top 3 Vacuum Cleaner</h2>
+        <div class="card-container">
+            <div class="card">
+                <img src="../images/dysonvac.jpg" alt="Dyson Vacuum Cleaner"> <br> <br> <br>
+                <div class="card-content">
+                    <h3 class="card-title">Dyson V15 Detect</h3>
+                    <p class="card-price">$700</p>
+                    <p class="card-description">Powerful cordless vacuum with laser detection for deep cleaning.</p>
+                    <a href="https://www.googleadservices.com/pagead/aclk?sa=L&ai=DChcSEwjX36XmwJiLAxVdK4MDHZ2CIkAYABADGgJzZg&co=1&ase=2&gclid=CjwKCAiAneK8BhAVEiwAoy2HYbFd2nAwp_uE3NaS-Rr5e6LDZE0Acb6Y5OGPqpf4QKe3ktDkDC59AxoCNzUQAvD_BwE&ohost=www.google.com&cid=CAESVeD2NH0Hvj6aekdwH9qdrDvlvr7SWCR_LfONXrltbdoBqJX81Bx-JccWRhWu01PJT4wggRZy2ofyCo9Tev5Ubp2BTlZoflWxtjvhl_xzA7kuERzGQQs&sig=AOD64_1UAMNkEs_-7UHI13IfNf83oViEAg&q&nis=4&adurl&ved=2ahUKEwib85_mwJiLAxV3TGwGHYMyIS4Q0Qx6BAgIEAQ"
+                        class="buy-now-btn">Buy Now</a>
+                </div>
+            </div>
+            <div class="card">
+                <img src="../images/vacuum4.jpg" alt="Shark Vacuum Cleaner">
+                <div class="card-content">
+                    <h3 class="card-title">Shark Navigator</h3>
+                    <p class="card-price">$300</p>
+                    <p class="card-description">Affordable upright vacuum with advanced pet hair removal features.</p>
+                    <a href="https://www.amazon.in/Sharkninja-Navigator-Lift-Away-Upright-Lavender/dp/B004Q4DRJW"
+                        class="buy-now-btn">Buy Now</a>
+                </div>
+            </div>
+            <div class="card">
+                <img src="../images/vacuum5.jpg" alt="Roomba Vacuum Cleaner">
+                <div class="card-content">
+                    <h3 class="card-title">iRobot Roomba i7+</h3>
+                    <p class="card-price">$800</p>
+                    <p class="card-description">Smart robotic vacuum with automatic dirt disposal and mapping.</p>
+                    <a href="https://irobot.in/category/i7-series?srsltid=AfmBOorPbVzYJp0OXO1RjPmJVk8agt_43riPX2avKtErmZum_v2-5xcg"
+                        class="buy-now-btn">Buy Now</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Suggested Vacuum Cleaner Section -->
+        <section id="suggested-vc" class="suggested-vc">
+            <div class="container">
+                <h2>TOP-SELLING VACUUM CLEANERS</h2>
+                <p>Explore the most in-demand vacuum cleaners with expert reviews and ratings.</p>
+                <div class="vc-grid">
+                    <!-- VC 1 -->
+                    <div class="vc-item">
+                        <img src="../images/vacuum8.jpg" alt="Dyson V15 Detect">
+                        <h3>Dyson V15 Detect</h3>
+                        <p>
+                            A powerful cordless vacuum with laser dust detection, advanced filtration,
+                            and strong suction power for deep cleaning.
+                        </p>
+                        <div class="review">
+                            <p><strong>Review:</strong> "Amazing suction and innovative laser technology. Worth every
+                                penny!"</p>
+                            <div class="star-rating">
+                                <span style="color: gold; font-size: 1.2em;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                            </div>
+                            <a href="https://www.dyson.in/dyson-v15-detect-vacuum-cleaner" class="buy-now-btn">Buy
+                                Now</a>
+
+                        </div>
+                    </div>
+                    <!-- VC 2 -->
+                    <div class="vc-item">
+                        <img src="../images/vacuum9.jpg" alt="Roomba i7+">
+                        <h3>Roomba i7+</h3>
+                        <p>
+                            A smart robotic vacuum cleaner with self-emptying technology,
+                            intelligent mapping, and powerful suction.
+                        </p>
+                        <div class="review">
+                            <p><strong>Review:</strong> "Cleans efficiently and empties itself. The best hands-free
+                                vacuum!"</p>
+                            <div class="star-rating">
+                                <span style="color: gold; font-size: 1.2em;">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
+                            </div>
+                            <a href="https://www.amazon.in/iRobot-i7-connected-Power-Lifting-Multi-Surface/dp/B07V9LD1HZ"
+                                class="buy-now-btn">Buy Now</a>
+
+                        </div>
+                    </div>
+                    <!-- VC 3 -->
+                    <div class="vc-item">
+                        <img src="../images/sharkvac.jpg" alt="Shark Navigator Lift-Away">
+                        <h3>Shark Navigator Lift-Away</h3>
+                        <p>
+                            A versatile upright vacuum with a lift-away feature,
+                            HEPA filtration, and powerful suction for all floor types.
+                        </p>
+                        <div class="review">
+                            <p><strong>Review:</strong> "Great for pet hair and deep cleaning. Easy to maneuver!"</p>
+                            <div class="star-rating">
+                                <span style="color: gold; font-size: 1.2em;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                            </div>
+                            <a href="https://www.sharkclean.com/products/shark-navigator-lift-away-deluxe-upright-vacuum-zidNV360?srsltid=AfmBOop60Wu_SKA_5m1WO006DD8fKu0SPMJfDyup7ABqsLCoIXxS8mPn"
+                                class="buy-now-btn">Buy Now</a>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!----Related articles-->
+        <h1 style="text-align: center; color:#00457c;">RELATED ARTICLES</h1>
+        <div class="grid-container">
+            <div class="grid-item">
+                <img src="../images/vacuum6.jpg"
+                    alt="Top Vacuum Cleaners for Easy and Efficient Home Cleaning">
+                <p><a
+                        href="https://zeenews.india.com/top-deals/electronics/top-vacuum-cleaners-for-easy-and-efficient-home-cleaning-2832617.html">Top
+                        Vacuum Cleaners for Easy and Efficient Home Cleaning.</a></p>
+            </div>
+            <div class="grid-item">
+                <img src="../images/vacuum1.jpg"
+                    alt="The best upright vacuum 2025: top vacuums for deeper cleaning">
+                <p><a
+                        href="https://www.techradar.com/best/best-upright-vacuum-2021-top-models-tested-for-carpets-and-hard-floors">The
+                        best upright vacuum 2025: top vacuums for deeper cleaning</a>
+                </p>
+            </div>
+            <div class="grid-item">
+                <img src="../images/vacuum7.jpg" style="height: 350px; width:200px;"
+                    alt="Dyson V15 Detect vs Gen5detect: what's the difference">
+                <p><a href="https://www.techradar.com/home/vacuums/dyson-v15-detect-vs-gen5detect">Dyson V15 Detect
+                        vs Gen5detect: what's the difference?</a>
+                </p>
+            </div>
+
+            <section id="faq">
+                <h2>Frequently Asked Questions</h2>
+                <div class="faq-item">
+                    <h3>How do I clean the filter of my vacuum cleaner?
+                        <button class="toggle-btn">+</button>
+                    </h3>
+                    <p class="faq-answer">Remove the filter from the vacuum, tap off loose dirt, and rinse it under
+                        running water. Let it dry completely before reinstalling.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Why is my vacuum cleaner losing suction power?
+                        <button class="toggle-btn">+</button>
+                    </h3>
+                    <p class="faq-answer">This could be due to a clogged filter, a full dustbin, or a blockage in
+                        the
+                        hose. Check these areas and clean or empty them as needed.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>What should I do if my vacuum cleaner overheats?
+                        <button class="toggle-btn">+</button>
+                    </h3>
+                    <p class="faq-answer">Turn off the vacuum and unplug it. Check for clogs in the hose or brush
+                        roll
+                        and ensure the filters are clean. Allow the motor to cool before using it again.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>How often should I replace the vacuum cleaner bag?
+                        <button class="toggle-btn">+</button>
+                    </h3>
+                    <p class="faq-answer">Replace the vacuum cleaner bag when it is about two-thirds full or if you
+                        notice a drop in suction power. Using the bag beyond this point can reduce performance.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Can I vacuum wet surfaces with my vacuum cleaner?
+                        <button class="toggle-btn">+</button>
+                    </h3>
+                    <p class="faq-answer">Most standard vacuum cleaners are not designed for wet surfaces. Use a
+                        wet-dry
+                        vacuum cleaner for such tasks to avoid damaging the unit.</p>
+                </div>
+    </main>
+    <script>// js for toggle function of FAQ'S
+        document.querySelectorAll('.toggle-btn').forEach(button => {
+            button.addEventListener('click', function () {
+                const answer = this.parentElement.nextElementSibling;
+                const isVisible = answer.style.display === 'block';
+                answer.style.display = isVisible ? 'none' : 'block';
+                this.textContent = isVisible ? '+' : '-';
+            });
+        });
+    </script>
+</body>
+
+</html>

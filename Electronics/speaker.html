@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speakers</title>
+</head>
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f9f9f9;
+        color: #333;
+    }
+
+    header {
+        background: linear-gradient(90deg, #002d72, #002d72);
+        color: white;
+        padding: 20px;
+        text-align: center;
+    }
+
+    header h1 {
+        margin: 0;
+        font-size: 2.8em;
+        text-transform: uppercase;
+        font-weight: bold;
+    }
+
+    header p {
+        margin: 10px 0;
+        font-size: 1.3em;
+        font-weight: 300;
+    }
+
+    nav {
+        background-color: #002d72;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 15px 0;
+        top: 0;
+        z-index: 1000;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    nav a {
+        color: white;
+        text-decoration: none;
+        padding: 10px 30px;
+        border-radius: 20px;
+        transition: background-color 0.3s ease;
+        font-size: 1.1em;
+    }
+
+    nav a:hover {
+        color: #80cbc4;
+    }
+
+    /* banner image*/
+    .banner {
+        width: 100%;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .banner-img {
+        width: 500px;
+        height: auto;
+        display: block;
+        margin-top: 20px;
+    }
+
+    /* 1 grid container */
+    .brands {
+        padding: 20px;
+        text-align: center;
+    }
+
+    .brands h2 {
+        font-size: 2em;
+        margin-bottom: 20px;
+    }
+
+    .grid-container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+    }
+
+    .grid-item {
+        background-color: white;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+
+    .grid-item img {
+        max-width: auto;
+        height: 200px;
+        margin-bottom: 10px;
+    }
+
+    .grid-item h3 {
+        font-size: 1.2em;
+        margin: 0;
+    }
+
+    .grid-item p {
+        font-size: 1em;
+        margin: 10px 0 20px;
+    }
+
+    .buy-now {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #002d72;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+    }
+
+    .buy-now:hover {
+        background-color: #80cbc4;
+    }
+
+    /* comparison styles for 2 tables*/
+    .comparison-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px auto;
+        text-align: left;
+    }
+
+    .comparison-table th,
+    .comparison-table td {
+        padding: 15px;
+        border: 1px solid #ddd;
+    }
+
+    .comparison-table th {
+        background-color: #002d72;
+        color: white;
+    }
+
+    .comparison-table td {
+        background-color: white;
+    }
+
+    .comparison-table tr:nth-child(even) td {
+        background-color: #f9f9f9;
+    }
+
+    .comparison-table caption {
+        caption-side: top;
+        font-size: 1.5em;
+        margin-bottom: 10px;
+    }
+
+    /*Categories styles*/
+    header h1 {
+        margin: 0;
+        font-size: 2.5rem;
+    }
+
+    .brands-section {
+        max-width: 1200px;
+        margin: 50px auto;
+        padding: 20px;
+    }
+
+    .brands-section h2 {
+        text-align: center;
+        color: #002d72;
+        font-size: 2rem;
+        margin-bottom: 30px;
+    }
+
+    .brand {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .brand img {
+        width: 150px;
+        height: auto;
+        object-fit: cover;
+    }
+
+    .brand-details {
+        padding: 15px;
+        flex: 1;
+    }
+
+    .brand-details h3 {
+        margin: 0;
+        color: #002d72;
+        font-size: 1.5rem;
+    }
+
+    .brand-details p {
+        margin: 10px 0;
+        font-size: 1rem;
+        line-height: 1.5;
+    }
+
+    .brand-details a {
+        display: inline-block;
+        margin-top: 10px;
+        padding: 10px 15px;
+        background-color: #002d72;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+    }
+
+    .brand-details a:hover {
+        background-color: #002d72;
+    }
+
+    /* General Styles */
+    body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        background-color: #f4f4f4;
+        text-align: center;
+    }
+
+    /* Heading */
+    h2 {
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    /* Product Cards Container */
+    .top-speaker-cards-container {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 20px;
+        padding: 20px;
+    }
+
+    /* Individual Card Styles */
+    .top-speaker-cards {
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 15px;
+        width: 320px;
+        text-align: center;
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .top-speaker-cards:hover {
+        transform: scale(1.05);
+    }
+
+    /* Product Image */
+    .top-speaker-cards img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 10px;
+    }
+
+    /* Product Title */
+    .top-speaker-cards h3 {
+        font-size: 1.2em;
+        color: #222;
+        margin: 10px 0;
+    }
+
+    /* Product Description */
+    .top-speaker-cards p {
+        font-size: 0.9em;
+        color: #555;
+        margin: 5px 0;
+    }
+
+    /* Buy Now Button */
+    .top-speaker-cards a button {
+        background-color: #00457c;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        font-size: 1em;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: background 0.3s;
+    }
+
+    .top-speaker-cards a button:hover {
+        background-color: #00457c;
+    }
+
+    /* Suggested Speakers Section Styling */
+    .suggested-speakers {
+        background-color: #f8f9fa;
+        padding: 50px 0;
+        text-align: center;
+    }
+
+    .suggested-speakers .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+
+    .suggested-speakers h2 {
+        font-size: 2em;
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    .suggested-speakers p {
+        color: #666;
+        margin-bottom: 30px;
+    }
+
+    .speakers-grid {
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+    }
+
+    .speaker-item {
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        max-width: 350px;
+        text-align: left;
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .speaker-item:hover {
+        transform: translateY(-5px);
+    }
+
+    .speaker-item img {
+        width: 100%;
+        height: 200px;
+        border-radius: 10px;
+    }
+
+    .speaker-item h3 {
+        font-size: 1.5em;
+        color: #222;
+        margin: 15px 0 10px;
+    }
+
+    .speaker-item p {
+        color: #555;
+        font-size: 1em;
+        line-height: 1.5;
+    }
+
+    .review {
+        margin-top: 15px;
+    }
+
+    .review p {
+        font-style: italic;
+        color: #444;
+    }
+
+    .star-rating span {
+        font-size: 1.2em;
+    }
+
+    .buy-now-btn {
+        display: inline-block;
+        margin-top: 10px;
+        padding: 10px 20px;
+        background-color: #00457c;
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+        border-radius: 5px;
+        transition: background 0.3s ease;
+    }
+
+    .buy-now-btn:hover {
+        background-color: #00457c;
+    }
+
+    /* reated articles style*/
+    .article-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+        justify-content: center;
+        align-items: center;
+        margin: 0 auto;
+        padding: 20px;
+        max-width: 1200px;
+    }
+
+
+    .article-item {
+        background-color: #fff;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        padding: 15px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .article-item:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .article-item img {
+        width: 100%;
+        height: 200px;
+        border-radius: 8px;
+        margin-bottom: 15px;
+    }
+
+    .article-item p {
+        font-size: 1rem;
+        color: #333;
+        line-height: 1.5;
+    }
+
+    .article-item a {
+        text-decoration: none;
+        color: #007bff;
+        font-weight: bold;
+        transition: color 0.3s ease;
+    }
+
+    .article-item a:hover {
+        color: #0056b3;
+    }
+
+    /* FAQ styles*/
+    #faq {
+        padding: 20px;
+        background-color: #f9f9f9;
+        text-align: center;
+    }
+
+    #faq h2 {
+        text-align: center;
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    .faq-item {
+        margin-bottom: 20px;
+    }
+
+    .faq-item h3 {
+        cursor: pointer;
+        padding: 10px;
+        background-color: white;
+        color: #002d72;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+    }
+
+    .faq-item p {
+        display: none;
+        padding: 10px;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-top: none;
+        border-radius: 0 0 5px 5px;
+    }
+
+    .faq-item p.visible {
+        display: block;
+    }
+
+    .faq-answer {
+        display: none;
+        padding: 10px;
+        background-color: #f9f9f9;
+        border: 1px solid #ddd;
+    }
+
+    .toggle-btn {
+        margin-left: 10px;
+        cursor: pointer;
+        background: none;
+        border: none;
+        font-size: 18px;
+        font-weight: bold;
+    }
+</style>
+
+<body>
+    <header class="header">
+        <h1>Speakers</h1>
+        <nav class="nav">
+            <a href="buyinguidespk.html">Buying Guide</a>
+            <a href="../reviews.php">Reviews</a>
+        </nav>
+    </header>
+    <section class="banner">
+        <img src="../images/speaker.jpg" alt="Speaker Banner" class="banner-img">
+    </section>
+    <section class="brands">
+        <h2>MAJOR GLOBAL SPEAKER BRANDS</h2>
+        <div class="grid-container">
+            <div class="grid-item">
+                <img src="../images/speaker1.jpg" alt="Bose">
+                <h3>Bose</h3>
+                <p>Bose is renowned for its high-quality audio products, delivering exceptional sound experiences.
+                    Explore the latest innovations from Bose.</p>
+                <a href="https://www.bose.com" class="buy-now" target="_blank">Buy Now</a>
+            </div>
+            <div class="grid-item">
+                <img src="../images/speaker2.jpg" alt="Sony">
+                <h3>Sony</h3>
+                <p>Sony offers a wide range of speakers that combine cutting-edge technology with superior sound
+                    quality. Discover the latest from Sony.</p>
+                <a href="https://www.sony.com" class="buy-now" target="_blank">Buy Now</a>
+            </div>
+            <div class="grid-item">
+                <img src="../images/speaker3.jpg" alt="JBL">
+                <h3>JBL</h3>
+                <p>JBL speakers are known for their powerful sound and durable build, perfect for any occasion. Check
+                    out the latest JBL speakers.</p>
+                <a href="https://www.jbl.com" class="buy-now" target="_blank">Buy Now</a>
+            </div>
+            <div class="grid-item">
+                <img src="../images/speaker4.jpg" alt="Harman Kardon">
+                <h3>Harman Kardon</h3>
+                <p>Harman Kardon delivers premium audio products with sleek designs and superior performance. Explore
+                    the latest from Harman Kardon.</p>
+                <a href="https://www.harmankardon.com" class="buy-now" target="_blank">Buy Now</a>
+            </div>
+            <div class="grid-item">
+                <img src="../images/speaker5.jpg" alt="Sonos">
+                <h3>Sonos</h3>
+                <p>Sonos offers smart speakers with rich sound and seamless connectivity. Discover the latest Sonos
+                    speakers.</p>
+                <a href="https://www.sonos.com" class="buy-now" target="_blank">Buy Now</a>
+            </div>
+            <div class="grid-item">
+                <img src="../images/speaker6.jpg" alt="Marshall">
+                <h3>Marshall</h3>
+                <p>Marshall speakers combine classic design with modern technology for a unique audio experience. Check
+                    out the latest from Marshall.</p>
+                <a href="https://www.marshallheadphones.com" class="buy-now" target="_blank">Buy Now</a>
+            </div>
+    </section>
+    <header>
+        <h1>EXPLORE DIFFERENT CATEGORIES OF SPEAKERS</h1>
+    </header>
+
+    <section class="brands-section">
+        <h2>CATEGORIES OF SPEAKERS</h2>
+
+        <div class="brand">
+            <img src="../images/speaker7.jpg" alt="Soundbars">
+            <div class="brand-details">
+                <h3>Soundbars</h3>
+                <p>Soundbars are long, slim speakers designed to sit below a TV. They enhance TV audio with minimal
+                    setup, providing a better audio experience for movies and TV shows.</p>
+                <a href="https://www.amazon.in/Soundbar-Speakers/b?ie=UTF8&node=1389372031" target="_blank">Shop Now</a>
+            </div>
+        </div>
+
+        <div class="brand">
+            <img src="../images/speaker8.jpg" alt="Portable Bluetooth Speakers">
+            <div class="brand-details">
+                <h3>Portable Bluetooth Speakers</h3>
+                <p>Portable Bluetooth speakers are small, wireless speakers that connect via Bluetooth. They are
+                    designed for portability and outdoor use, offering great sound on the go.</p>
+                <a href="https://www.amazon.in/bluetooth-speakers/s?k=bluetooth+speakers" target="_blank">Shop Now</a>
+            </div>
+        </div>
+
+        <div class="brand">
+            <img src="../images/speaker9.jpg" alt="Smart Speakers">
+            <div class="brand-details">
+                <h3>Smart Speakers</h3>
+                <p>Smart speakers are integrated with voice assistants like Alexa, Google Assistant, or Siri. They can
+                    control smart home devices and provide information on demand.</p>
+                <a href="https://www.amazon.in/Smart-Speakers/s?k=Smart+Speakers" target="_blank">Shop Now</a>
+            </div>
+        </div>
+
+        <div class="brand">
+            <img src="../images/speaker10.jpg" alt="Bookshelf Speakers">
+            <div class="brand-details">
+                <h3>Bookshelf Speakers</h3>
+                <p>Bookshelf speakers are compact speakers designed to be placed on shelves or stands. They are suitable
+                    for home audio systems and smaller rooms.</p>
+                <a href="https://www.amazon.in/Bookshelf-Speakers/b?ie=UTF8&node=1389366031" target="_blank">Shop
+                    Now</a>
+            </div>
+        </div>
+
+        <div class="brand">
+            <img src="../images/speaker11.jpg" alt="Floor-standing Speakers">
+            <div class="brand-details">
+                <h3>Floor-standing (Tower) Speakers</h3>
+                <p>Floor-standing speakers are larger speakers that stand on the floor. They provide powerful,
+                    full-range sound for home theaters and high-fidelity audio systems.</p>
+                <a href="https://www.amazon.in/Floor-Standing-Speakers/b?ie=UTF8&node=1389369031" target="_blank">Shop
+                    Now</a>
+            </div>
+        </div>
+
+        <div class="brand">
+            <img src="../images/speaker12.jpg" alt="Home Theater Systems">
+            <div class="brand-details">
+                <h3>Home Theater Systems</h3>
+                <p>Home theater systems are complete audio systems with multiple speakers (e.g., 5.1 or 7.1 setups).
+                    They provide immersive surround sound for movies and TV.</p>
+                <a href="https://www.amazon.in/Home-Theatre-Systems/b?ie=UTF8&node=1389387031" target="_blank">Shop
+                    Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Top Speakers Comparison Section -->
+    <section class="comparison">
+        <table class="comparison-table">
+            <caption><b>BEST SPEAKERS BY CATEGORY</b></caption>
+            <tr>
+                <th>Category</th>
+                <th>Best Speaker</th>
+                <th>Specifications</th>
+                <th>Features</th>
+                <th>Pros</th>
+                <th>Cons</th>
+                <th>Why It's the Best</th>
+            </tr>
+            <tr>
+                <td>Portable Bluetooth Speaker</td>
+                <td>JBL Charge 5</td>
+                <td>Power Output: 40W, Battery Life: 20 hours, Waterproof (IP67)</td>
+                <td>Deep Bass, USB Power Bank, Rugged Build</td>
+                <td>Great battery life, Waterproof, Durable</td>
+                <td>No AUX input</td>
+                <td>Best for portability and durability</td>
+            </tr>
+            <tr>
+                <td>Home Theater Speakers</td>
+                <td>Klipsch Reference Premiere RP-8000F</td>
+                <td>Dual 8" Woofers, Tractrix Horn, 600W Peak Power</td>
+                <td>Powerful Sound, Dolby Atmos Compatible</td>
+                <td>Rich soundstage, Deep bass, Great clarity</td>
+                <td>Bulky</td>
+                <td>Best for cinematic home theater experience</td>
+            </tr>
+            <tr>
+                <td>Smart Speaker</td>
+                <td>Sonos One (Gen 2)</td>
+                <td>Wi-Fi, AirPlay 2, Alexa/Google Assistant</td>
+                <td>Multi-room Audio, Compact Design</td>
+                <td>Great sound, Smart home integration</td>
+                <td>Requires Wi-Fi</td>
+                <td>Best for smart home audio</td>
+            </tr>
+            <tr>
+                <td>Bookshelf Speakers</td>
+                <td>KEF LS50 Meta</td>
+                <td>Uni-Q Driver, 85dB Sensitivity, 106dB Peak SPL</td>
+                <td>Clear Audio, Stylish Design</td>
+                <td>Excellent clarity, Premium build</td>
+                <td>Expensive</td>
+                <td>Best for detailed and immersive audio</td>
+            </tr>
+            <tr>
+                <td>Floorstanding Speakers</td>
+                <td>Bowers & Wilkins 603 S2</td>
+                <td>Dual 6.5" Woofers, 3-way Design, 200W Power</td>
+                <td>Powerful Bass, Clear Mids & Highs</td>
+                <td>Great audio performance, Elegant design</td>
+                <td>Requires space</td>
+                <td>Best for full-range sound</td>
+            </tr>
+            <tr>
+                <td>Soundbars</td>
+                <td>Sonos Arc</td>
+                <td>11 Speakers, Dolby Atmos, Wi-Fi</td>
+                <td>Immersive 3D Audio, Voice Control</td>
+                <td>Great for movies, Easy setup</td>
+                <td>Expensive</td>
+                <td>Best for cinematic sound in a compact form</td>
+            </tr>
+            <tr>
+                <td>Studio Monitors</td>
+                <td>Yamaha HS8</td>
+                <td>8" Woofer, 120W Bi-Amp, Flat Frequency Response</td>
+                <td>Accurate Sound, Professional Use</td>
+                <td>Highly precise audio</td>
+                <td>No Bluetooth</td>
+                <td>Best for studio-quality sound accuracy</td>
+            </tr>
+        </table>
+    </section>
+
+    <!----Top 3 Best Rated Speakers-->
+    <h2>TOP 3 BEST RATED SPEAKERS</h2>
+    <div class="top-speaker-cards-container">
+        <div class="top-speaker-cards">
+            <img src="../images/speaker13.jpg" alt="Sonos Era 300">
+            <h3>Sonos Era 300</h3>
+            <p>The Sonos Era 300 delivers next-level spatial audio with Dolby Atmos support. It provides an immersive
+                sound experience with deep bass, clear mids, and crisp highs, perfect for music and home theater setups.
+            </p>
+            <p><strong>Connectivity:</strong> Wi-Fi, Bluetooth</p>
+            <p><strong>Special Feature:</strong> Dolby Atmos & Voice Control</p>
+            <a href="https://www.sonos.com/en-us/shop/era-300">
+                <button>Buy Now</button></a>
+        </div>
+
+        <div class="top-speaker-cards">
+            <img src="../images/speaker14.jpg" alt="Marshall Stanmore III">
+            <h3>Marshall Stanmore III</h3>
+            <p>The Marshall Stanmore III blends classic rock-and-roll aesthetics with high-quality sound performance.
+                It features powerful bass, dynamic mid-range, and multi-host Bluetooth pairing for seamless
+                connectivity.</p>
+            <p><strong>Connectivity:</strong> Bluetooth 5.2, AUX</p>
+            <p><strong>Special Feature:</strong> Customizable EQ & Vintage Design</p>
+            <a href="https://www.marshallheadphones.com/us/en/stanmore-iii.html">
+                <button>Buy Now</button></a>
+        </div>
+
+        <div class="top-speaker-cards">
+            <img src="../images/speaker15.jpg" alt="Bang & Olufsen Beosound A1 2nd Gen">
+            <h3>Bang & Olufsen Beosound A1 (2nd Gen)</h3>
+            <p>The Bang & Olufsen Beosound A1 is a stylish, ultra-portable speaker with a waterproof design and
+                signature B&O sound quality. It offers 18 hours of battery life and built-in Alexa voice control.</p>
+            <p><strong>Connectivity:</strong> Bluetooth 5.1</p>
+            <p><strong>Special Feature:</strong> Waterproof & Alexa Built-in</p>
+            <a href="https://www.bang-olufsen.com/en/us/speakers/beosound-a1-2nd-gen">
+                <button>Buy Now</button></a>
+        </div>
+    </div>
+
+    <!-- top selling speaker Section -->
+    <section id="suggested-speakers" class="suggested-speakers">
+        <div class="container">
+            <h2>TOP-SELLING SPEAKERS</h2>
+            <p>Explore the most in-demand speakers with expert reviews and ratings.</p>
+            <div class="speakers-grid">
+                <!-- Speaker 1 -->
+                <div class="speaker-item">
+                    <img src="../images/speaker16.jpg" alt="Bose SoundLink Revolve">
+                    <h3>Bose SoundLink Revolve</h3>
+                    <p>
+                        A powerful portable Bluetooth speaker with deep, immersive sound and 360-degree coverage for an
+                        unparalleled audio experience.
+                    </p>
+                    <div class="review">
+                        <p><strong>Review:</strong> "Amazing sound quality and great battery life. Perfect for any
+                            occasion!"</p>
+                        <div class="star-rating">
+                            <span style="color: gold; font-size: 1.2em;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                        </div>
+                        <a href="https://www.bose.com/en_us/products/speakers.html" class="buy-now-btn">Buy Now</a>
+                    </div>
+                </div>
+                <!-- Speaker 2 -->
+                <div class="speaker-item">
+                    <img src="../images/speaker17.jpg" alt="JBL Flip 6">
+                    <h3>JBL Flip 6</h3>
+                    <p>
+                        A durable and waterproof Bluetooth speaker with high-quality sound, deep bass, and long battery
+                        life for outdoor adventures.
+                    </p>
+                    <div class="review">
+                        <p><strong>Review:</strong> "Great bass and clarity. The waterproof design makes it perfect for
+                            poolside parties!"</p>
+                        <div class="star-rating">
+                            <span style="color: gold; font-size: 1.2em;">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
+                        </div>
+                        <a href="https://www.jbl.com/bluetooth-speakers" class="buy-now-btn">Buy Now</a>
+                    </div>
+                </div>
+                <!-- Speaker 3 -->
+                <div class="speaker-item">
+                    <img src="../images/speaker18.jpg" alt="Sony SRS-XB43">
+                    <h3>Sony SRS-XB43</h3>
+                    <p>
+                        Experience extra bass and high-quality sound with this durable, waterproof speaker that delivers
+                        a powerful audio performance.
+                    </p>
+                    <div class="review">
+                        <p><strong>Review:</strong> "Excellent sound and battery life. The LED lights add a fun touch!"
+                        </p>
+                        <div class="star-rating">
+                            <span style="color: gold; font-size: 1.2em;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                        </div>
+                        <a href="https://www.sony.com/electronics/wireless-speakers" class="buy-now-btn">Buy Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- related articles Section -->
+    <header>RELATED ARTICLES</header>
+    <div class="article-grid">
+        <div class="article-item">
+            <img src="../images/speaker3.jpg" alt="Wireless speaker">
+            <p><a href="https://www.techradar.com/news/best-speaker">The best wireless speaker for 2024:Sonos Era
+                    100</a></p>
+        </div>
+        <div class="article-item">
+            <img src="../images/speaker6.jpg" alt="Top 23 best speaker brands on the market">
+            <p><a href="https://descriptive.audio/best-speaker-brands/">Top 23 best speaker brands on the market</a></p>
+        </div>
+        <div class="article-item">
+            <img src="../images/speaker19.jpg" alt="The best soundbars 2025 for all budgets">
+            <p><a href="https://www.techradar.com/news/audio/home-cinema-audio/tr-top-10-best-soundbars-1288008">The
+                    best soundbars 2025 for all budgets</a>
+            </p>
+        </div>
+    </div>
+    <!-- FAQ's Section -->
+    <section id="faq">
+        <h2>FREQUENTLY ASKED QUESTIONS</h2>
+        <div class="faq-item">
+            <h3>What is the best speaker for outdoor use?
+                <button class="toggle-btn">+</button>
+            </h3>
+            <p class="faq-answer">Look for waterproof, dustproof, and rugged speakers like the JBL Flip 6 or Sony
+                SRS-XB43 for outdoor adventures.</p>
+        </div>
+        <div class="faq-item">
+            <h3>How do I choose a speaker with good bass?
+                <button class="toggle-btn">+</button>
+            </h3>
+            <p class="faq-answer">Check for extra bass technology, subwoofers, and frequency range. Brands like Sony and
+                JBL excel in deep bass performance.</p>
+        </div>
+        <div class="faq-item">
+            <h3>Can I connect multiple speakers together?
+                <button class="toggle-btn">+</button>
+            </h3>
+            <p class="faq-answer">Yes, many modern speakers offer party mode or stereo pairing, allowing multiple
+                speakers to sync for enhanced sound.</p>
+        </div>
+        <div class="faq-item">
+            <h3>Are wired speakers better than wireless ones?
+                <button class="toggle-btn">+</button>
+            </h3>
+            <p class="faq-answer">Wired speakers generally provide higher audio fidelity, while wireless speakers offer
+                convenience and portability.</p>
+        </div>
+        <div class="faq-item">
+            <h3>What is the battery life of portable speakers?
+                <button class="toggle-btn">+</button>
+            </h3>
+            <p class="faq-answer">Battery life varies by model, but most portable speakers last between 8 to 24 hours on
+                a full charge.</p>
+        </div>
+        <div class="faq-item">
+            <h3>Do Bluetooth speakers work with all devices?
+                <button class="toggle-btn">+</button>
+            </h3>
+            <p class="faq-answer">Most Bluetooth speakers are compatible with smartphones, tablets, and laptops, but
+                it's best to check the specifications for compatibility.</p>
+        </div>
+        <div class="faq-item">
+            <h3>How can I improve the sound quality of my speaker?
+                <button class="toggle-btn">+</button>
+            </h3>
+            <p class="faq-answer">Placing the speaker on a solid surface, adjusting equalizer settings, and reducing
+                interference can enhance sound quality.</p>
+        </div>
+    </section>
+    <script>
+        // js for toggle function of FAQ'S
+        document.querySelectorAll('.toggle-btn').forEach(button => {
+            button.addEventListener('click', function () {
+                const answer = this.parentElement.nextElementSibling;
+                const isVisible = answer.style.display === 'block';
+                answer.style.display = isVisible ? 'none' : 'block';
+                this.textContent = isVisible ? '+' : '-';
+            });
+        });
+
+    </script>
+</body>
+
+</html>

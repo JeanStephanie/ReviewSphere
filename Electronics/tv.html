@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TV's</title>
+</head>
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f9f9f9;
+        color: #333;
+    }
+
+    header {
+        background: linear-gradient(90deg, #002d72, #002d72);
+        color: white;
+        padding: 20px;
+        text-align: center;
+    }
+
+    header h1 {
+        margin: 0;
+        font-size: 2.8em;
+        text-transform: uppercase;
+        font-weight: bold;
+    }
+
+    header p {
+        margin: 10px 0;
+        font-size: 1.3em;
+        font-weight: 300;
+    }
+
+    nav {
+        background-color: #002d72;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 15px 0;
+        top: 0;
+        z-index: 1000;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    nav a {
+        color: white;
+        text-decoration: none;
+        padding: 10px 30px;
+        border-radius: 20px;
+        transition: background-color 0.3s ease;
+        font-size: 1.1em;
+    }
+
+    nav a:hover {
+        color: #80cbc4;
+    }
+
+    /* banner image*/
+    .banner {
+        width: 100%;
+        overflow: hidden;
+    }
+
+    .banner-img {
+        width: 100%;
+        height: auto;
+        display: block;
+        margin-top: 20px;
+    }
+
+    /* 1 grid container */
+    .brands {
+        padding: 20px;
+        text-align: center;
+    }
+
+    .brands h2 {
+        font-size: 2em;
+        margin-bottom: 20px;
+    }
+
+    .grid-container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+    }
+
+    .grid-item {
+        background-color: white;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+
+    .grid-item img {
+        max-width: auto;
+        height: 200px;
+        margin-bottom: 10px;
+    }
+
+    .grid-item h3 {
+        font-size: 1.2em;
+        margin: 0;
+    }
+
+    .grid-item p {
+        font-size: 1em;
+        margin: 10px 0 20px;
+    }
+
+    .buy-now {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #002d72;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+    }
+
+    .buy-now:hover {
+        background-color: #80cbc4;
+    }
+
+    /* comparison table */
+    .comparison-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px auto;
+        text-align: left;
+    }
+
+    .comparison-table th,
+    .comparison-table td {
+        padding: 15px;
+        border: 1px solid #ddd;
+    }
+
+    .comparison-table th {
+        background-color: #002d72;
+        color: white;
+    }
+
+    .comparison-table td {
+        background-color: white;
+    }
+
+    .comparison-table tr:nth-child(even) td {
+        background-color: #f9f9f9;
+    }
+
+    .comparison-table caption {
+        caption-side: top;
+        font-size: 1.5em;
+        margin-bottom: 10px;
+    }
+
+    /* flexbox for TV categories */
+    .container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        padding: 20px;
+    }
+
+    .category {
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        padding: 15px;
+        width: calc(33% - 40px);
+        box-sizing: border-box;
+    }
+
+    .category h2 {
+        margin-top: 0;
+    }
+
+    /* General Styles */
+    body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        background-color: #f4f4f4;
+        text-align: center;
+    }
+
+    /* Heading */
+    h2 {
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    /* Product Cards Container */
+    .top-tv-cards-container {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 20px;
+        padding: 20px;
+    }
+
+    /* Individual Card Styles */
+    .top-tv-cards {
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 15px;
+        width: 320px;
+        text-align: center;
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .top-tv-cards:hover {
+        transform: scale(1.05);
+    }
+
+    /* Product Image */
+    .top-tv-cards img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 10px;
+    }
+
+    /* Product Title */
+    .top-tv-cards h3 {
+        font-size: 1.2em;
+        color: #222;
+        margin: 10px 0;
+    }
+
+    /* Product Description */
+    .top-tv-cards p {
+        font-size: 0.9em;
+        color: #555;
+        margin: 5px 0;
+    }
+
+    /* Buy Now Button */
+    .top-tv-cards a button {
+        background-color: #00457c;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        font-size: 1em;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: background 0.3s;
+    }
+
+    .top-tv-cards a button:hover {
+        background-color: #00457c;
+    }
+
+    /* suggested tv style*/
+    .suggested-tv {
+        background-color: #f4f4f4;
+        padding: 50px 0;
+        font-family: Arial, sans-serif;
+    }
+
+    .suggested-tv .container {
+        width: 80%;
+        margin: 0 auto;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .suggested-tv h2 {
+        font-size: 2.5rem;
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    .suggested-tv p {
+        font-size: 1.1rem;
+        color: #555;
+        margin-bottom: 40px;
+    }
+
+    .tv-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px;
+    }
+
+    .tv-item {
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        text-align: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .tv-item:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .tv-item img {
+        max-width: 300px;
+        height: 200px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+    }
+
+    .tv-item h3 {
+        font-size: 1.8rem;
+        color: #333;
+        margin-bottom: 10px;
+    }
+
+    .tv-item p {
+        font-size: 1rem;
+        color: #666;
+        margin-bottom: 15px;
+    }
+
+    .review p {
+        font-size: 1rem;
+        color: #444;
+        margin-bottom: 10px;
+    }
+
+    .star-rating span {
+        color: gold;
+    }
+
+    .review {
+        margin-top: 15px;
+    }
+
+    .review p {
+        font-style: italic;
+        color: #444;
+    }
+
+    .star-rating span {
+        font-size: 1.2em;
+    }
+
+    .buy-now-btn {
+        display: inline-block;
+        margin-top: 10px;
+        padding: 10px 20px;
+        background-color: #00457c;
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+        border-radius: 5px;
+        transition: background 0.3s ease;
+    }
+
+    .buy-now-btn:hover {
+        background-color: #00457c;
+    }
+
+    /* reated articles style*/
+    .article-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+        justify-content: center;
+        align-items: center;
+        margin: 0 auto;
+        padding: 20px;
+        max-width: 1200px;
+    }
+
+    .article-item {
+        background-color: #fff;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        padding: 15px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .article-item:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .article-item img {
+        width: 100%;
+        height: 200px;
+        border-radius: 8px;
+        margin-bottom: 15px;
+    }
+
+    .article-item p {
+        font-size: 1rem;
+        color: #333;
+        line-height: 1.5;
+    }
+
+    .article-item a {
+        text-decoration: none;
+        color: #007bff;
+        font-weight: bold;
+        transition: color 0.3s ease;
+    }
+
+    .article-item a:hover {
+        color: #0056b3;
+    }
+
+    /* FAQ styles*/
+    #faq {
+        padding: 20px;
+        background-color: #f9f9f9;
+        text-align: center;
+    }
+
+    #faq h2 {
+        text-align: center;
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    .faq-item {
+        margin-bottom: 20px;
+    }
+
+    .faq-item h3 {
+        cursor: pointer;
+        padding: 10px;
+        background-color: white;
+        color: #002d72;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+    }
+
+    .faq-item p {
+        display: none;
+        padding: 10px;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-top: none;
+        border-radius: 0 0 5px 5px;
+    }
+
+    .faq-item p.visible {
+        display: block;
+    }
+
+    .faq-answer {
+        display: none;
+        padding: 10px;
+        background-color: #f9f9f9;
+        border: 1px solid #ddd;
+    }
+
+    .toggle-btn {
+        margin-left: 10px;
+        cursor: pointer;
+        background: none;
+        border: none;
+        font-size: 18px;
+        font-weight: bold;
+    }
+</style>
+
+<body>
+    <header class="header">
+        <h1>TV's</h1>
+        <nav class="nav">
+            <a href="buyinguidetv.html">Buying Guide</a>
+            <a href="../reviews.php">Reviews</a>
+        </nav>
+    </header>
+    <section class="banner">
+        <img src="tv1.webp" alt="TV Banner" class="banner-img">
+    </section>
+    <section class="brands">
+        <h2>MAJOR GLOBAL TV BRANDS</h2>
+        <div class="grid-container">
+            <div class="grid-item">
+                <img src="../images/samsungTV.jpg" alt="Samsung">
+                <h3>Samsung</h3>
+                <p>Samsung Electronics is a global leader in technology, opening new possibilities for people
+                    everywhere. Discover the latest in electronic & smart appliance technology with Samsung.</p>
+                <a href="https://www.samsung.com" class="buy-now" target="_blank">Buy Now</a>
+            </div>
+            <div class="grid-item">
+                <img src="../images/LGtv.jpg" alt="LG">
+                <h3>LG</h3>
+                <p>LG Electronics is committed to delivering products that make life better, easier, and more enjoyable.
+                    Explore the latest innovative LG products and appliances.</p>
+                <a href="https://www.lg.com" class="buy-now" target="_blank">Buy Now</a>
+            </div>
+            <div class="grid-item">
+                <img src="../images/sonyTV.jpg" alt="Sony">
+                <h3>Sony</h3>
+                <p>Sony is one of the leading manufacturers of electronic products for the consumer and professional
+                    markets. Explore a wide range of TVs, sound bars, and more from Sony.</p>
+                <a href="https://www.sony.com" class="buy-now" target="_blank">Buy Now</a>
+            </div>
+            <div class="grid-item">
+                <img src="../images/TCLtv.jpg" alt="TCL">
+                <h3>TCL</h3>
+                <p>TCL is a fast-growing consumer electronics company and a leading player in the global TV industry.
+                    Experience the latest in TV technology with TCL's high-quality products.</p>
+                <a href="https://www.tcl.com" class="buy-now" target="_blank">Buy Now</a>
+            </div>
+            <div class="grid-item">
+                <img src="../images/hisenseTV.jpg" alt="Hisense">
+                <h3>Hisense</h3>
+                <p>Hisense is a global electronics and appliance manufacturer with a reputation for quality and
+                    innovation. Discover the latest in TV technology from Hisense.</p>
+                <a href="https://www.hisense.com" class="buy-now" target="_blank">Buy Now</a>
+            </div>
+            <div class="grid-item">
+                <img src="../images/panasonicTV.jpg" alt="Panasonic">
+                <h3>Panasonic</h3>
+                <p>Panasonic is committed to creating a better life and a better world, continuously contributing to the
+                    evolution of society and to the happiness of people around the globe.</p>
+                <a href="https://www.panasonic.com" class="buy-now" target="_blank">Buy Now</a>
+            </div>
+        </div>
+    </section>
+    <section class="comparison">
+        <table class="comparison-table">
+            <caption><b>TOP 6 TV BRANDS COMPARISON</b></caption>
+            <tr>
+                <th>Feature</th>
+                <th>Specifications</th>
+                <th>Features</th>
+                <th>Pros</th>
+                <th>Cons</th>
+                <th>Why it's the best</th>
+            </tr>
+            <tr>
+                <td>Samsung</td>
+                <td>4K, QLED, HDMI 2.1, HDR10+</td>
+                <td>Smart Hub, Bixby, Ambient Mode</td>
+                <td>Excellent picture quality, robust smart features</td>
+                <td>Expensive, Bixby can be inconsistent</td>
+                <td>Best overall performance and smart features</td>
+            </tr>
+            <tr>
+                <td>LG</td>
+                <td>4K, OLED, HDMI 2.1, Dolby Vision</td>
+                <td>WebOS, ThinQ AI, Magic Remote</td>
+                <td>Outstanding picture quality, intuitive interface</td>
+                <td>Expensive, limited app selection</td>
+                <td>Best for picture quality and user interface</td>
+            </tr>
+            <tr>
+                <td>Sony</td>
+                <td>4K, OLED, HDMI 2.1, Dolby Vision</td>
+                <td>Android TV, Google Assistant, Acoustic Surface</td>
+                <td>Superior picture and sound, excellent build quality</td>
+                <td>Expensive, Android TV can be sluggish</td>
+                <td>Best for picture and sound quality</td>
+            </tr>
+            <tr>
+                <td>TCL</td>
+                <td>4K, QLED, HDMI 2.0, HDR10</td>
+                <td>Roku TV, Voice Control, Wide Color</td>
+                <td>Good value for money, easy-to-use interface</td>
+                <td>Limited premium features, average sound quality</td>
+                <td>Best value for money with good features</td>
+            </tr>
+            <tr>
+                <td>Hisense</td>
+                <td>4K, ULED, HDMI 2.0, Dolby Vision</td>
+                <td>VIDAA U, Alexa Built-in, Game Mode</td>
+                <td>Affordable, good picture quality</td>
+                <td>Limited premium features, average build quality</td>
+                <td>Best budget option with good performance</td>
+            </tr>
+            <tr>
+                <td>Panasonic</td>
+                <td>4K, OLED, HDMI 2.0, HDR10+</td>
+                <td>My Home Screen, Voice Assistant, Art Mode</td>
+                <td>Good picture quality, reliable performance</td>
+                <td>Limited premium features, average smart platform</td>
+                <td>Best reliable performance at a reasonable price</td>
+            </tr>
+        </table>
+    </section>
+    <h1 style="text-align: center; color: black;">CATEGORIES OF TV</h1>
+    <div class="container">
+        <div class="category">
+            <h2>Display Technology</h2>
+            <ul>
+                <li><strong>LED (Light Emitting Diode):</strong> Provides bright and energy-efficient displays.</li>
+                <li><strong>OLED (Organic Light Emitting Diode):</strong> Offers high contrast ratios and deep blacks.
+                </li>
+                <li><strong>QLED (Quantum Dot LED):</strong> Uses quantum dots for enhanced color and brightness.</li>
+                <li><strong>LCD (Liquid Crystal Display):</strong> Common and cost-effective technology.</li>
+                <li><strong>Plasma:</strong> Older technology, less common now but known for good color accuracy.</li>
+            </ul>
+        </div>
+
+        <div class="category">
+            <h2>Screen Size</h2>
+            <ul>
+                <li><strong>Small (Under 40 inches):</strong> Ideal for bedrooms or small spaces.</li>
+                <li><strong>Medium (40-55 inches):</strong> Suitable for most living rooms.</li>
+                <li><strong>Large (Above 55 inches):</strong> Best for home theaters and large rooms.</li>
+            </ul>
+        </div>
+
+        <div class="category">
+            <h2>Resolution</h2>
+            <ul>
+                <li><strong>HD (720p):</strong> Basic high-definition resolution, suitable for small screens.</li>
+                <li><strong>Full HD (1080p):</strong> Standard resolution for most modern TVs.</li>
+                <li><strong>4K (Ultra HD):</strong> Offers four times the resolution of Full HD, providing sharper
+                    images.</li>
+                <li><strong>8K (Ultra High Definition):</strong> Provides the highest resolution available, with
+                    incredible detail.</li>
+            </ul>
+        </div>
+
+        <div class="category">
+            <h2>Smart TVs</h2>
+            <p>
+                <li>Smart TVs are televisions that come with built-in internet connectivity, allowing users to
+                    access
+                    streaming services like Netflix, YouTube, Hulu, and more, directly from the TV.</li>
+                <li> They often feature apps,voice control, and support for casting from mobile devices.</li>
+                <li>hey also offer features like browsing the web, gaming, and even controlling smart home devices.</li>
+                <li> Equipped with internet connectivity and streaming apps for a versatile viewing experience.</li>
+            </p>
+        </div>
+        <div class="category">
+            <h2>Refresh Rate</h2>
+            <ul>
+                <li><strong>60Hz:</strong> Standard refresh rate for most TVs, suitable for regular viewing.</li>
+                <li><strong>120Hz:</strong> Provides smoother motion for sports and action scenes.</li>
+                <li><strong>240Hz:</strong> Offers the smoothest motion, ideal for gaming and fast-paced content.</li>
+            </ul>
+        </div>
+
+        <div class="category">
+            <h2>Sound Quality</h2>
+            <ul>
+                <li><strong>Built-in soundbars:</strong> Provides enhanced audio quality without needing external
+                    speakers.</li>
+                <li><strong>Dolby Atmos support:</strong> Delivers immersive 3D audio for a theater-like experience.
+                </li>
+                <li><strong>Advanced audio technologies:</strong> Includes various enhancements for superior sound
+                    quality.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!----Top 3 Best Rated TVs-->
+    <h2>TOP 3 BEST RATED SMART TV'S</h2>
+    <div class="top-tv-cards-container">
+        <div class="top-tv-cards">
+            <img src="../images/TCL2.jpg" alt="TCL QM8 Mini LED">
+            <h3>TCL QM8 Mini LED</h3>
+            <p>The TCL QM8 Mini LED TV offers stunning 4K visuals with high peak brightness, Quantum Dot color, and a
+                144Hz refresh rate.
+                With Dolby Vision IQ, HDR10+, and built-in Google TV, it delivers a premium experience.</p>
+            <p><strong>Screen Size:</strong> 65 inches</p>
+            <p><strong>Resolution:</strong> 4K UHD</p>
+            <a href="https://www.amazon.com/TCL-65QM850G-Accelerator-Streaming-Television/dp/B0C1J4MPBB?th=1">
+                <button>Buy Now</button></a>
+        </div>
+
+        <div class="top-tv-cards">
+            <img src="../images/hisense2.jpg" alt="Hisense U8K ULED">
+            <h3>Hisense U8K ULED</h3>
+            <p>The Hisense U8K ULED TV features Mini LED backlighting, Quantum Dot technology, and a 120Hz refresh rate
+                for smooth visuals.
+                It supports Dolby Vision, HDR10+, and IMAX Enhanced for an immersive viewing experience.</p>
+            <p><strong>Screen Size:</strong> 55 inches</p>
+            <p><strong>Resolution:</strong> 4K UHD</p>
+            <a href="https://www.amazon.in/Hisense-inches-Ultra-Smart-55U7N/dp/B0D3X9SMKJ/ref=sr_1_1_sspa?dib=eyJ2IjoiMSJ9.7hD6-Dsed4l-XL5cFn12K0mg1EdDH9Qo4bswGjEQYtU5DiOqxsKAO4WkZvt32welKyi6NJREX687nGZ-5s3qfUSrdCa_CTBm3BOxKUgKidIYBtst3y9ITUnAfVruyItcs-C-ImyAxjmlky-jFwEXV2uaixFTUjvTpJy6sJ4TqXc8ri12yydNSKWQmXj-HXMbxYAVzODslguuMaRgeJXyxd4k-QlINIp_2Yx6iBatVrE.PnhpmR-ttWuJMDfRvumyBk7lKnNFY-bzMMImQnj9Xc0&dib_tag=se&keywords=hisense%2Bu8k&nsdOptOutParam=true&qid=1742832644&sr=8-1-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&th=1">
+                <button>Buy Now</button></a>
+        </div>
+
+        <div class="top-tv-cards">
+            <img src="../images/vizio.jpg" alt="Vizio P-Series Quantum X">
+            <h3>Vizio P-Series Quantum X</h3>
+            <p>The Vizio P-Series Quantum X TV offers high brightness, deep contrast, and vibrant Quantum Color
+                technology.
+                With a 120Hz refresh rate, VRR support, and HDMI 2.1, it's perfect for gaming and streaming.</p>
+            <p><strong>Screen Size:</strong> 65 inches</p>
+            <p><strong>Resolution:</strong> 4K UHD</p>
+            <a href="https://www.amazon.com/VIZIO-Quantum-Class-64-50-Diag/dp/B07V255N45">
+                <button>Buy Now</button></a>
+        </div>
+    </div>
+    <!-- top selling TVs Section -->
+    <section id="suggested-tv" class="suggested-tv">
+        <div class="container">
+            <h2 style="text-align: centers;">TOP-SELLING TVs</h2>
+            <p>Explore the most in-demand TV's with expert reviews and ratings.</p>
+            <div class="tv-grid">
+                <!-- TV 1 -->
+                <div class="tv-item">
+                    <img src="../images/samsungQLED.jpg" alt="Samsung QLED">
+                    <h3>Samsung QLED</h3>
+                    <p>
+                        Experience stunning picture quality with Quantum Dot technology and impressive brightness.
+                    </p>
+                    <div class="review">
+                        <p><strong>Review:</strong> "Amazing colors and clarity. Best TV for movies and gaming!"</p>
+                        <div class="star-rating">
+                            <span style="color: gold; font-size: 1.2em;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                        </div>
+                        <br>
+                        <a href="https://www.samsung.com/us/televisions-home-theater/tvs/qled-4k-tvs/"
+                            class="buy-now-btn">Buy Now</a>
+                    </div>
+                </div>
+                <!-- TV 2 -->
+                <div class="tv-item">
+                    <img src="../images/lgOLED.jpg" alt="LG OLED">
+                    <h3>LG OLED</h3>
+                    <p>
+                        Enjoy perfect blacks and infinite contrast with OLED technology, ideal for a cinematic
+                        experience.
+                    </p>
+                    <div class="review">
+                        <p><strong>Review:</strong> "Unmatched picture quality. A true game-changer!"</p>
+                        <div class="star-rating">
+                            <span style="color: gold; font-size: 1.2em;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                        </div>
+                        <br>
+                        <a href="https://www.lg.com/us/oled-tvs" class="buy-now-btn">Buy Now</a>
+                    </div>
+                </div>
+                <!-- TV 3 -->
+                <div class="tv-item">
+                    <img src="../images/sonyBravia.jpg" alt="Sony Bravia" >
+                    <h3>Sony Bravia</h3>
+                    <p>
+                        Experience exceptional color and clarity with Sony's advanced image processing technology.
+                    </p>
+                    <div class="review">
+                        <p><strong>Review:</strong> "Incredible detail and vibrant colors. Perfect for any home
+                            theater!"</p>
+                        <div class="star-rating">
+                            <span style="color: gold; font-size: 1.2em;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                        </div>
+                        <br>
+                        <a href="https://www.sony.com/electronics/bravia" class="buy-now-btn">Buy Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- related articles Section -->
+    <header>RELATED ARTICLES</header>
+    <div class="article-grid">
+        <div class="article-item">
+            <img src="../images/tv.jpg" alt="Article Image 1">
+            <p><a
+                    href="https://www.hindustantimes.com/technology/best-smart-tv-top-10-options-for-superior-viewing-and-smart-features-at-home-in-2024-101735537033565.html">Best
+                    smart TV: Top 10 options for superior viewing and smart features at home in 2024</a></p>
+        </div>
+        <div class="article-item">
+            <img src="../images/tv2.jpg" alt="LG B4 OLED TV Review">
+            <p><a href="https://www.rtings.com/tv/reviews/lg/b4-oled">LG B4 OLED TV Review</a></p>
+        </div>
+        <div class="article-item">
+            <img src="../images/tv3.jpg" alt=" Best TV brands in 2025">
+            <p><a
+                    href="https://www.hindustantimes.com/technology/best-tv-brands-in-india-top-10-choices-for-superior-viewing-101694772973566.html ">Best
+                    TV brands in 2025: Top picks from LG, Acer, Samsung and more</a>
+            </p>
+        </div>
+    </div>
+    <!-- FAQ Section -->
+    <section id="faq">
+        <h2>FREQUENTLY ASKED QUESTIONS</h2>
+        <div class="faq-item">
+            <h3>Why is my TV screen blurry?
+                <button class="toggle-btn">+</button>
+            </h3>
+            <p class="faq-answer">Blurriness can be caused by a poor cable connection, a low-quality signal, or
+                incorrect settings. Check the cable connections and make sure the resolution is set to match your TV's
+                capabilities.</p>
+        </div>
+        <div class="faq-item">
+            <h3>How can I improve the sound quality of my TV?
+                <button class="toggle-btn">+</button>
+            </h3>
+            <p class="faq-answer">You can improve sound quality by adjusting the TV’s audio settings, such as treble,
+                bass, and balance. Additionally, connecting external speakers or a soundbar can enhance your audio
+                experience.
+            </p>
+        </div>
+        <div class="faq-item">
+            <h3>Why is my TV not turning on?
+                <button class="toggle-btn">+</button>
+            </h3>
+            <p class="faq-answer">Check if the TV is plugged in and if the power outlet is working. Try a different
+                remote or press the power button on the TV itself. If the issue persists, there may be a problem with
+                the power supply.</p>
+        </div>
+        <div class="faq-item">
+            <h3>What is HDMI ARC, and why should I use it?
+                <button class="toggle-btn">+</button>
+            </h3>
+            <p class="faq-answer">HDMI ARC (Audio Return Channel) allows you to send audio from the TV back to a
+                soundbar or home theater system using a single HDMI cable. It simplifies cable management and improves
+                audio quality.</p>
+        </div>
+        <div class="faq-item">
+            <h3>How do I connect my TV to Wi-Fi?
+                <button class="toggle-btn">+</button>
+            </h3>
+            <p class="faq-answer">Navigate to the network settings in your TV's menu and select your Wi-Fi network.
+                Enter the password to establish the connection. If your TV doesn’t detect Wi-Fi, ensure your router is
+                functioning properly.</p>
+        </div>
+        <div class="faq-item">
+            <h3>What is the difference between LED, OLED, and QLED TVs?
+                <button class="toggle-btn">+</button>
+            </h3>
+            <p class="faq-answer">LED TVs use LED backlighting to enhance brightness, while OLED TVs offer better
+                contrast and deeper blacks thanks to individual pixel lighting. QLED TVs, a type of LED, use Quantum Dot
+                technology for more vivid colors and brightness.</p>
+        </div>
+    </section>
+    <script>
+        // js for toggle function of FAQ'S
+        document.querySelectorAll('.toggle-btn').forEach(button => {
+            button.addEventListener('click', function () {
+                const answer = this.parentElement.nextElementSibling;
+                const isVisible = answer.style.display === 'block';
+                answer.style.display = isVisible ? 'none' : 'block';
+                this.textContent = isVisible ? '+' : '-';
+            });
+        });
+
+    </script>
+</body>
+
+</html>

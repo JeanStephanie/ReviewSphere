@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pillows</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 3px;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f3f3f3;
+        }
+
+        header {
+            background-color: #002d72;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        header nav ul {
+            list-style-type: none;
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        header nav ul li {
+            margin: 0 15px;
+        }
+
+        header nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.1em;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        header nav ul li a:hover {
+            color: #80cbc4;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 80px 20px;
+            background: url('https://via.placeholder.com/1200x500') no-repeat center center/cover;
+            color: black;
+        }
+
+        .hero h2 {
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 1.5em;
+        }
+
+        /* Types of pillow*/
+
+        .pillow-section {
+            padding: 40px 20px;
+            background-color: #e9f5fb;
+            text-align: center;
+        }
+
+        .pillow-section h2 {
+            font-size: 2.2em;
+            margin-bottom: 20px;
+            color: #002d72;
+        }
+
+        .pillow-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .pillow-card {
+            background-color: white;
+            border-radius: 10px;
+            margin: 15px;
+            width: 260px;
+            height: 340px;
+            perspective: 1000px;
+        }
+
+        .pillow-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transform-style: preserve-3d;
+            transition: transform 0.6s;
+        }
+
+        .pillow-card:hover .pillow-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .pillow-card-front,
+        .pillow-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 10px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+        }
+
+        .pillow-card-front {
+            background-color: #fff;
+        }
+
+        .pillow-card-back {
+            background-color: #00457c;
+            color: white;
+            transform: rotateY(180deg);
+        }
+
+        .pillow-card img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 10px 10px 0 0;
+        }
+
+        .pillow-card h3 {
+            margin: 10px 0;
+            color: #00457c;
+        }
+
+        .pillow-card-back h3 {
+            color: white;
+        }
+
+        .pillow-card p {
+            font-size: 0.9em;
+            line-height: 1.4;
+            text-align: center;
+        }
+
+        /* Styles for comparisons*/
+        .specs-section {
+            padding: 40px 20px;
+            background-color: #f9f9f9;
+            text-align: center;
+        }
+
+        .specs-section h2 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            color: #002d72;
+        }
+
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .tab-btn {
+            background-color: #00457c;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 0 5px;
+            cursor: pointer;
+            font-size: 1em;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .tab-btn:hover,
+        .tab-btn.active {
+            background-color: #80cbc4;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background-color: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        table th,
+        table td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        table th {
+            background-color: #00457c;
+            color: white;
+        }
+
+        table td {
+            background-color: #f9f9f9;
+        }
+
+        .comparison-cards {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .comparison-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 300px;
+            transition: transform 0.3s;
+        }
+
+        .comparison-card:hover {
+            transform: scale(1.05);
+        }
+
+        .comparison-card h3 {
+            color: #00457c;
+            margin-bottom: 10px;
+        }
+
+        /* Brand styling*/
+        .brand-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .brand {
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            margin: 10px;
+            padding: 20px;
+            width: 300px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+            text-align: center;
+        }
+
+        .brand img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .brand:hover {
+            transform: scale(1.05);
+        }
+
+        h2 {
+            color: #003366;
+        }
+
+        p {
+            line-height: 1.6;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-top: 10px;
+            border-radius: 5px;
+            background-color: #003366;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #ff6600;
+        }
+
+        /* Suggested pillowss Section Styling */
+        .suggested-pill {
+            background-color: #f8f9fa;
+            padding: 50px 0;
+            text-align: center;
+        }
+
+        .suggested-pill .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .suggested-pill h2 {
+            font-size: 2em;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .suggested-pill p {
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .pill-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .pill-item {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            max-width: 350px;
+            text-align: left;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .pill-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .pill-item img {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .pill-item h3 {
+            font-size: 1.5em;
+            color: #222;
+            margin: 15px 0 10px;
+        }
+
+        .pill-item p {
+            color: #555;
+            font-size: 1em;
+            line-height: 1.5;
+        }
+
+        .review {
+            margin-top: 15px;
+        }
+
+        .review p {
+            font-style: italic;
+            color: #444;
+        }
+
+        .star-rating span {
+            font-size: 1.2em;
+        }
+
+        .buy-now-btn {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #00457c;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+        }
+
+        .buy-now-btn:hover {
+            background-color: #00457c;
+        }
+
+        /* Styling for the last grid*/
+        .additional-grids {
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        .additional-grids h2 {
+            font-size: 2.5em;
+            margin-bottom: 30px;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            /* 3 columns */
+            gap: 20px;
+            justify-items: center;
+        }
+
+        .grid-item {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 320px;
+            /* Keeps items from getting too wide */
+            transition: transform 0.3s ease;
+        }
+
+        .grid-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .grid-item img {
+            width: 100%;
+            height: 200px;
+            border-radius: 8px;
+        }
+
+        .grid-item p {
+            margin-top: 15px;
+            font-size: 1.1em;
+        }
+
+        .grid-item a {
+            text-decoration: none;
+            color: #003366;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .grid-item a:hover {
+            color: #00bcd4;
+        }
+
+        /* FAQ styles*/
+        #faq {
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+
+        #faq h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .faq-item {
+            margin-bottom: 20px;
+        }
+
+        .faq-item h3 {
+            cursor: pointer;
+            padding: 10px;
+            background-color: white;
+            color: #002d72;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .faq-item p {
+            display: none;
+            padding: 10px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-top: none;
+            border-radius: 0 0 5px 5px;
+        }
+
+        .faq-item p.visible {
+            display: block;
+        }
+
+        .faq-answer {
+            display: none;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+        }
+
+        .toggle-btn {
+            margin-left: 10px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>PILLOWS</h1>
+        <nav>
+            <ul>
+                <li><a href="buyinguidepillow.html">Buying Guide</a></li>
+                <li><a href="../reviews.php"> Reviews</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero" id="home">
+        <h2>Luxurious. Blissful. Cushiony.</h2>
+        <p>Discover Luxurious Comfort with Cushiony Pillows for Blissful Sleep.</p>
+    </section>
+
+    <section id="pillows" class="pillow-section">
+        <h2>TYPES OF PILLOWS</h2>
+        <div class="pillow-container">
+            <div class="pillow-card">
+                <div class="pillow-card-inner">
+                    <div class="pillow-card-front">
+                        <img src="../images/p1.jpg" alt="Memory Foam Pillow">
+                        <h3>Memory Foam</h3>
+                    </div>
+                    <div class="pillow-card-back">
+                        <h3>Memory Foam</h3>
+                        <p>Contours to your shape, offering customized support and reducing neck pain for enhanced sleep
+                            quality.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="pillow-card">
+                <div class="pillow-card-inner">
+                    <div class="pillow-card-front">
+                        <img src="../images/p2.jpg" alt="Down Pillow">
+                        <h3>Down Pillow</h3>
+                    </div>
+                    <div class="pillow-card-back">
+                        <h3>Down Pillow</h3>
+                        <p>Luxuriously soft and supportive, filled with feathers for a plush, restful sleep experience.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="pillow-card">
+                <div class="pillow-card-inner">
+                    <div class="pillow-card-front">
+                        <img src="../images/p3.jpg" alt="Latex Pillow">
+                        <h3>Latex Pillow</h3>
+                    </div>
+                    <div class="pillow-card-back">
+                        <h3>Latex Pillow</h3>
+                        <p>Durable and supportive, made from natural latex to offer resilience and refreshing sleep
+                            comfort.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="specs" class="tab-panel active">
+        <h1>PILLOW COMPARISONS</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Feature</th>
+                    <th>Memory Foam</th>
+                    <th>Down Pillow</th>
+                    <th>Latex Pillow</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Material</td>
+                    <td>Viscoelastic Foam</td>
+                    <td>Feathers</td>
+                    <td>Natural Latex</td>
+                </tr>
+                <tr>
+                    <td>Support Level</td>
+                    <td>High</td>
+                    <td>Medium</td>
+                    <td>High</td>
+                </tr>
+                <tr>
+                    <td>Durability</td>
+                    <td>5 Years</td>
+                    <td>2 Years</td>
+                    <td>7 Years</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div id="compare" class="tab-panel">
+        <div class="comparison-cards">
+            <div class="comparison-card">
+                <h3>Memory Foam vs. Down Pillow</h3>
+                <p>Memory foam pillows contour to your head and neck, providing personalized support and pressure
+                    relief, ideal for alleviating pain and enhancing sleep quality. In contrast, down pillows are filled
+                    with soft feathers, offering a luxuriously soft and fluffy feel, but they may flatten over time and
+                    require regular fluffing. Memory foam is great for tailored support, while down pillows cater to
+                    those who prefer plush, malleable comfort.</p>
+            </div>
+            <div class="comparison-card">
+                <h3>Latex Pillow vs. Memory Foam</h3>
+                <p>Latex pillows offer firm yet responsive support, maintaining their shape and providing hypoallergenic
+                    benefits, making them ideal for consistent, allergen-free comfort. In contrast, memory foam pillows
+                    contour closely to your head and neck, offering personalized support and pressure relief, perfect
+                    for reducing pain and enhancing sleep quality. Both types cater to different preferences: latex for
+                    durability and resilience, and memory foam for tailored, contouring comfort..</p>
+            </div>
+            <div class="comparison-card">
+                <h3>Down Pillow vs. Latex Pillow</h3>
+                <p>Down pillows are filled with soft feathers, offering a luxuriously soft and fluffy feel, but they may
+                    flatten over time and require regular fluffing. On the other hand, latex pillows are made from
+                    natural or synthetic latex, providing firm yet supportive comfort that retains its shape well and is
+                    naturally hypoallergenic. While down pillows cater to those who prefer plush, malleable support,
+                    latex pillows are ideal for those seeking durable, resilient, and allergy-resistant options..</p>
+            </div>
+        </div>
+    </div>
+    <h1>TOP PILLOW BRANDS</h1>
+    <section id="brands" class="brand-list">
+        <article class="brand">
+            <h2> Sleepwell</h2>
+            <p> Sleepwell pillows are known for their high-quality materials and exceptional comfort. They offer a
+                variety of pillow types, including memory foam, microfiber, and cotton, catering to different sleeping
+                positions and preferences1. Sleepwell pillows are designed to adapt to the contours of your head and
+                neck, providing excellent support and ensuring a good night's sleep. Additionally, they are durable and
+                come with a warranty of up to 12 months
+            </p> <a href="https://mysleepwell.com/pillowlist/pillows" class="btn">Learn More</a>
+        </article>
+        <article class="brand">
+            <h2>Kurl-On</h2>
+            <p> Kurl-On pillows are crafted using innovative rubberized coconut coir fiber, offering exceptional comfort
+                and support. They are designed to provide a balance of softness and firmness, catering to various
+                sleeping positions1. Kurl-On pillows are also known for their durability and breathability, ensuring a
+                comfortable sleep environment. Additionally, they come in a range of sizes and designs to suit different
+                preferences and needs.
+            </p> <a
+                href="https://kurlon.com/collections/pillows?srsltid=AfmBOoqJkPTGzvTsa5FpxkhFFYxVwIyyhUkR58IN_HggZ3ElyDSP_8F6"
+                class="btn">Learn More</a>
+        </article>
+        <article class="brand">
+            <h2>Hush</h2>
+            <p>Hush pillows are designed for ultimate comfort and support, featuring a blend of shredded memory foam and
+                vegan down. They come with a luxurious, breathable bamboo cover that is naturally hypoallergenic and
+                anti-wrinkle. Hush pillows are fully adjustable, catering to all sleeping positions, and they offer a
+                100-night satisfaction guarantee. Ideal for those seeking a customizable, allergen-free sleep
+                experience.</p> <br> <a href="https://hush.in/collections/pillows" class="btn">Learn More</a>
+        </article>
+    </section>
+    <!-- Suggested Pillows Section -->
+    <section id="suggested-pill" class="suggested-pill">
+        <div class="container">
+            <h2>TOP SELLING PILLOWS</h2>
+            <p>Explore the most comfortable and in-demand pillows with expert reviews and ratings.</p>
+            <div class="pill-grid">
+                <!-- Pillow 1 -->
+                <div class="pill-item">
+                    <img src="../images/p4.jpg" alt="Memory Foam Pillow" style="max-width: 500px; height:200px;">
+                    <h3>Memory Foam Pillow</h3>
+                    <p>
+                        Designed to provide excellent neck and head support, this memory foam pillow adapts to your
+                        sleeping posture for ultimate comfort.
+                    </p>
+                    <div class="review">
+                        <p><strong>Review:</strong> "Best pillow for neck pain! Super comfortable and supportive."</p>
+                        <div class="star-rating">
+                            <span style="color: gold; font-size: 1.2em;">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
+                        </div>
+                        <a href="https://www.nilkamalsleep.com/collections/memory-foam-pillow?srsltid=AfmBOoqAd6FFFZ2KygD4OB_eODuO3NyiweJIWZLHrSQU8yvBw_1ColU7"
+                            class="buy-now-btn">Buy Now</a>
+                    </div>
+                </div>
+                <!-- Pillow 2 -->
+                <div class="pill-item">
+                    <img src="../images/p5.jpg" alt="Cooling Gel Pillow" style="max-width: 500px; height:200px;">
+                    <h3>Cooling Gel Pillow</h3>
+                    <p>
+                        Stay cool all night with this innovative gel-infused pillow that helps regulate temperature
+                        while providing exceptional support.
+                    </p>
+                    <div class="review">
+                        <p><strong>Review:</strong> "Perfect for hot sleepers! Stays cool and feels amazing."</p>
+                        <div class="star-rating">
+                            <span style="color: gold; font-size: 1.2em;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                        </div>
+                        <a href="https://www.duroflexworld.com/products/duroflex-energy-medium-firm-foam-pillow?srsltid=AfmBOooGqO8m4rqj3Dt9KDuZdNB6zS0pZVz0VgXjRfKt_YQE6sqjPYRg"
+                            class="buy-now-btn">Buy Now</a>
+                    </div>
+                </div>
+                <!-- Pillow 3 -->
+                <div class="pill-item">
+                    <img src="../images/p6.jpg" alt="Organic Cotton Pillow" style="max-width: 500px; height:200px;">
+                    <h3>Organic Cotton Pillow</h3>
+                    <p>
+                        Made with hypoallergenic and eco-friendly materials, this pillow provides plush comfort while
+                        being gentle on sensitive skin.
+                    </p>
+                    <div class="review">
+                        <p><strong>Review:</strong> "So soft and eco-friendly! Perfect for a restful sleep."</p>
+                        <div class="star-rating">
+                            <span style="color: gold; font-size: 1.2em;">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
+                        </div>
+                        <a href="https://www.amouve.com/products/organic-kapok-pillow?srsltid=AfmBOopM42kAZDmtTgFIUppjeJ7INm6Q1Eews5p8lzl5OQFkjsmlVDja"
+                            class="buy-now-btn">Buy Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--Link Grid-->
+    <header>RELATED ARTICLES </header>
+    <section class="additional-grids">
+        <div class="grid-container">
+            <div class="grid-item">
+                <img src="../images/p7.jpg" alt="The 12 Very Best Pillows for Neck Pain">
+                <p><a href="https://nymag.com/strategist/article/best-pillows-for-neck-pain.html">The
+                        12 Very Best Pillows for Neck Pain.</a></p>
+            </div>
+            <div class="grid-item">
+                <img src="../images/p8.jpg" alt="The 13 Very Best Bed Pillows">
+                <p><a href="https://nymag.com/strategist/article/best-pillows.html">The 13 Very Best Bed
+                        Pillows.</a></p>
+            </div>
+            <div class="grid-item">
+                <img src="../images/p9.jpg" alt="Best Pillow for Every Sleeper in 2025">
+                <p><a href="https://www.cnet.com/health/sleep/best-pillow/">Best
+                        Pillow for Every Sleeper in 2025</a></p>
+            </div>
+        </div>
+    </section>
+    <section id="faq">
+        <h2>FREQUENTLY ASKED QUESTIONS</h2>
+
+        <div class="faq-item">
+            <h3>How often should I replace my pillow?
+                <button class="toggle-btn">+</button>
+            </h3>
+            <p class="faq-answer">It is recommended to replace your pillow every 1-2 years, depending on its material
+                and usage. Over time, pillows accumulate dust mites, allergens, and lose their support.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>What type of pillow is best for neck pain?
+                <button class="toggle-btn">+</button>
+            </h3>
+            <p class="faq-answer">Memory foam or ergonomic pillows with proper neck support are ideal for alleviating
+                neck pain. Look for pillows that keep your spine aligned while sleeping.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>How do I clean my pillow?
+                <button class="toggle-btn">+</button>
+            </h3>
+            <p class="faq-answer">Most pillows can be machine-washed on a gentle cycle. However, memory foam pillows
+                should only be spot-cleaned and air-dried. Always check the care label before washing.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>Can I use the same pillow for all sleeping positions?
+                <button class="toggle-btn">+</button>
+            </h3>
+            <p class="faq-answer">Not necessarily. Side sleepers benefit from firmer, thicker pillows, while stomach
+                sleepers need softer, flatter ones. Back sleepers do best with medium-firm pillows for optimal neck
+                support.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>Are memory foam pillows better than feather pillows?
+                <button class="toggle-btn">+</button>
+            </h3>
+            <p class="faq-answer">Memory foam pillows provide better contouring and support, making them great for pain
+                relief. Feather pillows are softer and more adjustable but may lack firm support.</p>
+        </div>
+    </section>
+    <script>
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const tabPanels = document.querySelectorAll('.tab-panel');
+
+        tabBtns.forEach((btn) => {
+            btn.addEventListener('click', () => {
+                // Remove 'active' class from all buttons and panels
+                tabBtns.forEach((b) => b.classList.remove('active'));
+                tabPanels.forEach((panel) => panel.classList.remove('active'));
+
+                // Add 'active' class to the clicked button and corresponding panel
+                btn.classList.add('active');
+                const tabPanelId = btn.getAttribute('data-tab');
+                document.getElementById(tabPanelId).classList.add('active');
+            });
+        });
+        // js for toggle function of FAQ'S
+        document.querySelectorAll('.toggle-btn').forEach(button => {
+            button.addEventListener('click', function () {
+                const answer = this.parentElement.nextElementSibling;
+                const isVisible = answer.style.display === 'block';
+                answer.style.display = isVisible ? 'none' : 'block';
+                this.textContent = isVisible ? '+' : '-';
+            });
+        });
+
+    </script>
+</body>
+
+</html>

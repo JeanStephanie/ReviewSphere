@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Washing Machine</title>
+</head>
+<style>
+    body {
+        font-family: 'Roboto', sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f5f5f5;
+    }
+
+    header {
+        background-color: #00457c;
+        color: white;
+        padding: 10px 10px;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        position: relative;
+        z-index: 10;
+    }
+
+    header .logo {
+        font-size: 24px;
+        font-weight: bold;
+    }
+
+    header nav ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+    }
+
+    header nav ul li {
+        margin: 0 15px;
+        position: relative;
+        /* Ensure dropdowns are positioned relative to the parent li */
+    }
+
+    header nav ul li a {
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    header nav ul li a:hover {
+        color: #00bcd4;
+    }
+
+    video{
+        width: 100%;
+    }
+
+    /* Sidebar for navigation links */
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 250px;
+        background-color: #00457c;
+        height: 100%;
+        padding-top: 20px;
+        color: white;
+        z-index: 1000;
+    }
+
+    .sidebar h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 1.5em;
+    }
+
+    .sidebar ul {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    .sidebar ul li {
+        padding: 10px 20px;
+        border-bottom: 1px solid #444;
+    }
+
+    .sidebar ul li a {
+        color: white;
+        text-decoration: none;
+        font-size: 1.1em;
+    }
+
+    .sidebar ul li a:hover {
+        color: #00bcd4;
+    }
+
+    footer {
+        background-color: #00457c;
+        color: white;
+        text-align: center;
+        padding: 10px 0;
+        margin-top: 40px;
+    }
+
+    /* Main content styling */
+    main {
+        margin-left: 270px; /* Adjust content for sidebar width */
+        padding: 20px;
+    }
+
+    .section {
+        margin-bottom: 40px;
+        text-align: center;
+    }
+
+    /* css for displaying brands*/
+    .brands-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+        gap: 20px;
+        margin-top: 20px;
+    }
+
+    .brand {
+        background-color: white;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        padding: 15px;
+        text-align: center;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .brand:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    .brand img {
+        width: 100px;
+        height: auto;
+        margin-bottom: 15px;
+    }
+
+    .brand h3 {
+        font-size: 1.2em;
+        color: #00457c;
+        margin-bottom: 10px;
+    }
+
+    .brand p {
+        font-size: 0.9em;
+        color: #555;
+        line-height: 1.5;
+    }
+
+    /* Comparison table*/
+    header {
+        background-color: #00457c;
+        color: white;
+        text-align: center;
+        padding: 20px 0;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    h1 {
+        text-align: center;
+        color: white;
+        margin-bottom: 20px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+        background-color: white;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    table th,
+    table td {
+        border: 1px solid #ddd;
+        padding: 12px;
+        text-align: center;
+    }
+
+    table th {
+        background-color: #00457c;
+        color: white;
+    }
+
+    table tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    table tr:hover {
+        background-color: #ddd;
+    }
+
+    .pros,
+    .cons {
+        text-align: left;
+    }
+
+     /* Flip card styling */
+     .flip-card {
+        background-color: transparent;
+        width: 300px;
+        height: 400px;
+        perspective: 1000px;
+        margin: 20px;
+        display: inline-block;
+        text-align: center;
+    }
+
+    .flip-card-inner {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        transform-style: preserve-3d;
+        transition: transform 0.6s;
+    }
+
+    .flip-card:hover .flip-card-inner {
+        transform: rotateY(180deg);
+    }
+
+    .flip-card-front,
+    .flip-card-back {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        backface-visibility: hidden;
+    }
+
+    .flip-card-front {
+        background-color: #fff;
+        color: black;
+    }
+
+    .flip-card-back {
+        background-color: #333;
+        color: white;
+        transform: rotateY(180deg);
+        padding: 20px;
+    }
+
+    .flip-card img {
+        width: 300px;
+        height: 300px;
+        object-fit: cover;
+    }
+
+    .flip-card h3 {
+        font-size: 1.2em;
+        margin: 15px 0;
+    }
+
+    .flip-card p {
+        font-size: 1em;
+        margin-bottom: 15px;
+    }
+
+    .flip-card a {
+        background-color: #00457c;
+        color: white;
+        padding: 10px 20px;
+        text-decoration: none;
+        border-radius: 5px;
+        font-weight: bold;
+    }
+
+    .flip-card a:hover {
+        background-color: #00bcd4;
+    }
+
+    /* css for grids*/
+    .grid-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+        gap: 20px;
+        margin: 20px 0;
+    }
+
+    .grid-item {
+        background-color: white;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        padding: 15px;
+        text-align: center;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .grid-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    .grid-item img {
+        width: 100%;
+        height: auto;
+        margin-bottom: 15px;
+        border-radius: 10px;
+    }
+
+    .grid-item p {
+        font-size: 1em;
+        color: #00457c;
+    }
+
+    .grid-item p a {
+        text-decoration: none;
+        color: black;
+        font-weight: bold;
+        transition: color 0.3s ease;
+    }
+
+    .grid-item p a:hover {
+        color: #00457c;
+    }
+
+    /* Suggested WM Section Styling */
+    .suggested-washmec {
+        background-color: #f8f9fa;
+        padding: 50px 0;
+        text-align: center;
+    }
+
+    .suggested-washmec .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+
+    .suggested-washmec h3 {
+        color: #666;
+        margin-bottom: 30px;
+    }
+
+    .washmec-grid {
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+    }
+
+    .washmec-item {
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        max-width: 350px;
+        text-align: left;
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .washmec-item:hover {
+        transform: translateY(-5px);
+    }
+
+    .washmec-item img {
+        width: 300px;
+        height: 300px;
+        border-radius: 10px;
+    }
+
+    .washmec-item h3 {
+        font-size: 1.5em;
+        color: #222;
+        margin: 15px 0 10px;
+    }
+
+    .washmec-item p {
+        color: #555;
+        font-size: 1em;
+        line-height: 1.5;
+    }
+
+    .buy-now-btn {
+        display: inline-block;
+        margin-top: 10px;
+        padding: 10px 20px;
+        background-color: #00457c;
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+        border-radius: 5px;
+        transition: background 0.3s ease;
+    }
+    
+    .buy-now-btn:hover {
+        background-color: #00457c;
+}
+
+    .review {
+        margin-top: 15px;
+    }
+
+    .review p {
+        font-style: italic;
+        color: #444;
+    }
+
+    .star-rating span {
+        font-size: 1.2em;
+    }
+
+    /* FAQ styles*/
+    #faq {
+        padding: 20px;
+        background-color: #f9f9f9;
+    }
+
+    #faq h2 {
+        text-align: center;
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    .faq-item {
+        margin-bottom: 20px;
+    }
+
+    .faq-item h3 {
+        cursor: pointer;
+        padding: 10px;
+        background-color: white;
+        color: #002d72;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+    }
+
+    .faq-item p {
+        display: none;
+        padding: 10px;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-top: none;
+        border-radius: 0 0 5px 5px;
+    }
+
+    .faq-item p.visible {
+        display: block;
+    }
+
+    .faq-answer {
+        display: none;
+        padding: 10px;
+        background-color: #f9f9f9;
+        border: 1px solid #ddd;
+    }
+
+    .toggle-btn {
+        margin-left: 10px;
+        cursor: pointer;
+        background: none;
+        border: none;
+        font-size: 18px;
+        font-weight: bold;
+    }
+</style>
+
+<body>
+    <header>
+        <div class="container">
+            <h1>WASHING MACHINE</h1>
+            <nav>
+                <ul>
+                    <li><a href="buyinguidewm.html">Buying Guide</a></li>
+                    <li><a href="../reviews.php">Reviews</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!--Sidebar-->
+    <aside class="sidebar">
+        <nav>
+            <ul>
+                <li><a href="#front-load">Front Load Washing Machines</a></li>
+                <li><a href="#top-load">Top Load Washing Machines</a></li>
+                <li><a href="#semi-automatic">Semi-Automatic Washing Machines</a></li>
+                <li><a href="#fully-automatic">Fully Automatic Washing Machines</a></li>
+                <li><a href="#washer-dryer">Washer Dryer Combos</a></li>
+                <li><a href="#portable">Portable Washing Machines</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main>
+        <section class="carousel">
+            <div class="carousel-container">
+                <div class="carousel-item active">
+                    <video src="../video/wm.mp4" autoplay muted loop></video>
+                </div>
+            </div>
+        </section>
+
+        <section id="brands" class="section">
+            <div class="container">
+                <header><h2>POPULAR BRANDS</h2></header>
+                <div class="brands-grid">
+                    <div class="brand">
+                        <img src="../images/samsung.jpg" alt="Samsung">
+                        <h3>Samsung</h3>
+                        <p>Samsung offers modern designs with innovative features like FlexWash and SmartThings
+                            integration,
+                            allowing users to control their washing machine remotely and optimize performance.</p>
+                    </div>
+                    <div class="brand">
+                        <img src="../images/lg.jpg" alt="LG">
+                        <h3>LG</h3>
+                        <p>Known for advanced technology, energy efficiency, and quiet operation, LG washing machines
+                            feature AI-driven wash cycles, TurboWash, and smart features for a convenient laundry
+                            experience.</p>
+                    </div>
+                    <div class="brand">
+                        <img src="../images/whirlpool.jpg" alt="Whirlpool">
+                        <h3>Whirlpool</h3>
+                        <p>Trusted for durability and efficiency, Whirlpool provides a wide range of models with
+                            features
+                            like load-sensing technology, offering optimal cleaning results with each wash.</p>
+                    </div>
+                    <div class="brand">
+                        <img src="../images/bosh.jpg" alt="Bosch">
+                        <h3>Bosch</h3>
+                        <p>Famous for German engineering, Bosch washing machines offer top-quality performance, energy
+                            efficiency, and a quiet operation. Their models are also equipped with advanced features for
+                            better fabric care.</p>
+                    </div>
+                    <div class="brand">
+                        <img src="../images/maytag.jpg" alt="Maytag">
+                        <h3>Maytag</h3>
+                        <p>Known for powerful, durable machines, Maytag’s washing machines are designed for heavy-duty
+                            cleaning and long-lasting reliability, with features like deep water washes and large
+                            capacity.
+                        </p>
+                    </div>
+                    <div class="brand">
+                        <img src="../images/electrolux.jpg" alt="Electrolux">
+                        <h3>Electrolux</h3>
+                        <p>Electrolux is recognized for its high-performance washing machines that combine energy
+                            efficiency, advanced features, and sleek designs. They are also known for their high spin
+                            speeds, reducing drying time.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!--Types-->
+        <header><h2>TYPES OF WASHING MACHINES</h2></header>
+            <section id="front-load" class="section">
+                <div class="container">
+                    <h2>Front Load Washing Machines</h2>
+                    <p>Front load washing machines are designed to offer superior cleaning performance while being energy and water efficient. These machines are gentle on clothes and come with features like multiple wash
+                        cycles, advanced drum technology, and higher spin speeds for faster drying. Their sleek design and stackable options make them a great choice for modern homes with limited space.</p>
+                </div>
+            </section>
+
+            <section id="top-load" class="section">
+                <div class="container">
+                    <h2>Top-Load Washing Machines</h2>
+                    <p>Top-load washing machines have a vertical drum with a lid on the top, allowing users to load and unload clothes easily without bending. These machines typically feature an agitator or impeller
+                        for effective cleaning and offer faster wash cycles compared to front-load models. They are often more affordable upfront and require less maintenance, with fewer issues like mold buildup. However,
+                        they tend to use more water and energy and can be less gentle on fabrics, especially with an agitator design.</p>
+                </div>
+            </section>
+
+            <section id="semi-automatic" class="section">
+                <div class="container">
+                    <h2>Semi-Automatic Washing Machines</h2>
+                    <p>Semi-automatic washing machines are a cost-effective option with two separate tubs for washing and drying. Users manually transfer clothes from the wash tub to the spin-drying tub, offering
+                        control over the process. These machines are water-efficient and do not require a continuous water supply, making them ideal for areas with limited water access. However, they require more manual effort compared to fully automatic models and lack advanced features.</p>
+                </div>
+            </section>
+
+            <section id="fully-automatic" class="section">
+                <div class="container">
+                    <h2>Fully Automatic Washing Machines</h2>
+                    <p>Fully automatic washing machines handle the entire laundry process with minimal user intervention, offering convenience and efficiency. They come in two types: front-load and top-load, both
+                        equipped with features like multiple wash programs and advanced settings. These machines require a continuous water supply and automatically control water levels, detergent usage, and cycle timing. While
+                        more expensive than semi-automatic models, they save time and effort, making them ideal for busy households.</p>
+                </div>
+            </section>
+
+            <section id="washer-dryer" class="section">
+                <div class="container">
+                    <h2>Washer Dryer Combos</h2>
+                    <p>Washer dryer combos are all-in-one machines that combine washing and drying functions in a single unit, saving space and eliminating the need for a separate dryer. These machines are convenient and
+                        ideal for small households or apartments, offering various wash and dry cycles for different fabric types. However, they may take longer to complete a full wash-and-dry cycle compared to
+                        standalone machines. Additionally, their drying capacity is often smaller than the washing capacity, requiring smaller loads for efficient drying.</p>
+                </div>
+            </section>
+
+            <section id="portable" class="section">
+                <div class="container">
+                    <h2>Portable Washing Machines</h2>
+                    <p>Portable washing machines are small, lightweight appliances designed for convenience and mobility, making them ideal for apartments, RVs, and dormitories. They usually connect to a standard
+                        faucet for water and have a drain hose for easy operation. These machines are energy-efficient, cost-effective, and can handle small laundry loads efficiently. However, they offer limited capacity
+                        and may not include advanced features found in full-sized washing machines.</p>
+                </div>
+            </section>
+        
+        <!--Comparison-->
+        <header><h2>WASHING MACHINES COMPARISON</h2></header>
+        <div class="container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Brand</th>
+                        <th>Specifications</th>
+                        <th>Features</th>
+                        <th>Price</th>
+                        <th>Pros</th>
+                        <th>Cons</th>
+                        <th>Why It's the Best</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>Samsung</td>
+                        <td>Capacity: 8 kg, Energy Efficiency: 5 Star</td>
+                        <td>FlexWash, SmartThings Integration</td>
+                        <td>₹35,000</td>
+                        <td class="pros">Modern design, Remote control, Efficient performance</td>
+                        <td class="cons">Higher initial cost</td>
+                        <td>Advanced features and smart technology for a modern household.</td>
+                    </tr>
+                    <tr>
+                        <td>LG</td>
+                        <td>Capacity: 7.5 kg, Energy Efficiency: 5 Star</td>
+                        <td>AI-driven Wash Cycles, TurboWash</td>
+                        <td>₹30,000</td>
+                        <td class="pros">Quiet operation, Energy-efficient, Smart features</td>
+                        <td class="cons">Limited drying options</td>
+                        <td>Offers excellent energy savings and advanced AI features.</td>
+                    </tr>
+                    <tr>
+                        <td>Whirlpool</td>
+                        <td>Capacity: 7 kg, Energy Efficiency: 4 Star</td>
+                        <td>Load-sensing Technology</td>
+                        <td>₹25,000</td>
+                        <td class="pros">Durable, Affordable, Reliable performance</td>
+                        <td class="cons">Basic design, Lacks advanced smart features</td>
+                        <td>Perfect for budget-conscious buyers seeking reliable performance.</td>
+                    </tr>
+                    <tr>
+                        <td>Bosch</td>
+                        <td>Capacity: 8 kg, Energy Efficiency: 5 Star</td>
+                        <td>Advanced Fabric Care, German Engineering</td>
+                        <td>₹40,000</td>
+                        <td class="pros">Top-quality performance, Quiet operation</td>
+                        <td class="cons">Higher price point</td>
+                        <td>Ideal for those prioritizing performance and fabric care.</td>
+                    </tr>
+                    <tr>
+                        <td>Maytag</td>
+                        <td>Capacity: 10 kg, Energy Efficiency: 4 Star</td>
+                        <td>Deep Water Wash, Large Capacity</td>
+                        <td>₹28,000</td>
+                        <td class="pros">Heavy-duty cleaning, High capacity</td>
+                        <td class="cons">Consumes more water</td>
+                        <td>Best for families needing heavy-duty cleaning and durability.</td>
+                    </tr>
+                    <tr>
+                        <td>Electrolux</td>
+                        <td>Capacity: 7 kg, Energy Efficiency: 5 Star</td>
+                        <td>High Spin Speeds, Sleek Design</td>
+                        <td>₹32,000</td>
+                        <td class="pros">Energy-efficient, Reduces drying time</td>
+                        <td class="cons">Smaller capacity</td>
+                        <td>Great for those seeking energy savings and modern aesthetics.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!--Flip Card Grid-->
+        <header><h2>TOP 3 BEST-RATED WASHING MACHINES</h2></header>
+        <section class="flip-cards">
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <img src="../images//wm1.jpg" alt="Samsung Flexwash Washing Machine">
+                        <h3>Samsung Flexwash Washing Machine</h3>
+                    </div>
+                    <div class="flip-card-back">
+                        <p>The Samsung FlexWash Washing Machine is a versatile appliance that combines two separate washing areas in one unit. It features a front-loading drum for larger loads and a smaller
+                            top-loading compartment for delicates or smaller items. This allows you to wash different types of clothing simultaneously, saving time and energy. The machine also includes smart
+                            features like WiFi connectivity and mobile app control, making laundry management more convenient1. With technologies like EcoBubble, Hygiene Steam, and Vibration Reduction, it
+                            ensures thorough cleaning and care for your clothes.</p>
+                        <a href="https://www.samsung.com/in/washers-and-dryers/washer-dryer-combo/2-in-1-21kg-black-caviar-wr24m9960kv-tl/?srsltid=AfmBOorfRgAGLEml4OzMqU8KAZlY8iREHk3mNnulPHfUcS4OfeXDky1L" target="_blank">Buy Now</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <img src="../images/wm2.jpg" alt="LG AI Direct Drive Washing Machine">
+                        <h3>LG AI Direct Drive Washing Machine</h3>
+                    </div>
+                    <div class="flip-card-back">
+                        <p>The LG AI Direct Drive Washing Machine stands out with its intelligent AI technology, which tailors washing cycles based on the fabric type and load weight, ensuring optimal care for
+                            your clothes. The 6 Motion Direct Drive mechanism combines multiple washing motions, such as tumbling, scrubbing, and swinging, to deliver a thorough yet gentle clean, mimicking the
+                            actions of hand washing. The machine's Steam Technology not only reduces common allergens but also helps to minimize wrinkles, making your laundry fresher and easier to iron.</p>
+                        <a href="https://www.lg.com/in/laundry/front-loading-washing-machines/fhp1410z7p/" target="_blank">Buy Now</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <img src="../images/wm3.jpg"
+                            alt="Whirlpool Top Load with 6th Sense Technology">
+                        <h3>Whirlpool Top Load with 6th Sense Technology</h3>
+                    </div>
+                    <div class="flip-card-back">
+                        <p>The Whirlpool Top Load Washing Machine with 6th Sense Technology offers advanced features for efficient and effective laundry care. It uses 6th Sense Ultra Clean Technology to analyze
+                            laundry loads and automatically adjust water temperature and detergent dosage for optimal cleaning. The machine includes ZPF Technology for faster tub filling even with low water
+                            pressure, and a Stainwash Programme that removes tough stains up to 48 hours old. With a 6.5 kg capacity and 740 rpm spin speed, it ensures thorough washing and quick drying.</p>
+                        <a href="https://www.whirlpoolindia.com/magic-clean-6-5kg-5-star-fully-automatic-top-load-washing-machine/p?sc=1" target="_blank">Buy Now</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!--Suggested Washing Machine Section-->
+        <section class="suggested-washmec">
+            <div class="container">
+                <header><h2>TOP-SELLING WASHING MACHINES</h2></header>
+                <h3>Explore the most in-demand washing machines with expert reviews and ratings!</h3>
+                <div class="washmec-grid">
+                    <!-- WM 1 -->
+                    <div class="washmec-item">
+                        <img src="../images/wm4.jpg" alt="LG Front Load Washer" style="max-width: 500px; height:200px;">
+                        <h3>LG Front Load Washer</h3>
+                        <p>A high-efficiency front load washing machine with smart technology, energy-saving features, and an ultra-large capacity for handling big loads effortlessly.</p>
+                        <div class="review">
+                            <p><strong>Review:</strong> "Quiet, efficient, and easy to use. Clothes come out super
+                                clean!"</p>
+                            <div class="star-rating">
+                                <span style="color: gold; font-size: 1.2em;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                            </div>
+                            <a href="https://www.lg.com/in/laundry/front-loading-washing-machines/?srsltid=AfmBOoqJubjJv4pi4Eahpo_d-Z72I3BC20lz2lzyjLc7ZdNrZPYUzvhj" class="buy-now-btn">Buy Now</a>
+                        </div>
+                    </div>
+
+                    <!-- WM 2 -->
+                    <div class="washmec-item">
+                        <img src="../images/wm5.jpg" alt="Samsung Top Load Washer" style="max-width: 100%; height: auto;">
+                        <h3>Samsung Top Load Washer</h3>
+                        <p>A powerful top-load washing machine with an innovative design, deep cleaning technology, and smart connectivity for a seamless laundry experience.</p>
+                        <div class="review">
+                            <p><strong>Review:</strong> "Great performance and value. The quick wash cycle is a game
+                                changer!"</p>
+                            <div class="star-rating">
+                                <span style="color: gold; font-size: 1.2em;">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
+                            </div>
+                            <a href="https://www.samsung.com/in/washers-and-dryers/washing-machines-by-type/top-load/?srsltid=AfmBOops4LgVGtHEKcjZ0pi3CbgSNP9y_ciBqD434P6jAC8IgWIdyiZJ" class="buy-now-btn">Buy Now</a>
+                        </div>
+                    </div>
+
+                    <!-- WM 3 -->
+                    <div class="washmec-item">
+                        <img src="../images/wm6.jpg" alt="Whirlpool High-Efficiency Washer"
+                            style="max-width: 500px; height: 200px;">
+                        <h3>Whirlpool High-Efficiency Washer</h3>
+                        <p>Designed for powerful stain removal and fabric care, this washer delivers deep cleaning while conserving water and energy, making it a household favorite.</p>
+                        <div class="review">
+                            <p><strong>Review:</strong> "Reliable and efficient. The energy savings are noticeable!"</p>
+                            <div class="star-rating">
+                                <span style="color: gold; font-size: 1.2em;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                            </div>
+                            <a href="https://www.whirlpoolindia.com/washing-machines/top-load-washing-machines" class="buy-now-btn">Buy Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>                                                                                                                                                                            
+
+        <!--Related Articles-->
+        <header><h2>RELATED ARTICLES</h2></header>
+        <div class="grid-container">
+            <div class="grid-item">
+                <img src="../images/wm7.jpg" alt="Best Top 5 Washing Machines for Every Household">
+                <p><a href="https://zeenews.india.com/top-deals/electronics/top-5-washing-machines-for-every-household-in-2024-2781628.html">
+                    Best Top 5 Washing Machines for Every Household </a></p>
+            </div>
+
+            <div class="grid-item">
+                <img src="../images/wm8.jpg" alt="Best top load washing machine">
+                <p><a href="https://www.hindustantimes.com/technology/best-top-load-washing-machines-to-buy-in-2024-top-10-user-friendly-powerful-durable-options-101727148348426.html">
+                        Best top load washing machines: Top 10 efficient picks for smooth and hassle-free laundry days</a>
+                </p>
+            </div>
+
+            <div class="grid-item">
+                <img src="../images/wm9.jpg" alt="Best washing machine by price">
+                <p><a href="https://www.samsung.com/in/washers-and-dryers/washing-machines-by-price/">Best washing machine by price</a>
+                </p>
+            </div>
+
+            <!--FAQs-->
+            <section id="faq">
+                <h2>Frequently Asked Questions</h2>
+                <div class="faq-item">
+                    <h3>How do I properly load my washing machine?
+                        <button class="toggle-btn">+</button>
+                    </h3>
+                    <p class="faq-answer">It's best to load your washing machine with a mix of light and heavy items,
+                        balancing the load to avoid unbalanced spinning. Always avoid overloading to ensure thorough washing.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>Why is my washing machine making a loud noise?
+                        <button class="toggle-btn">+</button>
+                    </h3>
+                    <p class="faq-answer">This could be due to an unbalanced load, a worn-out drum bearing, or a
+                        foreign object stuck in the drum. Check the load balance and inspect for any debris.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>What should I do if my washing machine leaks water?
+                        <button class="toggle-btn">+</button>
+                    </h3>
+                    <p class="faq-answer">Check for leaks around the door seal, hoses, or detergent drawer. Inspect the
+                        hoses for cracks or loose connections, and replace or tighten them as necessary.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>Can I wash all clothes in the washing machine?
+                        <button class="toggle-btn">+</button>
+                    </h3>
+                    <p class="faq-answer">Not all fabrics are suitable for machine washing. Delicate fabrics like silk,
+                        wool, and lace should be hand-washed or placed in a mesh bag for protection.</p>
+                </div>
+            </section>
+    </main>
+
+    <script>
+        // js for toggle function of FAQ'S
+        document.querySelectorAll('.toggle-btn').forEach(button => {
+            button.addEventListener('click', function () {
+                const answer = this.parentElement.nextElementSibling;
+                const isVisible = answer.style.display === 'block';
+                answer.style.display = isVisible ? 'none' : 'block';
+                this.textContent = isVisible ? '+' : '-';
+            });
+        });
+
+    </script>
+
+</body>
+</html>
