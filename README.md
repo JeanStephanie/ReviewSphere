@@ -164,9 +164,3 @@ Screenshots
 <p><b>Queries & Replies</b></p>
 <img src="https://github.com/user-attachments/assets/5cc39b31-d96d-43ec-a42d-177ab073730a" width="500"/>
 </details>
-
-
-
-Author
-
-Jean Stephanie F
