@@ -3,8 +3,6 @@
 ReviewSphere is a full stack product review website built using HTML, CSS, JavaScript, Bootstrap, jQuery, PHP and MySQL.
 It allows users to register, log in, submit and view product reviews, and ask queries, while an admin panel enables managing users, reviews and queries.
 
-This project was developed as part of my BCA final semester project.
-
 
 Features
 
